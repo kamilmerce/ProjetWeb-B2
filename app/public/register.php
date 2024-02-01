@@ -10,8 +10,10 @@
         var_dump($_POST);
 
         $page->insert('users',[
+            'surname'  => $_POST['surname'],
+            'name'    => $_POST['name'],
             'email'     => $_POST['email'],
-            'password' => password_hash($_POST['password'], PASSWORD_DEFAULT);        ]);
+            'password' => password_hash($_POST['password'], PASSWORD_DEFAULT)]);
     }
 
     echo $page->render('register.html.twig', []);
