@@ -16,6 +16,7 @@
             'email'=> $_POST['email']
         ]);
         var_dump($user);
+        $msg = "Envoi de mail avec un code de confirmation pour mettre à jour le mot de passe"
         if (!$user){
             $msg="Email introuvable !";
         } else {

@@ -36,5 +36,5 @@ ob_start();
     }
 
     echo $page->render('index.html.twig', [
-        'msg' => $msg  // Assurez-vous que 'msg' est correctement transmis au modèle
+        'msg' => $msg 
     ]);

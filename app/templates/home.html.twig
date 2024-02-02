@@ -1,15 +1,12 @@
 {% extends "base_auth.html.twig" %}
 
 {% block body %}
-    <h1>Welcome To AccordEnergie</h1>
-
-    <h2>Welcome back</h2>
-
-    <p>Bienvenue, {{ user_email }} !</p>
-
-
+    <h1>AccordEnergie</h1>
     {% if msg %}
         <div>{{ msg }}</div>
     {% endif %}
+    <p>Bienvenue, {{ user_email }} !</p>
+
+
 
 {% endblock %}
