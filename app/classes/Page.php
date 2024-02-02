@@ -36,10 +36,7 @@ class Page
         $sql ="SELECT * FROM users WHERE email=:email";
         $sth = $this->link->prepare($sql);
         $sth->execute($data);
-
         return $sth->fetch(\PDO::FETCH_ASSOC);
-
-
     }
 
     public function render(string $name, array $data) :string

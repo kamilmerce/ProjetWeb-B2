@@ -1,47 +1,36 @@
 {% extends "base_auth.html.twig" %}
 
 {% block body %}
-    <h1>Créez votre compte</h1>
+    <h1>Create account</h1>
 
     <form action="" method="post">
 
         <div>
-
-
             <label for="name">Name</label>
             <input type="name" 
                 name="name" 
                 
                 id="name" 
-                placeholder="Entrez votre prenom"
+                placeholder="Name"
             />
         </div>
 
         <div>
-
-
             <label for="surname">Surname</label>
             <input type="surname" 
                 name="surname" 
                 
                 id="surname" 
-                placeholder="Entrez votre nom"
+                placeholder="Surname"
             />
         </div>
     
-
-
-
-
         <div>
-
-
             <label for="email">Email</label>
             <input type="email" 
                 name="email" 
-                
                 id="email" 
-                placeholder="Entrez votre email"
+                placeholder="exemple@gmail.com"
             />
         </div>
 
@@ -51,38 +40,36 @@
             type="email"
             name="email_cfg"
             id="email_cfg"
-            placeholder="Confirmez votre email"
+            placeholder="Confirm"
         />
         </div>
 
         <div>
-
             <label for="password">Mot de passe</label>
             <input type="password" 
                 name="password" 
                 id="password" 
-                placeholder="Entrez votre mot de passe"
+                placeholder="*********"
             />
         </div>
 
         <div>
-        <label for "password_cfg">Mot de passe confirmation</label>
-        <input
-            type="password"
-            name="password_cfg"
-            id="password_cfg"
-            placeholder="Confirmez votre mot de passe"
-        />
+            <label for "password_cfg">Mot de passe confirmation</label>
+            <input type="password"
+                name="password_cfg"
+                id="password_cfg"
+                placeholder="Confirm"
+            />
         </div>
 
         <div>
-            <input type="Submit" name="send" value="Créez le compte"/>
+            <input type="Submit" name="send" value="Create"/>
         </div>
 
     </form>
 
     <p>
-        <a href="index.php">Dèja un compte ?</a>
+        <a href="index.php">Allready a account ? </a>
 
     </p>
 {% endblock %}
