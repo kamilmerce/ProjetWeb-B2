@@ -1,14 +1,16 @@
 <?php
-
 namespace App;
+
 
 class Page
 {
     private \Twig\Environment $twig;
     private $link;
+    public $session;
 
     function __construct()
     {
+        $this->session = new Session();
         $loader = new \Twig\Loader\FilesystemLoader('../templates');
         $this->twig = new \Twig\Environment($loader, [
             'cache' => '../var/cache/compilation_cache',
