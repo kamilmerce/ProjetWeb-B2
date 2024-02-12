@@ -1,5 +1,4 @@
 <?php
-
     require_once '../vendor/autoload.php';
 
     use App\Page;
@@ -25,3 +24,4 @@
     }
 
     echo $page->render('index.html.twig');
+

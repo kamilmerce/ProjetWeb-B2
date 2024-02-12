@@ -7,6 +7,7 @@ class Page
     private \Twig\Environment $twig;
     private $link;
     public $session;
+    
 
     function __construct()
     {

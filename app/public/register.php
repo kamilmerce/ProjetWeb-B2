@@ -6,14 +6,21 @@
     
     $page = new Page();
 
-    if (isset($_POST['send'])){
-        var_dump($_POST);
-
-        $page->insert('users',[
-            'surname'  => $_POST['surname'],
-            'name'    => $_POST['name'],
-            'email'     => $_POST['email'],
-            'password' => password_hash($_POST['password'], PASSWORD_DEFAULT)]);
+    if (isset($_POST['send'])) {
+        if (isset($_POST['surname']) && isset($_POST['name']) && isset($_POST['email']) && isset($_POST['password'])) {
+            $page->insert('users', [
+                'surname' => $_POST['surname'],
+                'name' => $_POST['name'],
+                'email' => $_POST['email'],
+                'password' => password_hash($_POST['password'], PASSWORD_DEFAULT)
+            ]);
+            
+            header('Location: index.php');
+            exit(); 
+        } else {
+            echo "Tous les champs doivent être remplis.";
+        }
     }
-
+    
     echo $page->render('register.html.twig', []);
+    ?>

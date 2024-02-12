@@ -1,10 +1,99 @@
 {% extends "base_auth.html.twig" %}
 
 {% block body %}
-    <h1>Create account</h1>
+<style>
+body {
+  font-family: 'Arial', sans-serif;
+  background-image: url('img/login.jpeg'); 
+  background-size: cover;
+  background-repeat: no-repeat; 
+  background-attachment: fixed; 
+  background-position: center center; 
+  color: white; 
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+}
+
+.title
+{
+  padding-right: 250px;
+  padding-bottom: 500px;
+  font-size: 75px;
+}
+
+form {
+  background: rgba(255, 255, 255, 0.25);
+  border-radius: 20px;
+  padding: 40px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  width: 400px;
+  align-items: center;
+  justify-content: center;
+}
+
+form div {
+  margin-bottom: 15px; /* Espace entre les champs */
+  align-items: center;
+  text-align: center;
+}
+
+label {
+  display: block;
+  margin-bottom: 5px; /* Espace entre le label et l'input */
+}
+
+input {
+  width: 100%;
+  background: rgba(255, 255, 255, 0.25);
+  padding: 10px;
+  margin-bottom: 15px; /* Espace entre les inputs */
+  border: 2px solid white;
+  border-radius: 25px;
+}
+
+input[type="submit"] {
+  width: 35%;
+  height: 35%;
+  padding: 10px;
+  border: none;
+  border-radius: 40px;
+  background-color: #3A559F; /* Couleur du bouton */
+  text-align: center;
+  color: white;
+  cursor: pointer;
+  margin-top: 20px;
+}
+
+p
+{
+  text-align: center;
+}
+
+input[type="submit"]:hover {
+  background-color: #2A3F7F; /* Couleur du bouton au survol */
+}
+
+.link {
+  text-align: center;
+  display: block;
+  margin-top: 20px;
+  color: white;
+  text-decoration: none;
+}
+
+.title
+{
+  text-align: center;
+  font-weight: bold;
+}
+</style>
+
+    <h1 class="title">Create account</h1>
 
     <form action="" method="post">
-
         <div>
             <label for="name">Name</label>
             <input type="name" 
@@ -24,52 +113,48 @@
                 placeholder="Surname"
             />
         </div>
-    
+
         <div>
             <label for="email">Email</label>
-            <input type="email" 
+            <input 
+                type="email" 
                 name="email" 
                 id="email" 
-                placeholder="exemple@gmail.com"
+                placeholder="Entrez votre email" 
+                required 
             />
         </div>
-
         <div>
-        <label for "email_cfg">Email confirmation</label>
-        <input
-            type="email"
-            name="email_cfg"
-            id="email_cfg"
-            placeholder="Confirm"
-        />
+            <label for="email_cfg">Confirmation email</label>
+            <input type="email" name="email_cfg" id="email_cfg" placeholder="Confirmation votre email" required />
         </div>
-
         <div>
-            <label for="password">Mot de passe</label>
-            <input type="password" 
+            <label for="password">Password</label>
+            <input 
+                type="password" 
                 name="password" 
                 id="password" 
-                placeholder="*********"
+                placeholder="Entrez un mot de passe" 
+                required 
             />
         </div>
-
         <div>
-            <label for "password_cfg">Mot de passe confirmation</label>
-            <input type="password"
-                name="password_cfg"
-                id="password_cfg"
-                placeholder="Confirm"
+            <label for="password_cfg">Confirmation Password</label>
+            <input 
+                type="password" 
+                name="password_cfg" 
+                id="password_cfg" 
+                placeholder="Confirmer votre mot de passe" 
+                required 
             />
         </div>
-
         <div>
-            <input type="Submit" name="send" value="Create"/>
+            <input type="submit" name="send" value="Crée le compte" />
         </div>
-
+    
         <p>
-            <a href="index.php">Allready an account ? </a>
-        </p>
-
+            <a href="index.php">Déjà un compte ?</a>
+        </p> 
     </form>
 
 {% endblock %}

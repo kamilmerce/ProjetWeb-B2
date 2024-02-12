@@ -1,12 +1,107 @@
 {% extends "base_auth.html.twig" %}
 
 {% block body %}
-    <h1>Welcome To AccordEnergie</h1>
+<style>
+body {
+  font-family: 'Arial', sans-serif;
+  background-image: url('/img/login.jpeg'); 
+  background-size: cover;
+  background-repeat: no-repeat; 
+  background-attachment: fixed; 
+  background-position: center center; 
+  color: white; 
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+}
 
-    <h2>Welcome back</h2>
-    <h3>Fill out the details below</h3>
+.title
+{
+  padding-right: 250px;
+  padding-bottom: 500px;
+  font-size: 75px;
+}
+
+form {
+  background: rgba(255, 255, 255, 0.25);
+  border-radius: 20px;
+  padding: 40px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  width: 400px;
+  align-items: center;
+}
+
+form div {
+  margin-bottom: 15px; /* Espace entre les champs */
+  align-items: center;
+  text-align: center;
+}
+
+label {
+  display: block;
+  margin-bottom: 5px; /* Espace entre le label et l'input */
+}
+
+input[type="email"], input[type="password"] {
+  width: 100%;
+  background: rgba(255, 255, 255, 0.25);
+  padding: 10px;
+  margin-bottom: 15px; /* Espace entre les inputs */
+  border: 2px solid white;
+  border-radius: 25px;
+}
+
+input[type="submit"] {
+  width: 35%;
+  height: 35%;
+  padding: 10px;
+  border: none;
+  border-radius: 40px;
+  background-color: #3A559F; /* Couleur du bouton */
+  text-align: center;
+  color: white;
+  cursor: pointer;
+  margin-top: 20px;
+}
+
+p
+{
+  text-align: center;
+}
+
+input[type="submit"]:hover {
+  background-color: #2A3F7F; /* Couleur du bouton au survol */
+}
+
+.link {
+  text-align: center;
+  display: block;
+  margin-top: 20px;
+  color: white;
+  text-decoration: none;
+}
+
+form h3
+{
+  text-align: center;
+}
+
+.title-f
+{
+  text-align: center;
+  font-weight: bold;
+}
+</style>
+    <h1 class="title">Welcome To AccordEnergie</h1>
+
+ 
     
     <form action="" method="post">
+       
+        <h2>Welcome back</h2>
+        <h3>Fill out the details below</h3>
 
         <div>
             <label for="email">Username</label>
@@ -34,10 +129,10 @@
         <div>
             <input type="Submit" name="send" value="Login"/>
         </div>
-
-    </form>
-
     <p>
         <a href="register.php">No account yet ? </a>
     </p>
+
+    </form>
+
 {% endblock %}

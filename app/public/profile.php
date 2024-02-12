@@ -13,7 +13,6 @@
         // Afficher une page d'accueil différente en fonction du rôle de l'utilisateur
         switch ($role) {
             case 'client':
-                
                 // Afficher la page d'accueil du client
                 echo $page->render('home_client.html.twig');
                 break;
