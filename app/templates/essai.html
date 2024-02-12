@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AccordEnergie - Intervention</title>
+    <style>
+        /* Ajoutez ici votre CSS ou référencez un fichier CSS externe */
+    </style>
+</head>
+<body>
+    <div id="container">
+        <header>
+            <!-- Header de la page -->
+            <h1>AccordEnergie</h1>
+            <nav>
+                <!-- Navigation si nécessaire -->
+            </nav>
+        </header>
+        <main>
+            <section id="intervention">
+                <h2>Intervention #00000</h2>
+                <form id="interventionForm">
+                    <label for="id">ID</label>
+                    <input type="text" id="id" name="id" readonly>
+
+                    <label for="start_date">Start date</label>
+                    <input type="text" id="start_date" name="start_date" readonly>
+
+                    <label for="end_date">End date</label>
+                    <input type="text" id="end_date" name="end_date" readonly>
+
+                    <label for="status">Statue</label>
+                    <input type="text" id="status" name="status" readonly>
+
+                    <label for="description">Description</label>
+                    <textarea id="description" name="description" readonly></textarea>
+
+                    <!-- Laissez la place pour le script de chargement des données -->
+                    <script>
+                        // Script pour charger les données de la base de données
+                        // Ajoutez votre code de connexion à la base de données ici
+                    </script>
+                </form>
+            </section>
+            <section id="comments">
+                <h2>Add comments</h2>
+                <form id="commentsForm">
+                    <textarea id="comment" name="comment"></textarea>
+                    <button type="submit">Save</button>
+
+                    <!-- Script pour envoyer les commentaires à la base de données -->
+                    <script>
+                        // Ajoutez ici le script pour envoyer les commentaires à la base de données
+                        document.getElementById('commentsForm').onsubmit = function(event) {
+                            event.preventDefault();
+                            // Ajoutez ici le code pour envoyer les données du commentaire à la base de données
+                        };
+                    </script>
+                </form>
+            </section>
+        </main>
+        <footer>
+            <!-- Pied de page si nécessaire -->
+        </footer>
+    </div>
+</body>
+</html>

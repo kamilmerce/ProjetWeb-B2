@@ -1,0 +1,100 @@
+{% extends "base_auth.html.twig" %}
+{% block body %}
+<style>
+    /* Ajoutez vos styles CSS ici */
+    body {
+        font-family: Arial, sans-serif;
+    }
+    .container {
+        background-color: #e0e0e0;
+        padding: 20px;
+        border-radius: 10px;
+        width: 80%;
+        margin: auto;
+    }
+    .header {
+        background-color: #00bcd4;
+        color: white;
+        padding: 10px;
+        border-radius: 5px;
+    }
+    .status-box {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 20px;
+    }
+    .status-box div {
+        padding: 10px;
+        border: 1px solid #000;
+    }
+    .button {
+        display: block;
+        margin-top: 20px;
+        padding: 10px 20px;
+        background-color: #4CAF50;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+</style>
+
+
+<div class="container">
+    <div class="header">
+        <h1>AccordEnergie</h1>
+        <h2>Intervention #00000</h2>
+    </div>
+    
+    <div class="form">
+        <label for="intervenant">Intervenant:</label>
+        <input type="text" id="intervenant" name="intervenant"><br><br>
+        
+        <label for="startDate">Start date:</label>
+        <input type="date" id="startDate" name="startDate"><br><br>
+        
+        <label for="endDate">End date:</label>
+        <input type="date" id="endDate" name="endDate"><br><br>
+        
+        <label for="statue">Statue:</label>
+        <select id="statue" name="statue">
+            <option value="green">Statue</option>
+            <option value="orange">Statue</option>
+            <option value="red">Statue</option>
+        </select><br><br>
+        
+        <label for="description">Description:</label>
+        <textarea id="description" name="description"></textarea><br><br>
+        
+        <label for="comments">Add comments:</label>
+        <textarea id="comments" name="comments"></textarea>
+        
+        <div class="status-box">
+            <div>
+                <p>Modify statue:</p>
+                <input type="checkbox" id="statue1" name="statue1" value="green">
+                <label for="statue1">Statue</label><br>
+                
+                <input type="checkbox" id="statue2" name="statue2" value="orange">
+                <label for="statue2">Statue</label><br>
+                
+                <input type="checkbox" id="statue3" name="statue3" value="red">
+                <label for="statue3">Statue</label>
+            </div>
+            <div>
+                <p>Degree:</p>
+                <input type="checkbox" id="degree1" name="degree1" value="critique">
+                <label for="degree1">Critique</label><br>
+                
+                <input type="checkbox" id="degree2" name="degree2" value="moyen">
+                <label for="degree2">Moyen</label><br>
+                
+                <input type="checkbox" id="degree3" name="degree3" value="faible">
+                <label for="degree3">Faible</label>
+            </div>
+        </div>
+        
+        <button type="submit" class="button">Save</button>
+    </div>
+</div>
+{% endblock %}

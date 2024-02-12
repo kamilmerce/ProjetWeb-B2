@@ -41,8 +41,27 @@ class Page
         return $sth->fetch(\PDO::FETCH_ASSOC);
     }
 
-    public function render(string $name, array $data) :string
+    public function render(string $name) :string
     {
-        return $this->twig->render($name, $data);
+        return $this->twig->render($name);
+    }
+
+    public function generateRandomPassword($length = 10){
+        $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        $charactersLength = strlen($characters);
+        $randomPassword = '';
+        for ($i = 0; $i < $length; $i++) {
+            $randomPassword .= $characters[rand(0, $charactersLength - 1)];
+        }
+        return $randomPassword;
+    }
+
+    public function updateUserPassword(string $email, string $newPassword){
+        $sql ="UPDATE users SET password = :newPassword WHERE email=:email";
+        $sth = $this->link->prepare($sql);
+        $sth->execute([
+            'email' => $email,
+            'newPassword' => $newPassword
+        ]);
     }
 }
