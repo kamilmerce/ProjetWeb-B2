@@ -14,7 +14,6 @@
         } else {
             if (!password_verify($_POST['password'], $user['password'])){
             } else {
-                // On va vers la page profile et on affiche l'adresse mail
                 $page->session->add('user',$user);
                 header('Location: profile.php');
 

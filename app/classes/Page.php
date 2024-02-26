@@ -5,7 +5,7 @@ namespace App;
 class Page
 {
     private \Twig\Environment $twig;
-    private $link;
+    public $link;
     public $session;
     
 

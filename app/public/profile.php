@@ -14,19 +14,19 @@
         switch ($role) {
             case 'client':
                 // Afficher la page d'accueil du client
-                echo $page->render('home_client.html.twig');
+                //header('Location: profile.php');
                 break;
             case 'intervenant':
                 // Afficher la page d'accueil de l'intervenant
-                //echo $page->render('home_intervenant.html.twig');
+                //header('Location: profile.php');
                 break;
             case 'standardiste':
                 // Afficher la page d'accueil du standardiste
-                //echo $page->render('home_standardiste.html.twig');
+                //header('Location: profile.php');
                 break;
             case 'admin':
                 // Afficher la page d'accueil de l'administrateur
-                //echo $page->render('home_admin.html.twig');
+                header('Location: home_admin.php');
                 break;
             default:
                 // Cas par défaut : afficher une page d'accueil générique
