@@ -6,7 +6,6 @@
     $page = new Page();
 
     if(isset($_POST['send'])){
-
         $user = $page->getUserByEmail([
             'email'=> $_POST['email']
         ]);
@@ -22,5 +21,5 @@
         }
     }
 
-    echo $page->render('index.html.twig');
+    echo $page->render('index.html.twig',[]);
 

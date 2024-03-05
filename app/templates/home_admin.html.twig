@@ -2,9 +2,71 @@
 
 {% block body %}
 <body>
+    <table>
+        <h1>Liste des interventions</h1>
 
-    <script>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th></th> {# Ajout de la colonne Action #}
 
-    </script>
+            </tr>
+        </thead>
+        <tbody>
+            {% for intervention in interventions %}
+            <tr>
+                <td>{{ intervention.id }}</td>
+                <td><a href="viewmore.php?type=intervention&id={{ intervention.id }}">View more</a></td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <table>
+        <h1>Liste des clients</h1>
+
+        <thead>
+            <tr>
+                <th>Nom</th>
+                <th>Prénom</th>
+                <th>ID</th>
+                <th></th> {# Ajout de la colonne Action #}
+            </tr>
+        </thead>
+        <tbody>
+            {% for client in newCustomers %}
+            <tr>
+                <td>{{ client.name }}</td>
+                <td>{{ client.surname }}</td>
+                <td>{{ client.user_id }}</td>
+                <td><a href="viewmore.php?type=client&id={{ client.user_id }}">View more</a></td> {# Ajout du bouton "View More" #}
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <table>
+        <h1>Liste des intervenants</h1>
+
+        <thead>
+            <tr>
+                <th>Nom</th>
+                <th>Prénom</th>
+                <th>ID</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for intervenant in intervenants %}
+            <tr>
+                <td>{{ intervenant.name }}</td>
+                <td>{{ intervenant.surname }}</td>
+                <td>{{ intervenant.user_id }}</td>
+                <td><a href="viewmore.php?type=intervenant&id={{ intervenant.user_id }}">View more</a></td>
+
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
 </body>
 {% endblock %}
+

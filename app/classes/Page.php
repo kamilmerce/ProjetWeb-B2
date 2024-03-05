@@ -42,9 +42,9 @@ class Page
         return $sth->fetch(\PDO::FETCH_ASSOC);
     }
 
-    public function render(string $name) :string
+    public function render(string $name, array $data) :string
     {
-        return $this->twig->render($name);
+        return $this->twig->render($name, $data);
     }
 
     public function generateRandomPassword($length = 10){
@@ -65,4 +65,48 @@ class Page
             'newPassword' => $newPassword
         ]);
     }
+
+    public function getAllCustomers(){
+        $sql ="SELECT * FROM users WHERE role='client' ";
+        $sth = $this->link->prepare($sql);
+        $sth->execute();
+        return $sth->fetchAll(\PDO::FETCH_ASSOC); 
+    }
+    
+    public function getAllInterventions(){
+        $sql ="SELECT * FROM interventions";
+        $sth = $this->link->prepare($sql);
+        $sth->execute();
+        return $sth->fetchAll(); 
+    }
+    
+    public function getAllIntervenent(){
+        $sql ="SELECT * FROM users WHERE role='intervenant'";
+        $sth = $this->link->prepare($sql);
+        $sth->execute();
+        return $sth->fetchAll(\PDO::FETCH_ASSOC); 
+    }
+    
+    public function getAllNewCustormers(){
+        $sql ="SELECT * FROM users WHERE role='client' ";
+        $sth = $this->link->prepare($sql);
+        $sth->execute();
+        return $sth->fetchAll(\PDO::FETCH_ASSOC); 
+    }
+    
+    public function getInterventionsByID($id){
+        $sql ="SELECT * FROM interventions WHERE id=$id";
+        $sth = $this->link->prepare($sql);
+        $sth->execute();
+        return $sth->fetch(\PDO::FETCH_ASSOC);
+
+    }
+
+    public function getUserByID($id) {
+        $sql ="SELECT * FROM users WHERE user_id=$id";
+        $sth = $this->link->prepare($sql);
+        $sth->execute();
+        return $sth->fetchAll(\PDO::FETCH_ASSOC);
+    }
+
 }

@@ -1,0 +1,29 @@
+{% extends "base_auth.html.twig" %}
+
+{% block body %}
+<body>
+    {% if type == 'client' %}
+        <h1>Informations sur le client</h1>
+        <p>ID: {{ userInfo['user_id']}} </p>
+        <p>Nom: {{ userInfo.name }}</p>
+        <p>Prénom: {{ userInfo.surname }}</p>
+        <p>Email: {{ userInfo.email }}</p>
+    {% elseif type == 'intervenant' %}
+        <h1>Informations sur l'intervenant</h1>
+        <p>ID: {{ intervenant.id }} </p
+        <p>Nom: {{ userInfo.name }}</p>
+        <p>Prénom: {{ userInfo.surname }}</p>
+        <p>Email: {{ userInfo.email }}</p>
+    {% elseif type == 'intervention' %}
+        <h1>Informations sur l'intervention</h1>
+        <p>ID: {{ intervention.id }} </p>
+        <p>Client: {{intervention.client_id}}<p/>
+        <p>Standardiste: {{intervention.standardiste_id}}</p>
+        <p>Date de debut:  {{ intervention.start_date}}</p>
+        <p>Status: {{ intervention.status_suivi }}</p>
+        <p>Degré d'urgence: {{ intervention.degree_urgence }}</p>
+    {% else %}
+        <p>Type non reconnu.</p>
+    {% endif %}
+</body>
+{% endblock %}
