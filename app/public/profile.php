@@ -5,14 +5,11 @@
     use App\Page;
 
     $page = new Page();
-    $user = $page->session->get('user'); // Récupérer l'utilisateur depuis la session
+    $user = $page->session->get('user');
     $page->session->add('user',$user);
 
-    // Vérifier le rôle de l'utilisateur
     if ($user) {
         $role = $user['role'];
-
-        // Afficher une page d'accueil différente en fonction du rôle de l'utilisateur
         switch ($role) {
             case 'client':
                 // Afficher la page d'accueil du client
@@ -23,16 +20,21 @@
                 //header('Location: profile.php');
                 break;
             case 'standardiste':
-                // Afficher la page d'accueil du standardiste
-                //header('Location: profile.php');
-                break;
+                $interventions=$page->getAllInterventions();
+                echo $page->render('home_standardiste.html.twig',[
+                    'user'=>$user,
+                    'interventions'=>$interventions
+                ]);
             case 'admin':
+                $standardistes=$page->getAllStandardiste();
                 $interventions = $page->getAllInterventions();
                 $intervenants = $page->getAllIntervenent();
                 $newCustomers = $page->getAllNewCustormers();
                 $customers = $page->getAllCustomers();
                 echo $page->render('home_admin.html.twig', 
                     ['newCustomers'=>$newCustomers,
+                    'user'=>$user,
+                    'standardistes'=>$standardistes,
                     'interventions'=>$interventions,
                     'intervenants'=>$intervenants,
                     'customers'=>$customers]

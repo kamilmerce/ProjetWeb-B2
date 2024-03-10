@@ -2,6 +2,7 @@
 
 {% block body %}
 <body>
+    {% if user.role == 'admin' %}
     <table>
         <h1>Liste des interventions</h1>
 
@@ -67,6 +68,29 @@
         </tbody>
     </table>
     <table>
+        <h1>Liste des standardiste</h1>
+
+        <thead>
+            <tr>
+                <th>Nom</th>
+                <th>Prénom</th>
+                <th>ID</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for standardiste in standardistes %}
+            <tr>
+                <td>{{ standardiste.name }}</td>
+                <td>{{ standardiste.surname }}</td>
+                <td>{{ standardiste.user_id }}</td>
+                <td><a href="viewmore.php?type=standardiste&id={{ standardiste.user_id }}">View more</a></td>
+
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <table>
     <h1>Nouveaux clients</h1>
     <thead>
         <tr>
@@ -87,7 +111,7 @@
         {% endfor %}
     </tbody>
 </table>
-
+{% endif %}
 </body>
 {% endblock %}
 

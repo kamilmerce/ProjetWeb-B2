@@ -67,7 +67,7 @@ class Page
     }
 
     public function getAllCustomers(){
-        $sql ="SELECT * FROM users WHERE role='client' ";
+        $sql ="SELECT * FROM users WHERE role='client' and verified=TRUE ";
         $sth = $this->link->prepare($sql);
         $sth->execute();
         return $sth->fetchAll(\PDO::FETCH_ASSOC); 
@@ -78,6 +78,13 @@ class Page
         $sth = $this->link->prepare($sql);
         $sth->execute();
         return $sth->fetchAll(); 
+    }
+
+    public function getAllStandardiste(){
+        $sql ="SELECT * FROM users WHERE role='standardiste'";
+        $sth = $this->link->prepare($sql);
+        $sth->execute();
+        return $sth->fetchAll(\PDO::FETCH_ASSOC); 
     }
     
     public function getAllIntervenent(){
@@ -93,6 +100,18 @@ class Page
         $sth->execute();
         return $sth->fetchAll(\PDO::FETCH_ASSOC); 
     }
+
+    public function getIntervenantByIntervention($id) {
+        $sql = "SELECT u.name, u.surname
+                FROM intervenant_intervention ii
+                INNER JOIN users u ON ii.intervenant_id = u.user_id
+                WHERE ii.intervention_id = :id";
+        $sth = $this->link->prepare($sql);
+        $sth->bindParam(':id', $id, \PDO::PARAM_INT);
+        $sth->execute();
+        return $sth->fetchAll(\PDO::FETCH_ASSOC); 
+    }
+    
     
     public function getInterventionsByID($id){
         $sql ="SELECT * FROM interventions WHERE id=$id";
@@ -124,6 +143,7 @@ class Page
         $sth->execute();
         return true;
     }
+
 
     public function setUserVerified($id){
         $sql ="UPDATE users SET verified = TRUE WHERE user_id = :id";

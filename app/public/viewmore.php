@@ -24,13 +24,21 @@ if (isset($_GET['type']) && isset($_GET['id'])) {
             echo "Utilisateur introuvable.";
         }
     } else if ($type === 'intervention'){
-        $interventionInfo = ($type=='intervention')?$page->getInterventionById($id)  : false ;
+        $interventionInfo = ($type=='intervention')?$page->getInterventionsByID($id)  : false ;
 
         var_dump($interventionInfo);
         echo $page->render('viewmore.html.twig', [
             'type'=>$type,
             'id'=>$id,
             'interventionInfo'=>$interventionInfo
+        ]);
+    } else if ($type === 'standardiste'){
+        $userInfo = ($type=='standardiste')?$page->getUserByID($id)  : false ;
+
+        var_dump($userInfo);
+        echo $page->render('viewmore.html.twig', [
+            'type'=>$type,
+            'userInfo'=>$userInfo[0]
         ]);
     } 
 } else {
