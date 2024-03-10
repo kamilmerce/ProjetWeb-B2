@@ -16,9 +16,11 @@
                 //header('Location: profile.php');
                 break;
             case 'intervenant':
-                // Afficher la page d'accueil de l'intervenant
-                //header('Location: profile.php');
-                break;
+                $interventions= $page->getInterventionsByIntervenantId($user['user_id']);
+                echo $page->render('home_intervenant.html.twig',[
+                    'user'=>$user,
+                    'interventions'=>$interventions
+                ]);
             case 'standardiste':
                 $interventions=$page->getAllInterventions();
                 echo $page->render('home_standardiste.html.twig',[

@@ -101,6 +101,20 @@ class Page
         return $sth->fetchAll(\PDO::FETCH_ASSOC); 
     }
 
+    public function getInterventionsByIntervenantId($intervenantId) {
+        $sql = "SELECT interventions.*
+                FROM interventions
+                INNER JOIN intervenant_intervention ON interventions.id = intervenant_intervention.intervention_id
+                WHERE intervenant_intervention.intervenant_id = :intervenantId";
+        
+        $stmt = $this->link->prepare($sql);
+        $stmt->bindParam(':intervenantId', $intervenantId, \PDO::PARAM_INT);
+        $stmt->execute();
+    
+        return $stmt->fetchAll(\PDO::FETCH_ASSOC);
+    }
+    
+
     public function getIntervenantByIntervention($id) {
         $sql = "SELECT u.name, u.surname
                 FROM intervenant_intervention ii
