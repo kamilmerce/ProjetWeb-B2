@@ -13,6 +13,10 @@ $intervention = $page->getInterventionsByID($interventionId);
 
 $intervenants=  $page->getIntervenantByIntervention($interventionId);
 
+$commentaires= $page->getCommentByIntervention($interventionId);
+
+
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Vérifier si les champs du formulaire sont définis
     if (isset($_POST['status'])) {
@@ -29,8 +33,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $urgence=$intervention['degre_urgence'];
     }
     $page->updateUrgenceIntervention($interventionId,$urgence);
-
-    // Rediriger vers la page de détails de l'intervention mise à jour
+    if (isset($_POST['commentaire'])) {
+        $commentaire = $_POST['commentaire'];
+        $data = [
+            'commentaire' => $commentaire,
+            'intervention_id'=>$interventionId,
+            'user_id'=>$user['user_id']
+        ]; 
+    }
+    $page->addCommentaire($data);
     header('Location: profile.php');
     exit();
 }
@@ -39,5 +50,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 echo $page->render('edit_intervention.html.twig', [
     'user' => $user,
     'intervention' => $intervention,
-    'intervenants' => $intervenants
+    'intervenants' => $intervenants,
+    'commentaires'=>$commentaires
 ]);

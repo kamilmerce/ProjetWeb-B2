@@ -108,6 +108,30 @@ class Page
         return $sth->fetchAll(\PDO::FETCH_ASSOC); 
     }
 
+    public function addCommentaire(array $data){
+        $sql = "INSERT INTO commentaires (user_id,intervention_id, commentaire) 
+                VALUES (:user_id, :intervention_id, :commentaire)";
+
+        $stmt = $this->link->prepare($sql, [\PDO::ATTR_CURSOR => \PDO::CURSOR_FWDONLY]);
+
+        $stmt->execute($data);
+
+    }
+
+    public function getCommentByIntervention($intervention_id){
+        $sql = "SELECT c.*, u.name AS user_name, u.surname AS user_surname
+                FROM commentaires c
+                INNER JOIN users u ON c.user_id = u.user_id
+                WHERE intervention_id = :intervention_id";
+    
+        $sth = $this->link->prepare($sql);
+        $sth->bindParam(':intervention_id', $intervention_id, \PDO::PARAM_INT);
+        $sth->execute();
+        
+        return $sth->fetchAll(\PDO::FETCH_ASSOC); 
+    }
+    
+
     public function getInterventionCompletedByClient($user_id){
         $sql ="SELECT * FROM interventions WHERE client_id=$user_id and  status_suivi='Clotûrée' or status_suivi='Annulée' ";
         $sth = $this->link->prepare($sql);

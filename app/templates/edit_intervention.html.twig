@@ -12,6 +12,8 @@
         <li>Degré d'urgence: {{ intervention.degre_urgence }}</li>
     </ul>
 
+
+
     <h2>Intervenants de l'intervention</h2>
     <ul>
         {% for intervenant in intervenants %}
@@ -19,8 +21,23 @@
         {% endfor %}
     </ul>
 
-    <h2>Modifier le statut et le degré d'urgence</h2>
+    <div class="comment-section">
+        <h2>Commentaires</h2>
+        <div class="comment-container">
+            {% for commentaire in commentaires %}
+            <div class="comment">
+                <span class="comment-author">{{ commentaire.user_name }} {{ commentaire.user_surname }}</span>
+                <span class="comment-date">{{ commentaire.date_commentaire}}</span>
+                <p class="comment-content">{{ commentaire.commentaire}}</p>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+
     <form action="edit_intervention.php?id={{ intervention.id }}" method="post">
+        <h2>Ajouter un commentaire :</h2>
+        <textarea id="commentaire" name="commentaire" cols="70" rows="5"></textarea><br><br>
+
         {% if user.role == 'standardiste' or user.role == 'intervenant' %}
         <h3>Statut :</h3>
             <input type="radio" name="status" value="En attente" {% if intervention.status_suivi == 'En attente' %}checked{% endif %}> En attente<br>
