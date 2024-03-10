@@ -88,7 +88,7 @@ class Page
     }
     
     public function getAllNewCustormers(){
-        $sql ="SELECT * FROM users WHERE role='client' ";
+        $sql ="SELECT * FROM users WHERE role='client' and verified = FALSE ";
         $sth = $this->link->prepare($sql);
         $sth->execute();
         return $sth->fetchAll(\PDO::FETCH_ASSOC); 
@@ -107,6 +107,30 @@ class Page
         $sth = $this->link->prepare($sql);
         $sth->execute();
         return $sth->fetchAll(\PDO::FETCH_ASSOC);
+    }
+
+    public function getNewCustomerByID($id){
+        $sql ="SELECT * FROM users WHERE user_id=$id and verified=FALSE";
+        $sth = $this->link->prepare($sql);
+        $sth->execute();
+        return $sth->fetchAll(\PDO::FETCH_ASSOC);
+    }
+
+    public function updateUserRole($id,$role){
+        $sql ="UPDATE users SET role = :role WHERE user_id = :id";
+        $sth = $this->link->prepare($sql);
+        $sth->bindParam(':role',$role);
+        $sth->bindParam(':id',$id);
+        $sth->execute();
+        return true;
+    }
+
+    public function setUserVerified($id){
+        $sql ="UPDATE users SET verified = TRUE WHERE user_id = :id";
+        $sth = $this->link->prepare($sql);
+        $sth->bindParam(':id',$id);
+        $sth->execute();
+        return true;
     }
 
 }

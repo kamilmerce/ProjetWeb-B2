@@ -66,6 +66,27 @@
             {% endfor %}
         </tbody>
     </table>
+    <table>
+    <h1>Nouveaux clients</h1>
+    <thead>
+        <tr>
+            <th>Nom</th>
+            <th>Prénom</th>
+            <th>ID</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for customer in newCustomers %}
+        <tr>
+            <td>{{ customer.name }}</td>
+            <td>{{ customer.surname }}</td>
+            <td>{{ customer.user_id }}</td>
+            <td><a href="verify.php?type=newCustomers&id={{ customer.user_id }}">Verify</a></td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
 
 </body>
 {% endblock %}
