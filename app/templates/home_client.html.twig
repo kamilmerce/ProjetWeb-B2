@@ -1,0 +1,40 @@
+{% extends "base_auth.html.twig" %}
+
+{% block body %}
+<body>
+    {% if user.role == 'client' %}
+     <h1>Liste des interventions en cours</h1>
+    <div style="width: 1300px; height: 500px; overflow-y: scroll; border: 1px solid #ccc; padding: 10px; margin-bottom: 20px;">
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Date de début</th>
+                    <th>Client</th>
+                    <th>Standardiste</th>
+                    <th>Infos</th>
+                    <th>Status</th>
+                    <th>Degré d'urgence</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for intervention in interventions_in_progress %}
+                <tr>
+                    <td>{{ intervention.id }}</td>
+                    <td>{{ intervention.start_date }}</td>
+                    <td>{{ intervention.client_id }}</td>
+                    <td>{{ intervention.standardiste_id }}</td>
+                    <td>{{ intervention.infos }}</td>
+                    <td>{{ intervention.status_suivi }}</td>
+                    <td>{{ intervention.degre_urgence }}</td>
+                    <td><a href="edit_intervention.php?id={{ intervention.id }}">Edit</a></td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+        <a href="intervention_completed.php">Voir les intervention cloturée</a>
+    {% endif %}
+</body>
+{% endblock %}

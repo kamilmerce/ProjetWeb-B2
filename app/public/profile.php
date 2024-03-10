@@ -12,9 +12,8 @@
         $role = $user['role'];
         switch ($role) {
             case 'client':
-                // Afficher la page d'accueil du client
-                //header('Location: profile.php');
-                break;
+                $interventions_in_progress = $page->getInterventionInProgressByClient($user['user_id']);
+                echo $page->render('home_client.html.twig',['user'=>$user,'interventions_in_progress'=>$interventions_in_progress]);
             case 'intervenant':
                 $interventions= $page->getInterventionsByIntervenantId($user['user_id']);
                 echo $page->render('home_intervenant.html.twig',[

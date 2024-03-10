@@ -21,17 +21,19 @@
 
     <h2>Modifier le statut et le degré d'urgence</h2>
     <form action="edit_intervention.php?id={{ intervention.id }}" method="post">
+        {% if user.role == 'standardiste' or user.role == 'intervenant' %}
         <h3>Statut :</h3>
-        <input type="radio" name="status" value="En attente" {% if intervention.status_suivi == 'En attente' %}checked{% endif %}> En attente<br>
-        <input type="radio" name="status" value="En cours" {% if intervention.status_suivi == 'En cours' %}checked{% endif %}> En cours<br>
-        <input type="radio" name="status" value="Clôturée" {% if intervention.status_suivi == 'Clôturée' %}checked{% endif %}> Clôturée<br>
-        <input type="radio" name="status" value="Annulée" {% if intervention.status_suivi == 'Annulée' %}checked{% endif %}> Annulée<br><br>
-        
-        <h3>Degré d'urgence :</h3>
-        <input type="radio" name="urgence" value="Faible" {% if intervention.degre_urgence == 'Faible' %}checked{% endif %}> Faible<br>
-        <input type="radio" name="urgence" value="Moyen" {% if intervention.degre_urgence == 'Moyen' %}checked{% endif %}> Moyen<br>
-        <input type="radio" name="urgence" value="Élevé" {% if intervention.degre_urgence == 'Élevé' %}checked{% endif %}> Élevé<br><br>
-
+            <input type="radio" name="status" value="En attente" {% if intervention.status_suivi == 'En attente' %}checked{% endif %}> En attente<br>
+            <input type="radio" name="status" value="En cours" {% if intervention.status_suivi == 'En cours' %}checked{% endif %}> En cours<br>
+            <input type="radio" name="status" value="Clôturée" {% if intervention.status_suivi == 'Clôturée' %}checked{% endif %}> Clôturée<br>
+            <input type="radio" name="status" value="Annulée" {% if intervention.status_suivi == 'Annulée' %}checked{% endif %}> Annulée<br><br>
+        {% endif %}
+        {% if user.role == 'standardiste' %}
+            <h3>Degré d'urgence :</h3>
+            <input type="radio" name="urgence" value="Faible" {% if intervention.degre_urgence == 'Faible' %}checked{% endif %}> Faible<br>
+            <input type="radio" name="urgence" value="Moyen" {% if intervention.degre_urgence == 'Moyen' %}checked{% endif %}> Moyen<br>
+            <input type="radio" name="urgence" value="Élevé" {% if intervention.degre_urgence == 'Élevé' %}checked{% endif %}> Élevé<br><br>
+        {% endif %}
         <button type="submit">Enregistrer</button>
     </form>
 </body>

@@ -101,6 +101,20 @@ class Page
         return $sth->fetchAll(\PDO::FETCH_ASSOC); 
     }
 
+    public function getInterventionInProgressByClient($user_id){
+        $sql ="SELECT * FROM interventions WHERE client_id=$user_id and  status_suivi!='Clotûtrée' and status_suivi!='Annulée' ";
+        $sth = $this->link->prepare($sql);
+        $sth->execute();
+        return $sth->fetchAll(\PDO::FETCH_ASSOC); 
+    }
+
+    public function getInterventionCompletedByClient($user_id){
+        $sql ="SELECT * FROM interventions WHERE client_id=$user_id and  status_suivi='Clotûrée' or status_suivi='Annulée' ";
+        $sth = $this->link->prepare($sql);
+        $sth->execute();
+        return $sth->fetchAll(\PDO::FETCH_ASSOC); 
+    }
+
     public function getInterventionsByIntervenantId($intervenantId) {
         $sql = "SELECT interventions.*
                 FROM interventions
