@@ -1,0 +1,51 @@
+{% extends "base_auth.html.twig" %}
+
+{% block body %}
+<body>
+    <h1>Création d'une nouvelle intervention</h1>
+
+    <form action="create_intervention.php" method="post">
+        <label for="infos">Informations :</label>
+        <textarea id="infos" name="infos" cols="70" rows="5"></textarea><br><br>
+        
+        <fieldset>
+            <legend>Intervenants :</legend>
+            {% for intervenant in intervenants %}
+                <input type="checkbox" id="intervenant_{{ intervenant.user_id }}" name="intervenants[]" value="{{ intervenant.user_id }}">
+                <label for="intervenant_{{ intervenant.user_id }}">{{ intervenant.name }} {{ intervenant.surname }}</label><br>
+            {% endfor %}
+        </fieldset><br>
+
+        <label for="standardiste">Standardiste :</label>
+        <select name="standardiste" id="standardiste" required>
+            {% for standardiste in standardistes %}
+                <option value="{{ standardiste.user_id }}">{{ standardiste.name }} {{ standardiste.surname }}</option>
+            {% endfor %}
+        </select><br><br>
+
+        <label for="client">Client :</label>
+        <select name="client_id" id="client_id" required>
+            {% for client in clients %}
+                <option value="{{ client.user_id }}">{{ client.name }} {{ client.surname }}</option>
+            {% endfor %}
+        </select><br><br>
+
+        <label>Date de début :</label>
+        <input type="date" id="start_date" name="start_date" required><br><br>
+
+        <fieldset>
+            <legend>Degré d'urgence :</legend>
+            <input type="radio" id="faible" name="degre_urgence" value="Faible" required>
+            <label for="faible">Faible</label><br>
+
+            <input type="radio" id="moyen" name="degre_urgence" value="Moyen" required>
+            <label for="moyen">Moyen</label><br>
+
+            <input type="radio" id="eleve" name="degre_urgence" value="Élevé" required>
+            <label for="eleve">Élevé</label><br>
+        </fieldset><br>
+
+        <button type="submit">Enregistrer</button>
+    </form>
+</body>
+{% endblock %}

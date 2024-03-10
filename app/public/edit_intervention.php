@@ -18,18 +18,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (isset($_POST['status'])) {
         // Mettre à jour le statut et le degré d'urgence de l'intervention
         $status = $_POST['status'];
-        
-        // Mettre à jour les informations de l'intervention dans la base de données
-        $page->updateIntervention($interventionId, $status);
-        
+    }else {
+        $status=$intervention['status_suivi'];
     }
+    $page->updateStatusIntervention($interventionId, $status);
     if (isset($_POST['urgence'])){
         $urgence = $_POST['urgence'];
-        $page->updateUrgenceIntervention($interventionId,$urgence);
+    
+    }else{
+        $urgence=$intervention['degre_urgence'];
     }
+    $page->updateUrgenceIntervention($interventionId,$urgence);
 
     // Rediriger vers la page de détails de l'intervention mise à jour
-    header('Location: profile.php?id=');
+    header('Location: profile.php');
     exit();
 }
 

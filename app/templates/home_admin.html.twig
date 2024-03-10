@@ -3,114 +3,120 @@
 {% block body %}
 <body>
     {% if user.role == 'admin' %}
-    <table>
+    <div style="width: 300px; height: 600px; overflow-y: scroll; border: 1px solid #ccc; padding: 10px; margin-bottom: 20px;">
         <h1>Liste des interventions</h1>
+            <table>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th></th> 
 
-        <thead>
-            <tr>
-                <th>ID</th>
-                <th></th> 
-
-            </tr>
-        </thead>
-        <tbody>
-            {% for intervention in interventions %}
-            <tr>
-                <td>{{ intervention.id }}</td>
-                <td><a href="viewmore.php?type=intervention&id={{ intervention.id }}">View more</a></td>
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
-    <table>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for intervention in interventions %}
+                    <tr>
+                        <td>{{ intervention.id }}</td>
+                        <td><a href="viewmore.php?type=intervention&id={{ intervention.id }}">View more</a></td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+    </div>
+    <div style="width: 300px; height: 300px; overflow-y: scroll; border: 1px solid #ccc; padding: 10px; margin-bottom: 20px;">
         <h1>Liste des clients</h1>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Nom</th>
+                        <th>Prénom</th>
+                        <th>ID</th>
+                        <th></th> 
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for client in customers %}
+                    <tr>
+                        <td>{{ client.name }}</td>
+                        <td>{{ client.surname }}</td>
+                        <td>{{ client.user_id }}</td>
+                        <td><a href="viewmore.php?type=client&id={{ client.user_id }}">View more</a></td> 
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+   </div>
+    <div style="width: 300px; height: 300px; overflow-y: scroll; border: 1px solid #ccc; padding: 10px; margin-bottom: 20px;">
+        <h1>Liste des intervenants</h1>  
+            <table>
+                <thead>
+                    <tr>
+                        <th>Nom</th>
+                        <th>Prénom</th>
+                        <th>ID</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for intervenant in intervenants %}
+                    <tr>
+                        <td>{{ intervenant.name }}</td>
+                        <td>{{ intervenant.surname }}</td>
+                        <td>{{ intervenant.user_id }}</td>
+                        <td><a href="viewmore.php?type=intervenant&id={{ intervenant.user_id }}">View more</a></td>
 
-        <thead>
-            <tr>
-                <th>Nom</th>
-                <th>Prénom</th>
-                <th>ID</th>
-                <th></th> 
-            </tr>
-        </thead>
-        <tbody>
-            {% for client in customers %}
-            <tr>
-                <td>{{ client.name }}</td>
-                <td>{{ client.surname }}</td>
-                <td>{{ client.user_id }}</td>
-                <td><a href="viewmore.php?type=client&id={{ client.user_id }}">View more</a></td> 
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
-    <table>
-        <h1>Liste des intervenants</h1>
-
-        <thead>
-            <tr>
-                <th>Nom</th>
-                <th>Prénom</th>
-                <th>ID</th>
-                <th></th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for intervenant in intervenants %}
-            <tr>
-                <td>{{ intervenant.name }}</td>
-                <td>{{ intervenant.surname }}</td>
-                <td>{{ intervenant.user_id }}</td>
-                <td><a href="viewmore.php?type=intervenant&id={{ intervenant.user_id }}">View more</a></td>
-
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
-    <table>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+    </div>
+    <div style="width: 300px; height: 300px; overflow-y: scroll; border: 1px solid #ccc; padding: 10px; margin-bottom: 20px;">
         <h1>Liste des standardiste</h1>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Nom</th>
+                        <th>Prénom</th>
+                        <th>ID</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for standardiste in standardistes %}
+                    <tr>
+                        <td>{{ standardiste.name }}</td>
+                        <td>{{ standardiste.surname }}</td>
+                        <td>{{ standardiste.user_id }}</td>
+                        <td><a href="viewmore.php?type=standardiste&id={{ standardiste.user_id }}">View more</a></td>
 
-        <thead>
-            <tr>
-                <th>Nom</th>
-                <th>Prénom</th>
-                <th>ID</th>
-                <th></th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for standardiste in standardistes %}
-            <tr>
-                <td>{{ standardiste.name }}</td>
-                <td>{{ standardiste.surname }}</td>
-                <td>{{ standardiste.user_id }}</td>
-                <td><a href="viewmore.php?type=standardiste&id={{ standardiste.user_id }}">View more</a></td>
-
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
-    <table>
-    <h1>Nouveaux clients</h1>
-    <thead>
-        <tr>
-            <th>Nom</th>
-            <th>Prénom</th>
-            <th>ID</th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        {% for customer in newCustomers %}
-        <tr>
-            <td>{{ customer.name }}</td>
-            <td>{{ customer.surname }}</td>
-            <td>{{ customer.user_id }}</td>
-            <td><a href="verify.php?type=newCustomers&id={{ customer.user_id }}">Verify</a></td>
-        </tr>
-        {% endfor %}
-    </tbody>
-</table>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+    </div>
+    <div style="width: 300px; height: 300px; overflow-y: scroll; border: 1px solid #ccc; padding: 10px; margin-bottom: 20px;">
+        <h1>Nouveaux clients</h1>  
+            <table>
+                <thead>
+                    <tr>
+                        <th>Nom</th>
+                        <th>Prénom</th>
+                        <th>ID</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for customer in newCustomers %}
+                    <tr>
+                        <td>{{ customer.name }}</td>
+                        <td>{{ customer.surname }}</td>
+                        <td>{{ customer.user_id }}</td>
+                        <td><a href="verify.php?type=newCustomers&id={{ customer.user_id }}">Verify</a></td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+    </div>
 {% endif %}
 </body>
 {% endblock %}

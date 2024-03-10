@@ -111,6 +111,24 @@ class Page
         $sth->execute();
         return $sth->fetchAll(\PDO::FETCH_ASSOC); 
     }
+
+    public function updateStatusIntervention($id,$status){
+        $sql ="UPDATE interventions SET status_suivi =:status  WHERE id = :id";
+        $sth = $this->link->prepare($sql);
+        $sth->bindParam(':status',$status);
+        $sth->bindParam(':id',$id);
+        $sth->execute();
+        return true;
+    }
+
+    public function updateUrgenceIntervention($id,$urgence){
+        $sql ="UPDATE interventions SET degre_urgence =:urgence  WHERE id = :id";
+        $sth = $this->link->prepare($sql);
+        $sth->bindParam(':urgence',$urgence);
+        $sth->bindParam(':id',$id);
+        $sth->execute();
+        return true;
+    }
     
     
     public function getInterventionsByID($id){
@@ -152,5 +170,29 @@ class Page
         $sth->execute();
         return true;
     }
+
+    public function insertIntervention(array $data) {
+        // Requête SQL pour l'insertion des données de l'intervention
+        $sql = "INSERT INTO interventions (client_id, standardiste_id, start_date, degre_urgence, infos) 
+                VALUES (:client_id, :standardiste_id, :start_date, :degre_urgence, :infos)";
+
+        // Préparation de la requête SQL
+        $stmt = $this->link->prepare($sql, [\PDO::ATTR_CURSOR => \PDO::CURSOR_FWDONLY]);
+
+        // Exécution de la requête SQL
+        $stmt->execute($data);
+
+        return $this->link->lastInsertId();
+
+    }
+
+    public function insertIntervenantIntervention($intervenantId, $interventionId) {
+        $sql = "INSERT INTO intervenant_intervention (intervenant_id, intervention_id) VALUES (:intervenant_id, :intervention_id)";
+        $stmt = $this->link->prepare($sql);
+        $stmt->bindParam(':intervenant_id', $intervenantId);
+        $stmt->bindParam(':intervention_id', $interventionId);
+        $stmt->execute();
+    }
+
 
 }
