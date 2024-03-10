@@ -8,7 +8,7 @@
         <thead>
             <tr>
                 <th>ID</th>
-                <th></th> {# Ajout de la colonne Action #}
+                <th></th> 
 
             </tr>
         </thead>
@@ -29,16 +29,16 @@
                 <th>Nom</th>
                 <th>Prénom</th>
                 <th>ID</th>
-                <th></th> {# Ajout de la colonne Action #}
+                <th></th> 
             </tr>
         </thead>
         <tbody>
-            {% for client in newCustomers %}
+            {% for client in customers %}
             <tr>
                 <td>{{ client.name }}</td>
                 <td>{{ client.surname }}</td>
                 <td>{{ client.user_id }}</td>
-                <td><a href="viewmore.php?type=client&id={{ client.user_id }}">View more</a></td> {# Ajout du bouton "View More" #}
+                <td><a href="viewmore.php?type=client&id={{ client.user_id }}">View more</a></td> 
             </tr>
             {% endfor %}
         </tbody>

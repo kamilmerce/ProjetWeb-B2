@@ -4,13 +4,13 @@
 <body>
     {% if type == 'client' %}
         <h1>Informations sur le client</h1>
-        <p>ID: {{ userInfo['user_id']}} </p>
+        <p>ID: {{ userInfo.user_id }} </p>
         <p>Nom: {{ userInfo.name }}</p>
         <p>Prénom: {{ userInfo.surname }}</p>
         <p>Email: {{ userInfo.email }}</p>
     {% elseif type == 'intervenant' %}
         <h1>Informations sur l'intervenant</h1>
-        <p>ID: {{ intervenant.id }} </p
+        <p>ID: {{ userInfo.user_id }} </p
         <p>Nom: {{ userInfo.name }}</p>
         <p>Prénom: {{ userInfo.surname }}</p>
         <p>Email: {{ userInfo.email }}</p>
