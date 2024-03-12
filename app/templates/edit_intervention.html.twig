@@ -23,7 +23,7 @@
 
     <div class="comment-section">
         <h2>Commentaires</h2>
-        <div class="comment-container">
+        <div class="comment-container" style="width: 600px; height: 300px; overflow-y: scroll; border: 1px solid #ccc; padding: 10px; margin-bottom: 20px;">
             {% for commentaire in commentaires %}
             <div class="comment">
                 <span class="comment-author">{{ commentaire.user_name }} {{ commentaire.user_surname }}</span>
@@ -42,8 +42,10 @@
         <h3>Statut :</h3>
             <input type="radio" name="status" value="En attente" {% if intervention.status_suivi == 'En attente' %}checked{% endif %}> En attente<br>
             <input type="radio" name="status" value="En cours" {% if intervention.status_suivi == 'En cours' %}checked{% endif %}> En cours<br>
-            <input type="radio" name="status" value="Clôturée" {% if intervention.status_suivi == 'Clôturée' %}checked{% endif %}> Clôturée<br>
-            <input type="radio" name="status" value="Annulée" {% if intervention.status_suivi == 'Annulée' %}checked{% endif %}> Annulée<br><br>
+            {% if user.role =='standardiste' %}
+                <input type="radio" name="status" value="Clôturée" {% if intervention.status_suivi == 'Clôturée' %}checked{% endif %}> Clôturée<br>
+                <input type="radio" name="status" value="Annulée" {% if intervention.status_suivi == 'Annulée' %}checked{% endif %}> Annulée<br><br>
+            {% endif %}
         {% endif %}
         {% if user.role == 'standardiste' %}
             <h3>Degré d'urgence :</h3>

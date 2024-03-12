@@ -25,17 +25,17 @@ if (isset($_GET['type']) && isset($_GET['id'])) {
         }
     } else if ($type === 'intervention'){
         $interventionInfo = ($type=='intervention')?$page->getInterventionsByID($id)  : false ;
+        $commentaires = $page->getCommentByIntervention($id);
 
-        var_dump($interventionInfo);
         echo $page->render('viewmore.html.twig', [
             'type'=>$type,
             'id'=>$id,
-            'interventionInfo'=>$interventionInfo
+            'interventionInfo'=>$interventionInfo,
+            'commentaires'=>$commentaires
         ]);
     } else if ($type === 'standardiste'){
         $userInfo = ($type=='standardiste')?$page->getUserByID($id)  : false ;
 
-        var_dump($userInfo);
         echo $page->render('viewmore.html.twig', [
             'type'=>$type,
             'userInfo'=>$userInfo[0]

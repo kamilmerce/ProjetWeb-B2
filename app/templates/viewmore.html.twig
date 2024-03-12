@@ -22,12 +22,24 @@
         <p>Email: {{ userInfo.email }}</p>
     {% elseif type == 'intervention' %}
         <h1>Informations sur l'intervention</h1>
-        <p>ID: {{ intervention.id }} </p>
-        <p>Client: {{intervention.client_id}}<p/>
-        <p>Standardiste: {{intervention.standardiste_id}}</p>
-        <p>Date de debut:  {{ intervention.start_date}}</p>
-        <p>Status: {{ intervention.status_suivi }}</p>
-        <p>Degré d'urgence: {{ intervention.degree_urgence }}</p>
+        <p>ID: {{ interventionInfo.id }} </p>
+        <p>Client: {{interventionInfo.client_id}}<p/>
+        <p>Standardiste: {{interventionInfo.standardiste_id}}</p>
+        <p>Date de debut:  {{ interventionInfo.start_date}}</p>
+        <p>Status: {{ interventionInfo.status_suivi }}</p>
+        <p>Degré d'urgence: {{ interventionInfo.degre_urgence }}</p>
+         <div class="comment-section">
+        <h2>Commentaires</h2>
+        <div class="comment-container" >
+            {% for commentaire in commentaires %}
+            <div class="comment" style="width: 600px; height: 300px; overflow-y: scroll; border: 1px solid #ccc; padding: 10px; margin-bottom: 20px;">
+                <span class="comment-author">{{ commentaire.user_name }} {{ commentaire.user_surname }}</span>
+                <span class="comment-date">{{ commentaire.date_commentaire}}</span>
+                <p class="comment-content">{{ commentaire.commentaire}}</p>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
     {% else %}
         <p>Type non reconnu.</p>
     {% endif %}
