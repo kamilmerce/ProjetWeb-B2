@@ -96,29 +96,31 @@
                 </tbody>
             </table>
     </div>
-    <div style="width: 300px; height: 300px; overflow-y: scroll; border: 1px solid #ccc; padding: 10px; margin-bottom: 20px;">
-        <h1>Nouveaux clients</h1>  
-            <table>
-                <thead>
-                    <tr>
-                        <th>Nom</th>
-                        <th>Prénom</th>
-                        <th>ID</th>
-                        <th></th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {% for customer in newCustomers %}
-                    <tr>
-                        <td>{{ customer.name }}</td>
-                        <td>{{ customer.surname }}</td>
-                        <td>{{ customer.user_id }}</td>
-                        <td><a href="verify.php?type=newCustomers&id={{ customer.user_id }}">Verify</a></td>
-                    </tr>
-                    {% endfor %}
-                </tbody>
-            </table>
-    </div>
+    {% if newCustomers != empty %}
+        <div style="width: 300px; height: 300px; overflow-y: scroll; border: 1px solid #ccc; padding: 10px; margin-bottom: 20px;">
+            <h1>Nouveaux clients</h1>  
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Nom</th>
+                            <th>Prénom</th>
+                            <th>ID</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for customer in newCustomers %}
+                        <tr>
+                            <td>{{ customer.name }}</td>
+                            <td>{{ customer.surname }}</td>
+                            <td>{{ customer.user_id }}</td>
+                            <td><a href="verify.php?type=newCustomers&id={{ customer.user_id }}">Verify</a></td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+        </div>
+    {% endif %}
 {% endif %}
 </body>
 {% endblock %}

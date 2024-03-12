@@ -102,11 +102,12 @@ class Page
     }
 
     public function getInterventionInProgressByClient($user_id){
-        $sql ="SELECT * FROM interventions WHERE client_id=$user_id and  status_suivi!='Clotûtrée' and status_suivi!='Annulée' ";
+        $sql ="SELECT * FROM interventions WHERE client_id=$user_id AND status_suivi NOT IN ('Clôturée', 'Annulée')";
         $sth = $this->link->prepare($sql);
         $sth->execute();
         return $sth->fetchAll(\PDO::FETCH_ASSOC); 
     }
+    
 
     public function addCommentaire(array $data){
         $sql = "INSERT INTO commentaires (user_id,intervention_id, commentaire) 
@@ -189,7 +190,12 @@ class Page
         $sth->execute();
         return true;
     }
-    
+    public function getInterventionsByClient($id){
+        $sql ="SELECT * FROM interventions WHERE client_id=$id";
+        $sth = $this->link->prepare($sql);
+        $sth->execute();
+        return $sth->fetchALL(\PDO::FETCH_ASSOC);
+    }
     
     public function getInterventionsByID($id){
         $sql ="SELECT * FROM interventions WHERE id=$id";
@@ -252,6 +258,13 @@ class Page
         $stmt->bindParam(':intervenant_id', $intervenantId);
         $stmt->bindParam(':intervention_id', $interventionId);
         $stmt->execute();
+    }
+
+    public function getInterventionByStandardiste($id){
+        $sql ="SELECT * FROM interventions WHERE standardiste_id=$id";
+        $sth = $this->link->prepare($sql);
+        $sth->execute();
+        return $sth->fetchALL(\PDO::FETCH_ASSOC);
     }
 
 

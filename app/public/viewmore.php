@@ -13,20 +13,17 @@ if (isset($_GET['type']) && isset($_GET['id'])) {
     
     if ($type === 'client' || $type === 'intervenant') {
         $userInfo = ($type === 'client') ? $page->getUserByID($id) : $page->getUserByID($id);
-
-        if ($userInfo) {
-            var_dump($userInfo);
-            echo $page->render('viewmore.html.twig', [
-                'type' => $type,
-                'userInfo' => $userInfo[0] // Accessing the first element of the userInfo array
-            ]);
-        } else {
-            echo "Utilisateur introuvable.";
-        }
+        $interventionbyclient = $page->getInterventionsByClient($id);
+        $interventionbyintervenant = $page->getInterventionsByIntervenantId($id);
+        echo $page->render('viewmore.html.twig', [
+            'interventionbyintervenant'=>$interventionbyintervenant,
+            'interventionclient' => $interventionbyclient,
+            'type' => $type,
+            'userInfo' => $userInfo[0] 
+        ]);
     } else if ($type === 'intervention'){
         $interventionInfo = ($type=='intervention')?$page->getInterventionsByID($id)  : false ;
         $commentaires = $page->getCommentByIntervention($id);
-
         echo $page->render('viewmore.html.twig', [
             'type'=>$type,
             'id'=>$id,
@@ -35,8 +32,10 @@ if (isset($_GET['type']) && isset($_GET['id'])) {
         ]);
     } else if ($type === 'standardiste'){
         $userInfo = ($type=='standardiste')?$page->getUserByID($id)  : false ;
+        $interventionbystandardiste = $page->getInterventionByStandardiste($id);
 
         echo $page->render('viewmore.html.twig', [
+            'interventionbystandardiste'=>$interventionbystandardiste,
             'type'=>$type,
             'userInfo'=>$userInfo[0]
         ]);

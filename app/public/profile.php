@@ -16,14 +16,16 @@
                 $allcommentaires = $page->getALLComment();
                 echo $page->render('home_client.html.twig',['commentaires'=>$allcommentaires,'user'=>$user,'interventions_in_progress'=>$interventions_in_progress]);
             case 'intervenant':
+                $allcommentaires = $page->getALLComment();
                 $interventions= $page->getInterventionsByIntervenantId($user['user_id']);
-                echo $page->render('home_intervenant.html.twig',[
+                echo $page->render('home_intervenant.html.twig',['commentaires'=>$allcommentaires,
                     'user'=>$user,
                     'interventions'=>$interventions
                 ]);
             case 'standardiste':
                 $interventions=$page->getAllInterventions();
-                echo $page->render('home_standardiste.html.twig',[
+                $allcommentaires = $page->getALLComment();
+                echo $page->render('home_standardiste.html.twig',['commentaires'=>$allcommentaires,
                     'user'=>$user,
                     'interventions'=>$interventions
                 ]);
