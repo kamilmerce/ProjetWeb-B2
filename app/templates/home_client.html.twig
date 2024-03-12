@@ -13,6 +13,7 @@
                     <th>Client</th>
                     <th>Standardiste</th>
                     <th>Infos</th>
+                    <th>Commentaires</th>
                     <th>Status</th>
                     <th>Degré d'urgence</th>
                     <th></th>
@@ -26,9 +27,22 @@
                     <td>{{ intervention.client_id }}</td>
                     <td>{{ intervention.standardiste_id }}</td>
                     <td>{{ intervention.infos }}</td>
+                    <td>
+                        <div style="width: 300px; height: 100px; overflow-y: scroll; border: 1px solid #ccc; padding: 10px; margin-bottom: 20px;">
+                            {% for commentaire in commentaires %}
+                                {% if commentaire.intervention_id == intervention.id %}
+                                    <div class="comment">
+                                        <span class="comment-author">{{ commentaire.user_name }} {{ commentaire.user_surname }}</span>
+                                        <span class="comment-date">{{ commentaire.date_commentaire}}</span>
+                                        <p class="comment-content">{{ commentaire.commentaire}}</p>
+                                    </div>
+                                {% endif %}
+                            {% endfor %}
+                        </div>
+                    </td>
                     <td>{{ intervention.status_suivi }}</td>
                     <td>{{ intervention.degre_urgence }}</td>
-                    <td><a href="edit_intervention.php?id={{ intervention.id }}">Edit</a></td>
+                    <td><a href="edit_intervention.php?id={{ intervention.id }}">Add comments</a></td>
                 </tr>
                 {% endfor %}
             </tbody>

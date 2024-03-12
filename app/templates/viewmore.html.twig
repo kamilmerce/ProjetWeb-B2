@@ -28,16 +28,16 @@
         <p>Date de debut:  {{ interventionInfo.start_date}}</p>
         <p>Status: {{ interventionInfo.status_suivi }}</p>
         <p>Degré d'urgence: {{ interventionInfo.degre_urgence }}</p>
-         <div class="comment-section">
+        <div class="comment-section">
         <h2>Commentaires</h2>
         <div class="comment-container" >
-            {% for commentaire in commentaires %}
             <div class="comment" style="width: 600px; height: 300px; overflow-y: scroll; border: 1px solid #ccc; padding: 10px; margin-bottom: 20px;">
-                <span class="comment-author">{{ commentaire.user_name }} {{ commentaire.user_surname }}</span>
-                <span class="comment-date">{{ commentaire.date_commentaire}}</span>
-                <p class="comment-content">{{ commentaire.commentaire}}</p>
+                    {% for commentaire in commentaires %}
+                        <span class="comment-author">{{ commentaire.user_name }} {{ commentaire.user_surname }}</span>
+                        <span class="comment-date">{{ commentaire.date_commentaire}}</span>
+                        <p class="comment-content">{{ commentaire.commentaire}}</p>
+                    {% endfor %}
             </div>
-            {% endfor %}
         </div>
     </div>
     {% else %}

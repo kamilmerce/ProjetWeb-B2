@@ -118,6 +118,14 @@ class Page
 
     }
 
+    public function getALLComment(){
+        $sql ="SELECT c.*, u.name AS user_name, u.surname AS user_surname FROM commentaires c INNER JOIN users u ON c.user_id = u.user_id";
+        $sth = $this->link->prepare($sql);
+        $sth->execute();
+        return $sth->fetchAll(\PDO::FETCH_ASSOC); 
+    }
+    
+
     public function getCommentByIntervention($intervention_id){
         $sql = "SELECT c.*, u.name AS user_name, u.surname AS user_surname
                 FROM commentaires c
