@@ -1,5 +1,6 @@
 <?php
 namespace App;
+use PDO;
 
 
 class Page
@@ -108,6 +109,38 @@ class Page
         return $sth->fetchAll(\PDO::FETCH_ASSOC); 
     }
     
+    // Recherche les interventions
+    public function searchInterventions($query) {
+        $stmt = $this->link->prepare("SELECT * FROM interventions WHERE id LIKE :query OR client_id LIKE :query");
+        $stmt->bindValue(':query', "%$query%", PDO::PARAM_STR);
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    // Recherche les clients
+    public function searchClients($query) {
+        $stmt = $this->link->prepare("SELECT * FROM users WHERE role='client' and (name LIKE :query OR surname LIKE :query)");
+        $stmt->bindValue(':query', "%$query%", PDO::PARAM_STR);
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    // Recherche les intervenants
+    public function searchIntervenants($query) {
+        $stmt = $this->link->prepare("SELECT * FROM users WHERE role='intervenant' and ( name LIKE :query OR surname LIKE :query)");
+        $stmt->bindValue(':query', "%$query%", PDO::PARAM_STR);
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    // Recherche les standardistes
+    public function searchStandardistes($query) {
+        $stmt = $this->link->prepare("SELECT * FROM users WHERE role ='standardiste' and ( name LIKE :query OR surname LIKE :query)");
+        $stmt->bindValue(':query', "%$query%", PDO::PARAM_STR);
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
 
     public function addCommentaire(array $data){
         $sql = "INSERT INTO commentaires (user_id,intervention_id, commentaire) 

@@ -28,7 +28,7 @@
                     <td>{{ intervention.standardiste_id }}</td>
                     <td>{{ intervention.infos }}</td>
                     <td>
-                        <div style="width: 300px; height: 100px; overflow-y: scroll; border: 1px solid #ccc; padding: 10px; margin-bottom: 20px;">
+                        <div style="width: 300px; height: 100px; overflow-y: scroll; border: 0px solid #ccc; padding: 10px; margin-bottom: 20px;">
                             {% for commentaire in commentaires %}
                                 {% if commentaire.intervention_id == intervention.id %}
                                     <div class="comment">

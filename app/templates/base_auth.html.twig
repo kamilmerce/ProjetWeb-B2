@@ -3,10 +3,29 @@
     <head>
         <meta charset="utf-8">
         <title>Accord Energie</title>
+        
     </head>
     <body>
-    {% block body %}{% endblock %}
+        <h1>AccordEnergie</h1>
+    
+        <div class="top-bar">
+            <nav>
+                {% if user.role == 'client' %}
+                    <ul style="list-style-type:none; padding:0; margin:0;">
+                        <li style="display:inline; margin-right:20px;"><a href="#">Accueil</a></li>
+                        <li style="display:inline; margin-right:20px;"><a href="#">Mon compte</a></li>
+                    </ul>
+                {% elseif user.role == 'admin' %}
+                    <ul style="list-style-type:none; padding:0; margin:0;">
+                        <li style="display:inline; margin-right:20px;"><a href="#">Accueil</a></li>
+                        <li style="display:inline; margin-right:20px;"><a href="#">Mon compte</a></li>
+                    </ul>
+                
+                {% endif %}
+            </nav>
+        </div>
 
+        {% block body %}{% endblock %}
 
     </body>
 </html>

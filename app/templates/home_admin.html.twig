@@ -3,8 +3,22 @@
 {% block body %}
 <body>
     {% if user.role == 'admin' %}
+    <div style="margin-bottom: 20px;">
+        <h2>Rechercher</h2>
+        <form action="search.php" method="GET">
+            <input type="text" name="query" placeholder="Recherche...">
+            <select name="type">
+                <option value="intervention">Intervention</option>
+                <option value="client">Client</option>
+                <option value="intervenant">Intervenant</option>
+                <option value="standardiste">Standardiste</option>
+            </select>
+            <button type="submit">Rechercher</button>
+        </form>
+    </div>
+    
     <div style="width: 300px; height: 600px; overflow-y: scroll; border: 1px solid #ccc; padding: 10px; margin-bottom: 20px;">
-        <h1>Liste des interventions</h1>
+        <h2>Liste des interventions</h2>
             <table>
                 <thead>
                     <tr>
@@ -26,7 +40,7 @@
             </table>
     </div>
     <div style="width: 300px; height: 300px; overflow-y: scroll; border: 1px solid #ccc; padding: 10px; margin-bottom: 20px;">
-        <h1>Liste des clients</h1>
+        <h2>Liste des clients</h2>
             <table>
                 <thead>
                     <tr>
@@ -49,7 +63,7 @@
             </table>
    </div>
     <div style="width: 300px; height: 300px; overflow-y: scroll; border: 1px solid #ccc; padding: 10px; margin-bottom: 20px;">
-        <h1>Liste des intervenants</h1>  
+        <h2>Liste des intervenants</h2>  
             <table>
                 <thead>
                     <tr>
@@ -73,7 +87,7 @@
             </table>
     </div>
     <div style="width: 300px; height: 300px; overflow-y: scroll; border: 1px solid #ccc; padding: 10px; margin-bottom: 20px;">
-        <h1>Liste des standardiste</h1>
+        <h2>Liste des standardiste</h2>
             <table>
                 <thead>
                     <tr>
@@ -98,7 +112,7 @@
     </div>
     {% if newCustomers != empty %}
         <div style="width: 300px; height: 300px; overflow-y: scroll; border: 1px solid #ccc; padding: 10px; margin-bottom: 20px;">
-            <h1>Nouveaux clients</h1>  
+            <h2>Nouveaux clients</h2>  
                 <table>
                     <thead>
                         <tr>
