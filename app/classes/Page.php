@@ -111,7 +111,7 @@ class Page
     
     // Recherche les interventions
     public function searchInterventions($query) {
-        $stmt = $this->link->prepare("SELECT * FROM interventions WHERE id LIKE :query OR client_id LIKE :query");
+        $stmt = $this->link->prepare("SELECT * FROM interventions WHERE id LIKE :query OR client_id LIKE :query OR status_suivi LIKE :query OR degre_urgence LIKE :query OR start_date LIKE :query or infos LIKE :query OR standardiste_id LIKE :query");
         $stmt->bindValue(':query', "%$query%", PDO::PARAM_STR);
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -119,7 +119,7 @@ class Page
 
     // Recherche les clients
     public function searchClients($query) {
-        $stmt = $this->link->prepare("SELECT * FROM users WHERE role='client' and (name LIKE :query OR surname LIKE :query)");
+        $stmt = $this->link->prepare("SELECT * FROM users WHERE role='client' and (name LIKE :query OR surname LIKE :query OR user_id LIKE :query)");
         $stmt->bindValue(':query', "%$query%", PDO::PARAM_STR);
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -127,7 +127,7 @@ class Page
 
     // Recherche les intervenants
     public function searchIntervenants($query) {
-        $stmt = $this->link->prepare("SELECT * FROM users WHERE role='intervenant' and ( name LIKE :query OR surname LIKE :query)");
+        $stmt = $this->link->prepare("SELECT * FROM users WHERE role='intervenant' and ( name LIKE :query OR surname LIKE :query OR user_id LIKE :query)");
         $stmt->bindValue(':query', "%$query%", PDO::PARAM_STR);
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -135,7 +135,7 @@ class Page
 
     // Recherche les standardistes
     public function searchStandardistes($query) {
-        $stmt = $this->link->prepare("SELECT * FROM users WHERE role ='standardiste' and ( name LIKE :query OR surname LIKE :query)");
+        $stmt = $this->link->prepare("SELECT * FROM users WHERE role ='standardiste' and ( name LIKE :query OR surname LIKE :query OR user_id LIKE :query)");
         $stmt->bindValue(':query', "%$query%", PDO::PARAM_STR);
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
