@@ -300,5 +300,159 @@ class Page
         return $sth->fetchALL(\PDO::FETCH_ASSOC);
     }
 
+    // Dans la classe Page
+
+    public function getInterventionAsc()
+    {
+        $sql = "SELECT * FROM interventions ORDER BY id ASC";
+        $sth = $this->link->prepare($sql);
+        $sth->execute();
+        return $sth->fetchALL(\PDO::FETCH_ASSOC);
+    }
+
+    public function getInterventionDesc()
+    {
+        $sql = "SELECT * FROM interventions ORDER BY id DESC";
+        $sth = $this->link->prepare($sql);
+        $sth->execute();
+        return $sth->fetchALL(\PDO::FETCH_ASSOC);
+    }
+
+
+// Dans la classe Page
+
+    // Tri des clients
+    public function getClientsAsc()
+    {
+        $query = "SELECT * FROM users WHERE role='client' and verified=TRUE ORDER BY user_id ASC";
+        $sth = $this->link->prepare($query);
+        $sth->execute();
+        return $sth->fetchALL(\PDO::FETCH_ASSOC);
+    }
+
+    public function getClientsDesc()
+    {
+        $query = "SELECT * FROM users WHERE role='client' and verified=TRUE ORDER BY user_id DESC";
+        $sth = $this->link->prepare($query);
+        $sth->execute();
+        return $sth->fetchALL(\PDO::FETCH_ASSOC);
+    }
+
+    public function getClientsNameAsc()
+    {
+        $query = "SELECT * FROM users WHERE role='client' and verified=TRUE ORDER BY name ASC";
+        $sth = $this->link->prepare($query);
+        $sth->execute();
+        return $sth->fetchALL(\PDO::FETCH_ASSOC);
+    }
+
+    public function getClientNameDesc()
+    {
+        $query = "SELECT * FROM users WHERE role='client' and verified=TRUE ORDER BY name DESC";
+        $sth = $this->link->prepare($query);
+        $sth->execute();
+        return $sth->fetchALL(\PDO::FETCH_ASSOC);
+    }
+
+    // Tri des intervenants
+    public function getIntervenantAsc()
+    {
+        $query = "SELECT * FROM users WHERE role='intervenant' ORDER BY user_id ASC";
+        $sth = $this->link->prepare($query);
+        $sth->execute();
+        return $sth->fetchALL(\PDO::FETCH_ASSOC);
+    }
+
+    public function getIntervenantDesc()
+    {
+        $query = "SELECT * FROM users WHERE role='intervenant' ORDER BY user_id DESC";
+        $sth = $this->link->prepare($query);
+        $sth->execute();
+        return $sth->fetchALL(\PDO::FETCH_ASSOC);
+    }
+
+    public function getIntervenantNameAsc()
+    {
+        $query = "SELECT * FROM users WHERE role='intervenant' ORDER BY name ASC";
+        $sth = $this->link->prepare($query);
+        $sth->execute();
+        return $sth->fetchALL(\PDO::FETCH_ASSOC);
+    }
+
+    public function getIntervenantNameDesc()
+    {
+        $query = "SELECT * FROM users WHERE role='intervenant' ORDER BY name DESC";
+        $sth = $this->link->prepare($query);
+        $sth->execute();
+        return $sth->fetchALL(\PDO::FETCH_ASSOC);
+    }
+
+    // Tri des standardistes
+    public function getStandardisteAsc()
+    {
+        $query = "SELECT * FROM users WHERE role='standardiste' ORDER BY user_id ASC";
+        $sth = $this->link->prepare($query);
+        $sth->execute();
+        return $sth->fetchALL(\PDO::FETCH_ASSOC);
+    }
+
+    public function getStandardisteDesc()
+    {
+        $query = "SELECT * FROM users WHERE role='standardiste' ORDER BY user_id DESC";
+        $sth = $this->link->prepare($query);
+        $sth->execute();
+        return $sth->fetchALL(\PDO::FETCH_ASSOC);
+    }
+
+    public function getStandardisteNameAsc()
+    {
+        $query = "SELECT * FROM users WHERE role='standardiste' ORDER BY name ASC";
+        $sth = $this->link->prepare($query);
+        $sth->execute();
+        return $sth->fetchALL(\PDO::FETCH_ASSOC);
+    }
+
+    public function getStandardisteNameDesc()
+    {
+        $query = "SELECT * FROM users WHERE role='standardiste' ORDER BY name DESC";
+        $sth = $this->link->prepare($query);
+        $sth->execute();
+        return $sth->fetchALL(\PDO::FETCH_ASSOC);
+    }
+
+    // Tri des nouveaux clients
+    public function getNewClientAsc()
+    {
+        $query = "SELECT * FROM users WHERE role='client' and verified=FALSE ORDER BY user_id ASC";
+        $sth = $this->link->prepare($query);
+        $sth->execute();
+        return $sth->fetchALL(\PDO::FETCH_ASSOC);
+    }
+
+    public function getNewClientDesc()
+    {
+        $query = "SELECT * FROM users WHERE role='client' and verified=FALSE ORDER BY user_id DESC";
+        $sth = $this->link->prepare($query);
+        $sth->execute();
+        return $sth->fetchALL(\PDO::FETCH_ASSOC);
+    }
+
+    public function getNewClientNameAsc()
+    {
+        $query = "SELECT * FROM users WHERE role='client' and verified=FALSE ORDER BY name ASC";
+        $sth = $this->link->prepare($query);
+        $sth->execute();
+        return $sth->fetchALL(\PDO::FETCH_ASSOC);
+    }
+
+    public function getNewClientNameDesc()
+    {
+        $query = "SELECT * FROM users WHERE role='client' and verified=FALSE ORDER BY name DESC";
+        $sth = $this->link->prepare($query);
+        $sth->execute();
+        return $sth->fetchALL(\PDO::FETCH_ASSOC);
+    }
+
+
 
 }
