@@ -14,12 +14,11 @@
                 'email' => $_POST['email'],
                 'password' => password_hash($_POST['password'], PASSWORD_DEFAULT)
             ]);
-            
             header('Location: index.php');
             exit(); 
-        } else {
-            echo "Tous les champs doivent être remplis.";
         }
+
+
     }
     
     echo $page->render('register.html.twig', []);

@@ -101,55 +101,70 @@ form h3
 </style>
 
 <h1 class="title">Create account</h1>
+  <form action="" method="post">
+    <h3> Fill out the details bellow</h3>
+    <div>
+      <label for="name">Name</label>
+      <input type="name" 
+        name="name" 
 
-<form action="" method="post" style="overflow-y: scroll;">
-  <h3>Fill out the details below</h3>
-  
-    <div>
-        <label for="name">Name</label><input type="name" id="name" placeholder="Name"/><label for="surname">Surname</label><input type="surname" name="surname" placeholder="surname"/>
+        id="name" 
+        placeholder="Name"
+      />
     </div>
 
     <div>
-        <label for="email">Email</label>
-        <input 
-            type="email" 
-            name="email" 
-            id="email" 
-            placeholder="Entrez votre email" 
-            required 
-        />
+      <label for="surname">Surname</label>
+      <input type="surname" 
+        name="surname" 
+
+        id="surname" 
+        placeholder="Surname"
+      />
+    </div>
+
+    <div>
+      <label for="email">Email</label>
+      <input 
+        type="email" 
+        name="email" 
+        id="email" 
+        placeholder="Entrez votre email" 
+        required 
+      />
     </div>
     <div>
-        <label for="email_cfg">Confirmation email</label>
-        <input type="email" name="email_cfg" id="email_cfg" placeholder="Confirmation votre email" required />
+      <label for="email_cfg">Confirmation email</label>
+      <input type="email" name="email_cfg" id="email_cfg" placeholder="Confirmation votre email" required />
     </div>
     <div>
-        <label for="password">Password</label>
-        <input 
-            type="password" 
-            name="password" 
-            id="password" 
-            placeholder="Entrez un mot de passe" 
-            required 
-        />
+      <label for="password">Password</label>
+      <input 
+        type="password" 
+        name="password" 
+        id="password" 
+        placeholder="Entrez un mot de passe" 
+        required 
+      />
     </div>
     <div>
-        <label for="password_cfg">Confirmation Password</label>
-        <input 
-            type="password" 
-            name="password_cfg" 
-            id="password_cfg" 
-            placeholder="Confirmer votre mot de passe" 
-            required 
-        />
+      <label for="password_cfg">Confirmation Password</label>
+      <input 
+        type="password" 
+        name="password_cfg" 
+        id="password_cfg" 
+        placeholder="Confirmer votre mot de passe" 
+        required 
+      />
     </div>
     <div>
-        <input type="submit" name="send" value="Crée le compte" />
+      <input type="submit" name="send" value="Crée le compte" />
     </div>
 
     <p>
-        <a href="index.php">Déjà un compte ?</a>
+      <a href="index.php">Déjà un compte ?</a>
     </p> 
-</form>
+  </form>
+
 
 {% endblock %}

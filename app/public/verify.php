@@ -28,6 +28,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         // Mettez à jour la colonne vérifiée dans la base de données
         if ($success) {
             $page->setUserVerified($id);
+            header('Location: profile.php');
             exit;
         } else {
             // Affichez un message d'erreur si la mise à jour a échoué

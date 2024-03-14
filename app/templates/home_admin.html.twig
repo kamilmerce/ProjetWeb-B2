@@ -4,7 +4,7 @@
 <style>
 body {
   font-family: 'Arial', sans-serif;
-  background-image: url('/img/login.jpeg'); 
+  background-image: url('/img/login.png'); 
   background-size: cover;
   background-repeat: no-repeat; 
   background-attachment: fixed; 
@@ -17,26 +17,24 @@ body {
   margin: 0;
 }
 
-.title {
-  padding-top: 5px
-  font-size: 50px;
-  margin-left: 5px;
-  margin-top: 5px;
-}
 
-
-.liste_intervention{
+.liste{
   background: rgba(255, 255, 255, 0.25);
   border-radius: 20px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   width: 500px;
   height: 300px;
   align-items: center;
+  margin-right:30px;
+  margin-top:100px;
 }
 
-.search{
-  margin-bottom: 10px;
+.liste table {
+    width: 100%;
+    border-collapse: separate; 
+    border-spacing: 0; 
 }
+
 
 select, input[type=text], button {
   width: 35%;
@@ -61,8 +59,15 @@ th, td {
   padding: 10px;
 }
 
+
+.liste td {
+    border-bottom: 2px solid white; 
+}
+
+
 th {
-  background-color: none;
+    border-bottom: 2px solid white; 
+    color:#3A559F;
 }
 
 a {
@@ -70,7 +75,13 @@ a {
   width: 100%;
   text-align: right;
   text-decoration: none;
-  color: #0066cc;
+  color: #3A559F;
+}
+.liste_newCustomers{
+    margin-top:0px;
+    background-color:none;
+    border:none;
+
 }
 
 @media (max-width: 1200px) {
@@ -88,7 +99,7 @@ a {
 </style>
 <body>
 {% if user.role == 'admin' %}
-    <div class = "liste_intervention" style="width: 300px; height: 600px; overflow-y: scroll; border: 1px solid #ccc; padding: 10px; margin-bottom: 20px;">
+    <div class = "liste" style="width: 300px; height: 600px; overflow-y: scroll; border: 1px solid #ccc; padding: 10px; margin-bottom: 20px;">
         <h2>Liste des interventions</h2>
         <form action="search.php" method="GET">
             <select name="tri">
@@ -117,7 +128,7 @@ a {
                 </tbody>
             </table>
     </div>
-    <div class = "liste_clients" style="width: 300px; height: 300px; overflow-y: scroll; border: 1px solid #ccc; padding: 10px; margin-bottom: 20px;">
+    <div class = "liste" style="width: 300px; height: 600px; overflow-y: scroll; border: 1px solid #ccc; padding: 10px; margin-bottom: 20px;">
         <h2>Liste des clients</h2>
         <form action="search.php" method="GET">
             <select name="tri">
@@ -148,8 +159,44 @@ a {
                     {% endfor %}
                 </tbody>
             </table>
+        {% if newCustomers != empty %}
+        <div class = "liste_newCustomers" style="width: 270px; height: 300px; overflow-y: scroll; padding: 10px; margin-bottom: 20px;">
+            <h2>Nouveaux clients</h2>  
+            <form action="search.php" method="GET">
+                <select name="tri">
+                    <option value="id_newclient_asc">ID croissant</option>
+                    <option value="id_newclient_desc">ID décroissant</option>
+                    <option value="name_newclient_asc">Nom croissant</option>
+                    <option value="name_newclient_desc">Nom décroissant</option>
+                </select>
+                <button type="submit">Trier</button>
+            </form>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Nom</th>
+                        <th>Prénom</th>
+                        <th>ID</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for customer in newCustomers %}
+                    <tr>
+                        <td>{{ customer.name }}</td>
+                        <td>{{ customer.surname }}</td>
+                        <td>{{ customer.user_id }}</td>
+                        <td><a href="verify.php?type=newCustomers&id={{ customer.user_id }}">Verify</a></td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        {% endif %}
+
+
    </div>
-    <div class = "liste_intervenants" style="width: 300px; height: 300px; overflow-y: scroll; border: 1px solid #ccc; padding: 10px; margin-bottom: 20px;">
+    <div class = "liste" style="width: 300px; height: 600px; overflow-y: scroll; border: 1px solid #ccc; padding: 10px; margin-bottom: 20px;">
         <h2>Liste des intervenants</h2>  
         <form action="search.php" method="GET">
             <select name="tri">
@@ -182,7 +229,7 @@ a {
                 </tbody>
             </table>
     </div>
-    <div class = "liste_standardiste" style="width: 300px; height: 300px; overflow-y: scroll; border: 1px solid #ccc; padding: 10px; margin-bottom: 20px;">
+    <div class = "liste" style="width: 300px; height: 600px; overflow-y: scroll; border: 1px solid #ccc; padding: 10px; margin-bottom: 20px;">
         <h2>Liste des standardiste</h2>
         <form action="search.php" method="GET">
             <select name="tri">
@@ -215,40 +262,6 @@ a {
                 </tbody>
             </table>
     </div>
-    {% if newCustomers != empty %}
-        <div class = "liste_newClients" style="width: 300px; height: 300px; overflow-y: scroll; border: 1px solid #ccc; padding: 10px; margin-bottom: 20px;">
-            <h2>Nouveaux clients</h2>  
-            <form action="search.php" method="GET">
-                <select name="tri">
-                    <option value="id_newclient_asc">ID croissant</option>
-                    <option value="id_newclient_desc">ID décroissant</option>
-                    <option value="name_newclient_asc">Nom croissant</option>
-                    <option value="name_newclient_desc">Nom décroissant</option>
-                </select>
-                <button type="submit">Trier</button>
-            </form>
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Nom</th>
-                            <th>Prénom</th>
-                            <th>ID</th>
-                            <th></th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {% for customer in newCustomers %}
-                        <tr>
-                            <td>{{ customer.name }}</td>
-                            <td>{{ customer.surname }}</td>
-                            <td>{{ customer.user_id }}</td>
-                            <td><a href="verify.php?type=newCustomers&id={{ customer.user_id }}">Verify</a></td>
-                        </tr>
-                        {% endfor %}
-                    </tbody>
-                </table>
-        </div>
-    {% endif %}
 {% endif %}
 </body>
 {% endblock %}
