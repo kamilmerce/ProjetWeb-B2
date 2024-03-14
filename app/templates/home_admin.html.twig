@@ -1,22 +1,94 @@
 {% extends "base_auth.html.twig" %}
 
 {% block body %}
-<body>
-    {% if user.role == 'admin' %}
-    <div style="margin-bottom: 20px;">
-        <form action="search.php" method="GET">
-            <input type="text" name="query" placeholder="Recherche...">
-            <select name="type">
-                <option value="intervention">Intervention</option>
-                <option value="client">Client</option>
-                <option value="intervenant">Intervenant</option>
-                <option value="standardiste">Standardiste</option>
-            </select>
-            <button type="submit">Rechercher</button>
-        </form>
-    </div>
+<style>
+body {
+  font-family: 'Arial', sans-serif;
+  background-image: url('/img/login.jpeg'); 
+  background-size: cover;
+  background-repeat: no-repeat; 
+  background-attachment: fixed; 
+  background-position: center center; 
+  color: white; 
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+}
 
-    <div style="width: 300px; height: 600px; overflow-y: scroll; border: 1px solid #ccc; padding: 10px; margin-bottom: 20px;">
+.title {
+  padding-top: 5px
+  font-size: 50px;
+  margin-left: 5px;
+  margin-top: 5px;
+}
+
+
+.liste_intervention{
+  background: rgba(255, 255, 255, 0.25);
+  border-radius: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  width: 500px;
+  height: 300px;
+  align-items: center;
+}
+
+.search{
+  margin-bottom: 10px;
+}
+
+select, input[type=text], button {
+  width: 35%;
+  height: 35%;
+  padding: 10px;
+  border: none;
+  border-radius: 40px;
+  background-color: #3A559F; 
+  text-align: center;
+  color: white;
+  cursor: pointer;
+  margin-top: 20px;
+}
+
+.liste h2
+{
+  text-align: center; 
+}
+
+
+th, td {
+  padding: 10px;
+}
+
+th {
+  background-color: none;
+}
+
+a {
+  display: block;
+  width: 100%;
+  text-align: right;
+  text-decoration: none;
+  color: #0066cc;
+}
+
+@media (max-width: 1200px) {
+  div {
+    width: 450px;
+  }
+}
+
+@media (max-width: 900px) {
+  div {
+    width: 100%;
+  }
+}
+
+</style>
+<body>
+{% if user.role == 'admin' %}
+    <div class = "liste_intervention" style="width: 300px; height: 600px; overflow-y: scroll; border: 1px solid #ccc; padding: 10px; margin-bottom: 20px;">
         <h2>Liste des interventions</h2>
         <form action="search.php" method="GET">
             <select name="tri">
@@ -45,7 +117,7 @@
                 </tbody>
             </table>
     </div>
-    <div style="width: 300px; height: 300px; overflow-y: scroll; border: 1px solid #ccc; padding: 10px; margin-bottom: 20px;">
+    <div class = "liste_clients" style="width: 300px; height: 300px; overflow-y: scroll; border: 1px solid #ccc; padding: 10px; margin-bottom: 20px;">
         <h2>Liste des clients</h2>
         <form action="search.php" method="GET">
             <select name="tri">
@@ -77,7 +149,7 @@
                 </tbody>
             </table>
    </div>
-    <div style="width: 300px; height: 300px; overflow-y: scroll; border: 1px solid #ccc; padding: 10px; margin-bottom: 20px;">
+    <div class = "liste_intervenants" style="width: 300px; height: 300px; overflow-y: scroll; border: 1px solid #ccc; padding: 10px; margin-bottom: 20px;">
         <h2>Liste des intervenants</h2>  
         <form action="search.php" method="GET">
             <select name="tri">
@@ -110,7 +182,7 @@
                 </tbody>
             </table>
     </div>
-    <div style="width: 300px; height: 300px; overflow-y: scroll; border: 1px solid #ccc; padding: 10px; margin-bottom: 20px;">
+    <div class = "liste_standardiste" style="width: 300px; height: 300px; overflow-y: scroll; border: 1px solid #ccc; padding: 10px; margin-bottom: 20px;">
         <h2>Liste des standardiste</h2>
         <form action="search.php" method="GET">
             <select name="tri">
@@ -144,7 +216,7 @@
             </table>
     </div>
     {% if newCustomers != empty %}
-        <div style="width: 300px; height: 300px; overflow-y: scroll; border: 1px solid #ccc; padding: 10px; margin-bottom: 20px;">
+        <div class = "liste_newClients" style="width: 300px; height: 300px; overflow-y: scroll; border: 1px solid #ccc; padding: 10px; margin-bottom: 20px;">
             <h2>Nouveaux clients</h2>  
             <form action="search.php" method="GET">
                 <select name="tri">

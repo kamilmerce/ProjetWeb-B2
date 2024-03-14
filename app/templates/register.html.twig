@@ -17,39 +17,36 @@ body {
   margin: 0;
 }
 
-.title
-{
-  padding-right: 250px;
-  padding-bottom: 500px;
-  font-size: 75px;
-}
-
 form {
   background: rgba(255, 255, 255, 0.25);
   border-radius: 20px;
   padding: 40px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   width: 400px;
+  height: 700px;
   align-items: center;
   justify-content: center;
+  margin-top: 20px;
 }
 
 form div {
-  margin-bottom: 15px; /* Espace entre les champs */
+  margin-bottom: 10px; 
   align-items: center;
   text-align: center;
+  
 }
 
 label {
   display: block;
-  margin-bottom: 5px; /* Espace entre le label et l'input */
+  margin-bottom: 5px; 
+  text-align:left;
 }
 
 input {
   width: 100%;
   background: rgba(255, 255, 255, 0.25);
   padding: 10px;
-  margin-bottom: 15px; /* Espace entre les inputs */
+  margin-bottom: 15px; 
   border: 2px solid white;
   border-radius: 25px;
 }
@@ -60,7 +57,7 @@ input[type="submit"] {
   padding: 10px;
   border: none;
   border-radius: 40px;
-  background-color: #3A559F; /* Couleur du bouton */
+  background-color: #3A559F; 
   text-align: center;
   color: white;
   cursor: pointer;
@@ -88,73 +85,71 @@ input[type="submit"]:hover {
 {
   text-align: center;
   font-weight: bold;
+  padding-right: 250px;
+  padding-bottom: 500px;
+  font-size: 75px;
+  margin-bottom: 20px; 
+  display: block;
 }
+
+form h3
+{
+  text-align: center; 
+}
+
+
 </style>
 
-    <h1 class="title">Create account</h1>
+<h1 class="title">Create account</h1>
 
-    <form action="" method="post">
-        <div>
-            <label for="name">Name</label>
-            <input type="name" 
-                name="name" 
-                
-                id="name" 
-                placeholder="Name"
-            />
-        </div>
+<form action="" method="post" style="overflow-y: scroll;">
+  <h3>Fill out the details below</h3>
+  
+    <div>
+        <label for="name">Name</label><input type="name" id="name" placeholder="Name"/><label for="surname">Surname</label><input type="surname" name="surname" placeholder="surname"/>
+    </div>
 
-        <div>
-            <label for="surname">Surname</label>
-            <input type="surname" 
-                name="surname" 
-                
-                id="surname" 
-                placeholder="Surname"
-            />
-        </div>
+    <div>
+        <label for="email">Email</label>
+        <input 
+            type="email" 
+            name="email" 
+            id="email" 
+            placeholder="Entrez votre email" 
+            required 
+        />
+    </div>
+    <div>
+        <label for="email_cfg">Confirmation email</label>
+        <input type="email" name="email_cfg" id="email_cfg" placeholder="Confirmation votre email" required />
+    </div>
+    <div>
+        <label for="password">Password</label>
+        <input 
+            type="password" 
+            name="password" 
+            id="password" 
+            placeholder="Entrez un mot de passe" 
+            required 
+        />
+    </div>
+    <div>
+        <label for="password_cfg">Confirmation Password</label>
+        <input 
+            type="password" 
+            name="password_cfg" 
+            id="password_cfg" 
+            placeholder="Confirmer votre mot de passe" 
+            required 
+        />
+    </div>
+    <div>
+        <input type="submit" name="send" value="Crée le compte" />
+    </div>
 
-        <div>
-            <label for="email">Email</label>
-            <input 
-                type="email" 
-                name="email" 
-                id="email" 
-                placeholder="Entrez votre email" 
-                required 
-            />
-        </div>
-        <div>
-            <label for="email_cfg">Confirmation email</label>
-            <input type="email" name="email_cfg" id="email_cfg" placeholder="Confirmation votre email" required />
-        </div>
-        <div>
-            <label for="password">Password</label>
-            <input 
-                type="password" 
-                name="password" 
-                id="password" 
-                placeholder="Entrez un mot de passe" 
-                required 
-            />
-        </div>
-        <div>
-            <label for="password_cfg">Confirmation Password</label>
-            <input 
-                type="password" 
-                name="password_cfg" 
-                id="password_cfg" 
-                placeholder="Confirmer votre mot de passe" 
-                required 
-            />
-        </div>
-        <div>
-            <input type="submit" name="send" value="Crée le compte" />
-        </div>
-    
-        <p>
-            <a href="index.php">Déjà un compte ?</a>
-        </p> 
-    </form>
+    <p>
+        <a href="index.php">Déjà un compte ?</a>
+    </p> 
+</form>
 
 {% endblock %}

@@ -22,6 +22,8 @@ body {
   padding-right: 250px;
   padding-bottom: 500px;
   font-size: 75px;
+  margin-left: 100px;
+  margin-top: 60px;
 }
 
 form {
@@ -31,24 +33,26 @@ form {
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   width: 400px;
   align-items: center;
+  margin-right:100px
 }
 
 form div {
-  margin-bottom: 15px; /* Espace entre les champs */
+  margin-bottom: 10px; 
   align-items: center;
   text-align: center;
 }
 
 label {
   display: block;
-  margin-bottom: 5px; /* Espace entre le label et l'input */
+  margin-bottom: 5px; 
+  text-align: left;
 }
 
 input[type="email"], input[type="password"] {
   width: 100%;
   background: rgba(255, 255, 255, 0.25);
   padding: 10px;
-  margin-bottom: 15px; /* Espace entre les inputs */
+  margin-bottom: 15px; 
   border: 2px solid white;
   border-radius: 25px;
 }
@@ -59,7 +63,7 @@ input[type="submit"] {
   padding: 10px;
   border: none;
   border-radius: 40px;
-  background-color: #3A559F; /* Couleur du bouton */
+  background-color: #3A559F; 
   text-align: center;
   color: white;
   cursor: pointer;
@@ -72,7 +76,7 @@ p
 }
 
 input[type="submit"]:hover {
-  background-color: #2A3F7F; /* Couleur du bouton au survol */
+  background-color: #2A3F7F; 
 }
 
 .link {
@@ -83,9 +87,9 @@ input[type="submit"]:hover {
   text-decoration: none;
 }
 
-form h3
+form h2, form h3
 {
-  text-align: center;
+  text-align: center; 
 }
 
 .title-f
@@ -94,41 +98,40 @@ form h3
   font-weight: bold;
 }
 </style>
-    <h1 class="title">Welcome To AccordEnergie</h1>
+<body>
+  <h1 class="title">Welcome To AccordEnergie</h1>
 
- 
-    
-    <form action="" method="post">
-       
-        <h2>Welcome back</h2>
-        <h3>Fill out the details below</h3>
+  <form action="" method="post">
+      
+      <h2>Welcome back</h2>
+      <h3>Fill out the details below</h3>
 
-        <div>
-            <label for="email">Username</label>
-            <input type="email" 
-                name="email" 
-                
-                id="email" 
-                placeholder="exemple@gamil.com"
-            />
-        </div>
+      <div>
+          <label for="email">Username</label>
+          <input type="email" 
+            name="email" 
+            id="email" 
+            placeholder="exemple@gamil.com"
+          />
+      </div>
 
-        <div>
-            <label for="password">Password</label>
-            <input type="password" 
-                name="password" 
-                id="password" 
-                placeholder="*********"
-            />
-        </div>
+      <div>
+          <label for="password">Password</label>
+          <input type="password" 
+              name="password" 
+              id="password" 
+              placeholder="*********"
+          />
+      </div>
 
-        <div>
-            <input type="Submit" name="send" value="Login"/>
-        </div>
-    <p>
-        <a href="register.php">No account yet ? </a>
-    </p>
+      <div>
+          <input type="Submit" name="send" value="Login"/>
+      </div>
+  <p>
+      <a href="register.php">No account yet ? </a>
+  </p>
 
-    </form>
+  </form>
+</body>
 
 {% endblock %}
