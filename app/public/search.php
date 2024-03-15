@@ -8,55 +8,230 @@
     $user = $page->session->get('user');
     $page->session->add('user',$user);
 
-    //Verifier si le formulaire de tri a ete envoye
-   // Vérifier si le formulaire de tri a été soumis
     if ($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET["tri"])) {
         $tri = $_GET["tri"];
         switch ($tri) {
+            case "intervention_annulee":
+                if ($user['role']=='admin'){
+                    $interventions = $page->getInterventionAnnulee();
+                    $standardistes=$page->getAllStandardiste();
+                    $intervenants = $page->getAllIntervenent();
+                    $newCustomers = $page->getAllNewCustormers();
+                    $customers = $page->getAllCustomers();
+
+                    echo $page->render('home_admin.html.twig', 
+                        ['newCustomers'=>$newCustomers,
+                        'user'=>$user,
+                        'standardistes'=>$standardistes,
+                        'interventions'=>$interventions,
+                        'intervenants'=>$intervenants,
+                        'customers'=>$customers
+                    ]);
+                }elseif($user['role']=="standardiste"){
+                    $interventions=$page->getInterventionAnnulee();
+                    $allcommentaires = $page->getALLComment();
+                    echo $page->render('home_standardiste.html.twig',['commentaires'=>$allcommentaires,
+                        'user'=>$user,
+                        'interventions'=>$interventions
+                    ]);
+                }elseif($user['role']=='intervenant'){
+                    $allcommentaires = $page->getALLComment();
+                    $interventions= $page->getInterventionsAnnuleeByIntervenantId($user['user_id']);
+                    echo $page->render('home_intervenant.html.twig',['commentaires'=>$allcommentaires,
+                        'user'=>$user,
+                        'interventions'=>$interventions
+                    ]); 
+                }
+                break;
+            case "intervention_encours":
+                if ($user['role']=='admin'){
+                    $interventions = $page->getInterventionEnCours();
+                    $standardistes=$page->getAllStandardiste();
+                    $intervenants = $page->getAllIntervenent();
+                    $newCustomers = $page->getAllNewCustormers();
+                    $customers = $page->getAllCustomers();
+
+                    echo $page->render('home_admin.html.twig', 
+                        ['newCustomers'=>$newCustomers,
+                        'user'=>$user,
+                        'standardistes'=>$standardistes,
+                        'interventions'=>$interventions,
+                        'intervenants'=>$intervenants,
+                        'customers'=>$customers
+                    ]);
+                }elseif($user['role']=="standardiste"){
+                    $interventions=$page->getInterventionEnCours();
+                    $allcommentaires = $page->getALLComment();
+                    echo $page->render('home_standardiste.html.twig',['commentaires'=>$allcommentaires,
+                        'user'=>$user,
+                        'interventions'=>$interventions
+                    ]);
+                }elseif($user['role']=='intervenant'){
+                    $allcommentaires = $page->getALLComment();
+                    $interventions= $page->getInterventionsencoursByIntervenantId($user['user_id']);
+                    echo $page->render('home_intervenant.html.twig',['commentaires'=>$allcommentaires,
+                        'user'=>$user,
+                        'interventions'=>$interventions
+                    ]); 
+                }
+                break;
+
+            case "intervention_enattente":
+                if ($user['role']=='admin'){
+                    $interventions = $page->getInterventionAttente();
+                    $standardistes=$page->getAllStandardiste();
+                    $intervenants = $page->getAllIntervenent();
+                    $newCustomers = $page->getAllNewCustormers();
+                    $customers = $page->getAllCustomers();
+
+                    echo $page->render('home_admin.html.twig', 
+                        ['newCustomers'=>$newCustomers,
+                        'user'=>$user,
+                        'standardistes'=>$standardistes,
+                        'interventions'=>$interventions,
+                        'intervenants'=>$intervenants,
+                        'customers'=>$customers
+                    ]);
+                }elseif($user['role']=="standardiste"){
+                    $interventions=$page->getInterventionAttente();
+                    $allcommentaires = $page->getALLComment();
+                    echo $page->render('home_standardiste.html.twig',['commentaires'=>$allcommentaires,
+                        'user'=>$user,
+                        'interventions'=>$interventions
+                    ]);
+                }elseif($user['role']=='intervenant'){
+                    $allcommentaires = $page->getALLComment();
+                    $interventions= $page->getInterventionsenAttenteByIntervenantId($user['user_id']);
+                    echo $page->render('home_intervenant.html.twig',['commentaires'=>$allcommentaires,
+                        'user'=>$user,
+                        'interventions'=>$interventions
+                    ]); 
+                }
+                break;
+            case "intervention_cloturee":
+                if ($user['role']=='admin'){
+                    $interventions = $page->getInterventionCompleted();
+                    $standardistes=$page->getAllStandardiste();
+                    $intervenants = $page->getAllIntervenent();
+                    $newCustomers = $page->getAllNewCustormers();
+                    $customers = $page->getAllCustomers();
+
+                    echo $page->render('home_admin.html.twig', 
+                        ['newCustomers'=>$newCustomers,
+                        'user'=>$user,
+                        'standardistes'=>$standardistes,
+                        'interventions'=>$interventions,
+                        'intervenants'=>$intervenants,
+                        'customers'=>$customers
+                    ]);
+                }elseif($user['role']=="standardiste"){
+                    $interventions=$page->getInterventionCompleted();
+                    $allcommentaires = $page->getALLComment();
+                    echo $page->render('home_standardiste.html.twig',['commentaires'=>$allcommentaires,
+                        'user'=>$user,
+                        'interventions'=>$interventions
+                    ]);
+                }elseif($user['role']=='intervenant'){
+                    $allcommentaires = $page->getALLComment();
+                    $interventions= $page->getInterventionCompletedByintervenant($user['user_id']);
+                    echo $page->render('home_intervenant.html.twig',['commentaires'=>$allcommentaires,
+                        'user'=>$user,
+                        'interventions'=>$interventions
+                    ]); 
+                }
+                break;
+
             case "id_intervention_asc":
-                $interventions = $page->getInterventionAsc();
-                $standardistes=$page->getAllStandardiste();
-                $intervenants = $page->getAllIntervenent();
-                $newCustomers = $page->getAllNewCustormers();
-                $customers = $page->getAllCustomers();
-                echo $page->render('home_admin.html.twig', 
-                    ['newCustomers'=>$newCustomers,
-                    'user'=>$user,
-                    'standardistes'=>$standardistes,
-                    'interventions'=>$interventions,
-                    'intervenants'=>$intervenants,
-                    'customers'=>$customers]
-                );
+                if ($user['role']=='admin'){
+                    $interventions = $page->getInterventionAsc();
+                    $standardistes=$page->getAllStandardiste();
+                    $intervenants = $page->getAllIntervenent();
+                    $newCustomers = $page->getAllNewCustormers();
+                    $customers = $page->getAllCustomers();
+
+                    echo $page->render('home_admin.html.twig', 
+                        ['newCustomers'=>$newCustomers,
+                        'user'=>$user,
+                        'standardistes'=>$standardistes,
+                        'interventions'=>$interventions,
+                        'intervenants'=>$intervenants,
+                        'customers'=>$customers
+                    ]);
+                }elseif($user['role']=="standardiste"){
+                    $interventions=$page->getInterventionAsc();
+                    $allcommentaires = $page->getALLComment();
+                    echo $page->render('home_standardiste.html.twig',['commentaires'=>$allcommentaires,
+                        'user'=>$user,
+                        'interventions'=>$interventions
+                    ]);
+                }elseif($user['role']=='intervenant'){
+                    $allcommentaires = $page->getALLComment();
+                    $interventions= $page->getInterventionsAscByIntervenantId($user['user_id']);
+                    echo $page->render('home_intervenant.html.twig',['commentaires'=>$allcommentaires,
+                        'user'=>$user,
+                        'interventions'=>$interventions
+                    ]); 
+                }
                 break;
+
             case "id_intervention_desc":
-                $interventions = $page->getInterventionDesc();
-                $standardistes=$page->getAllStandardiste();
-                $intervenants = $page->getAllIntervenent();
-                $newCustomers = $page->getAllNewCustormers();
-                $customers = $page->getAllCustomers();
-                echo $page->render('home_admin.html.twig', 
-                    ['newCustomers'=>$newCustomers,
-                    'user'=>$user,
-                    'standardistes'=>$standardistes,
-                    'interventions'=>$interventions,
-                    'intervenants'=>$intervenants,
-                    'customers'=>$customers]
-                );
+                if ($user['role']=='admin'){
+                    $interventions = $page->getInterventionDesc();
+                    $standardistes=$page->getAllStandardiste();
+                    $intervenants = $page->getAllIntervenent();
+                    $newCustomers = $page->getAllNewCustormers();
+                    $customers = $page->getAllCustomers();
+
+                    echo $page->render('home_admin.html.twig', 
+                        ['newCustomers'=>$newCustomers,
+                        'user'=>$user,
+                        'standardistes'=>$standardistes,
+                        'interventions'=>$interventions,
+                        'intervenants'=>$intervenants,
+                        'customers'=>$customers
+                    ]);
+                }elseif($user['role']=="standardiste"){
+                    $interventions=$page->getInterventionDesc();
+                    $allcommentaires = $page->getALLComment();
+                    echo $page->render('home_standardiste.html.twig',['commentaires'=>$allcommentaires,
+                        'user'=>$user,
+                        'interventions'=>$interventions
+                    ]);
+                }elseif($user['role']=='intervenant'){
+                    $allcommentaires = $page->getALLComment();
+                    $interventions= $page->getInterventionsDescByIntervenantId($user['user_id']);
+                    echo $page->render('home_intervenant.html.twig',['commentaires'=>$allcommentaires,
+                        'user'=>$user,
+                        'interventions'=>$interventions
+                    ]); 
+                }
                 break;
+                
             case "id_client_asc":
                 $customers = $page->getClientsAsc();
                 $standardistes=$page->getAllStandardiste();
                 $interventions = $page->getAllInterventions();
                 $intervenants = $page->getAllIntervenent();
                 $newCustomers = $page->getAllNewCustormers();
-                echo $page->render('home_admin.html.twig', 
+                if ($user['role']=='admin'){
+                    echo $page->render('home_admin.html.twig', 
+                        ['newCustomers'=>$newCustomers,
+                        'user'=>$user,
+                        'standardistes'=>$standardistes,
+                        'interventions'=>$interventions,
+                        'intervenants'=>$intervenants,
+                        'customers'=>$customers
+                    ]);
+                }elseif($user['role']=="standardiste"){
+                    echo $page->render('home_standardiste.html.twig', 
                     ['newCustomers'=>$newCustomers,
                     'user'=>$user,
                     'standardistes'=>$standardistes,
                     'interventions'=>$interventions,
                     'intervenants'=>$intervenants,
-                    'customers'=>$customers]
-                );
+                    'customers'=>$customers
+                    ]);
+                }
                 break;
             case "id_client_desc":
                 $customers = $page->getClientsDesc();
@@ -64,14 +239,25 @@
                 $interventions = $page->getAllInterventions();
                 $intervenants = $page->getAllIntervenent();
                 $newCustomers = $page->getAllNewCustormers();
-                echo $page->render('home_admin.html.twig', 
+                if ($user['role']=='admin'){
+                    echo $page->render('home_admin.html.twig', 
+                        ['newCustomers'=>$newCustomers,
+                        'user'=>$user,
+                        'standardistes'=>$standardistes,
+                        'interventions'=>$interventions,
+                        'intervenants'=>$intervenants,
+                        'customers'=>$customers
+                    ]);
+                }elseif($user['role']=="standardiste"){
+                    echo $page->render('home_standardiste.html.twig', 
                     ['newCustomers'=>$newCustomers,
                     'user'=>$user,
                     'standardistes'=>$standardistes,
                     'interventions'=>$interventions,
                     'intervenants'=>$intervenants,
-                    'customers'=>$customers]
-                );
+                    'customers'=>$customers
+                    ]);
+                }
                 break;
             case "name_client_asc":
                 $customers = $page->getClientsNameAsc();
@@ -79,14 +265,25 @@
                 $interventions = $page->getAllInterventions();
                 $intervenants = $page->getAllIntervenent();
                 $newCustomers = $page->getAllNewCustormers();
-                echo $page->render('home_admin.html.twig', 
+                if ($user['role']=='admin'){
+                    echo $page->render('home_admin.html.twig', 
+                        ['newCustomers'=>$newCustomers,
+                        'user'=>$user,
+                        'standardistes'=>$standardistes,
+                        'interventions'=>$interventions,
+                        'intervenants'=>$intervenants,
+                        'customers'=>$customers
+                    ]);
+                }elseif($user['role']=="standardiste"){
+                    echo $page->render('home_standardiste.html.twig', 
                     ['newCustomers'=>$newCustomers,
                     'user'=>$user,
                     'standardistes'=>$standardistes,
                     'interventions'=>$interventions,
                     'intervenants'=>$intervenants,
-                    'customers'=>$customers]
-                );
+                    'customers'=>$customers
+                    ]);
+                }
                 break;
             case "name_client_desc":
                 $customers = $page->getClientNameDesc();
@@ -94,14 +291,25 @@
                 $interventions = $page->getAllInterventions();
                 $intervenants = $page->getAllIntervenent();
                 $newCustomers = $page->getAllNewCustormers();
-                echo $page->render('home_admin.html.twig', 
+                if ($user['role']=='admin'){
+                    echo $page->render('home_admin.html.twig', 
+                        ['newCustomers'=>$newCustomers,
+                        'user'=>$user,
+                        'standardistes'=>$standardistes,
+                        'interventions'=>$interventions,
+                        'intervenants'=>$intervenants,
+                        'customers'=>$customers
+                    ]);
+                }elseif($user['role']=="standardiste"){
+                    echo $page->render('home_standardiste.html.twig', 
                     ['newCustomers'=>$newCustomers,
                     'user'=>$user,
                     'standardistes'=>$standardistes,
                     'interventions'=>$interventions,
                     'intervenants'=>$intervenants,
-                    'customers'=>$customers]
-                );
+                    'customers'=>$customers
+                    ]);
+                }
                 break;
             case "id_intervenant_asc":
                 $intervenants = $page->getIntervenantAsc();
@@ -109,14 +317,25 @@
                 $interventions = $page->getAllInterventions();
                 $newCustomers = $page->getAllNewCustormers();
                 $customers = $page->getAllCustomers();
-                echo $page->render('home_admin.html.twig', 
+                if ($user['role']=='admin'){
+                    echo $page->render('home_admin.html.twig', 
+                        ['newCustomers'=>$newCustomers,
+                        'user'=>$user,
+                        'standardistes'=>$standardistes,
+                        'interventions'=>$interventions,
+                        'intervenants'=>$intervenants,
+                        'customers'=>$customers
+                    ]);
+                }elseif($user['role']=="standardiste"){
+                    echo $page->render('home_standardiste.html.twig', 
                     ['newCustomers'=>$newCustomers,
                     'user'=>$user,
                     'standardistes'=>$standardistes,
                     'interventions'=>$interventions,
                     'intervenants'=>$intervenants,
-                    'customers'=>$customers]
-                );
+                    'customers'=>$customers
+                    ]);
+                }
                 break;
             case "id_intervenant_desc":
                 $intervenants = $page->getIntervenantDesc();
@@ -124,14 +343,25 @@
                 $interventions = $page->getAllInterventions();
                 $newCustomers = $page->getAllNewCustormers();
                 $customers = $page->getAllCustomers();
-                echo $page->render('home_admin.html.twig', 
+                if ($user['role']=='admin'){
+                    echo $page->render('home_admin.html.twig', 
+                        ['newCustomers'=>$newCustomers,
+                        'user'=>$user,
+                        'standardistes'=>$standardistes,
+                        'interventions'=>$interventions,
+                        'intervenants'=>$intervenants,
+                        'customers'=>$customers
+                    ]);
+                }elseif($user['role']=="standardiste"){
+                    echo $page->render('home_standardiste.html.twig', 
                     ['newCustomers'=>$newCustomers,
                     'user'=>$user,
                     'standardistes'=>$standardistes,
                     'interventions'=>$interventions,
                     'intervenants'=>$intervenants,
-                    'customers'=>$customers]
-                );
+                    'customers'=>$customers
+                    ]);
+                }
                 break;
             case "name_intervenant_asc":
                 $intervenants = $page->getIntervenantNameAsc();
@@ -139,14 +369,25 @@
                 $interventions = $page->getAllInterventions();
                 $newCustomers = $page->getAllNewCustormers();
                 $customers = $page->getAllCustomers();
-                echo $page->render('home_admin.html.twig', 
+                if ($user['role']=='admin'){
+                    echo $page->render('home_admin.html.twig', 
+                        ['newCustomers'=>$newCustomers,
+                        'user'=>$user,
+                        'standardistes'=>$standardistes,
+                        'interventions'=>$interventions,
+                        'intervenants'=>$intervenants,
+                        'customers'=>$customers
+                    ]);
+                }elseif($user['role']=="standardiste"){
+                    echo $page->render('home_standardiste.html.twig', 
                     ['newCustomers'=>$newCustomers,
                     'user'=>$user,
                     'standardistes'=>$standardistes,
                     'interventions'=>$interventions,
                     'intervenants'=>$intervenants,
-                    'customers'=>$customers]
-                );
+                    'customers'=>$customers
+                    ]);
+                }
                 break;
             case "name_intervenant_desc":
                 $intervenants = $page->getIntervenantNameDesc();
@@ -154,14 +395,25 @@
                 $interventions = $page->getAllInterventions();
                 $newCustomers = $page->getAllNewCustormers();
                 $customers = $page->getAllCustomers();
-                echo $page->render('home_admin.html.twig', 
+                if ($user['role']=='admin'){
+                    echo $page->render('home_admin.html.twig', 
+                        ['newCustomers'=>$newCustomers,
+                        'user'=>$user,
+                        'standardistes'=>$standardistes,
+                        'interventions'=>$interventions,
+                        'intervenants'=>$intervenants,
+                        'customers'=>$customers
+                    ]);
+                }elseif($user['role']=="standardiste"){
+                    echo $page->render('home_standardiste.html.twig', 
                     ['newCustomers'=>$newCustomers,
                     'user'=>$user,
                     'standardistes'=>$standardistes,
                     'interventions'=>$interventions,
                     'intervenants'=>$intervenants,
-                    'customers'=>$customers]
-                );
+                    'customers'=>$customers
+                    ]);
+                }
                 break;
             case "id_standardiste_asc":
                 $standardistes = $page->getStandardisteAsc();
@@ -169,14 +421,25 @@
                 $intervenants = $page->getAllIntervenent();
                 $newCustomers = $page->getAllNewCustormers();
                 $customers = $page->getAllCustomers();
-                echo $page->render('home_admin.html.twig', 
+                if ($user['role']=='admin'){
+                    echo $page->render('home_admin.html.twig', 
+                        ['newCustomers'=>$newCustomers,
+                        'user'=>$user,
+                        'standardistes'=>$standardistes,
+                        'interventions'=>$interventions,
+                        'intervenants'=>$intervenants,
+                        'customers'=>$customers
+                    ]);
+                }elseif($user['role']=="standardiste"){
+                    echo $page->render('home_standardiste.html.twig', 
                     ['newCustomers'=>$newCustomers,
                     'user'=>$user,
                     'standardistes'=>$standardistes,
                     'interventions'=>$interventions,
                     'intervenants'=>$intervenants,
-                    'customers'=>$customers]
-                );
+                    'customers'=>$customers
+                    ]);
+                }
                 break;
             case "id_standardiste_desc":
                 $standardistes = $page->getStandardisteDesc();
@@ -184,14 +447,25 @@
                 $intervenants = $page->getAllIntervenent();
                 $newCustomers = $page->getAllNewCustormers();
                 $customers = $page->getAllCustomers();
-                echo $page->render('home_admin.html.twig', 
+                if ($user['role']=='admin'){
+                    echo $page->render('home_admin.html.twig', 
+                        ['newCustomers'=>$newCustomers,
+                        'user'=>$user,
+                        'standardistes'=>$standardistes,
+                        'interventions'=>$interventions,
+                        'intervenants'=>$intervenants,
+                        'customers'=>$customers
+                    ]);
+                }elseif($user['role']=="standardiste"){
+                    echo $page->render('home_standardiste.html.twig', 
                     ['newCustomers'=>$newCustomers,
                     'user'=>$user,
                     'standardistes'=>$standardistes,
                     'interventions'=>$interventions,
                     'intervenants'=>$intervenants,
-                    'customers'=>$customers]
-                );
+                    'customers'=>$customers
+                    ]);
+                }
                 break;
             case "name_standardiste_asc":
                 $standardistes = $page->getStandardisteNameAsc();
@@ -199,14 +473,25 @@
                 $intervenants = $page->getAllIntervenent();
                 $newCustomers = $page->getAllNewCustormers();
                 $customers = $page->getAllCustomers();
-                echo $page->render('home_admin.html.twig', 
+                if ($user['role']=='admin'){
+                    echo $page->render('home_admin.html.twig', 
+                        ['newCustomers'=>$newCustomers,
+                        'user'=>$user,
+                        'standardistes'=>$standardistes,
+                        'interventions'=>$interventions,
+                        'intervenants'=>$intervenants,
+                        'customers'=>$customers
+                    ]);
+                }elseif($user['role']=="standardiste"){
+                    echo $page->render('home_standardiste.html.twig', 
                     ['newCustomers'=>$newCustomers,
                     'user'=>$user,
                     'standardistes'=>$standardistes,
                     'interventions'=>$interventions,
                     'intervenants'=>$intervenants,
-                    'customers'=>$customers]
-                );
+                    'customers'=>$customers
+                    ]);
+                }
                 break;
             case "name_standardiste_desc":
                 $standardistes = $page->getStandardisteNameDesc();
@@ -214,14 +499,25 @@
                 $intervenants = $page->getAllIntervenent();
                 $newCustomers = $page->getAllNewCustormers();
                 $customers = $page->getAllCustomers();
-                echo $page->render('home_admin.html.twig', 
+                if ($user['role']=='admin'){
+                    echo $page->render('home_admin.html.twig', 
+                        ['newCustomers'=>$newCustomers,
+                        'user'=>$user,
+                        'standardistes'=>$standardistes,
+                        'interventions'=>$interventions,
+                        'intervenants'=>$intervenants,
+                        'customers'=>$customers
+                    ]);
+                }elseif($user['role']=="standardiste"){
+                    echo $page->render('home_standardiste.html.twig', 
                     ['newCustomers'=>$newCustomers,
                     'user'=>$user,
                     'standardistes'=>$standardistes,
                     'interventions'=>$interventions,
                     'intervenants'=>$intervenants,
-                    'customers'=>$customers]
-                );
+                    'customers'=>$customers
+                    ]);
+                }
                 break;
             case "id_newclient_asc":
                 $newCustomers = $page->getNewClientAsc();
@@ -229,14 +525,25 @@
                 $interventions = $page->getAllInterventions();
                 $intervenants = $page->getAllIntervenent();
                 $customers = $page->getAllCustomers();
-                echo $page->render('home_admin.html.twig', 
+                if ($user['role']=='admin'){
+                    echo $page->render('home_admin.html.twig', 
+                        ['newCustomers'=>$newCustomers,
+                        'user'=>$user,
+                        'standardistes'=>$standardistes,
+                        'interventions'=>$interventions,
+                        'intervenants'=>$intervenants,
+                        'customers'=>$customers
+                    ]);
+                }elseif($user['role']=="standardiste"){
+                    echo $page->render('home_standardiste.html.twig', 
                     ['newCustomers'=>$newCustomers,
                     'user'=>$user,
                     'standardistes'=>$standardistes,
                     'interventions'=>$interventions,
                     'intervenants'=>$intervenants,
-                    'customers'=>$customers]
-                );
+                    'customers'=>$customers
+                    ]);
+                }
                 break;
             case "id_newclient_desc":
                 $newCustomers = $page->getNewClientDesc();

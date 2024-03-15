@@ -105,11 +105,20 @@
         </li>
         {% endif %}
         {% if user.role == 'standardiste' %}
+        <li class="nav-item">
+            <form class="search-form" action="search.php" method="GET">
+                <input type="text" name="query" placeholder="Recherche...">
+                <select  hidden name="type">
+                    <option value="intervention">Intervention</option>
+                </select>
+                <button type="submit">Rechercher</button>
+            </form>
+        </li>
         <li class="nav-item"><a href="create_intervention.php"><i class='bx bxs-create'></i>Create new</a></li>
         {% endif %}
         <li class="nav-item"><a href="#"><i class='bx bxs-profile'></i> My account</a></li>
         <li class="nav-item"><a href="profile.php"><i class="bx bxs-home"></i> Home</a></li>
-        <li class="nav-item"><a href="#" class="keluar"><i class='bx bx-log-in'></i> Log Out</a></li>
+        <li class="nav-item"><a href="log_out.php" class="keluar"><i class='bx bx-log-in'></i> Log Out</a></li>
     
     </ul>
 </nav>

@@ -1,6 +1,126 @@
 {% extends "base_auth.html.twig" %}
 
 {% block body %}
+<style>
+body {
+  font-family: 'Arial', sans-serif;
+  background-image: url('/img/login.png'); 
+  background-size: cover;
+  background-repeat: no-repeat; 
+  background-attachment: fixed; 
+  background-position: center center; 
+  display: flex;
+  justify-content:center;
+  align-items: center;
+  color: white; 
+  height: 100vh;
+}
+
+.liste-container {
+  display: flex;
+  flex-direction: column;
+  margin-bottom:100px;
+}
+
+.en-tete {
+  margin-top:150px;
+  text-align:center;
+  
+}
+
+.en-tete h1 {
+  font-weight: bold;
+  color:white;
+  font-size:70px;
+}
+
+.en-tete select, input[type=text], button {
+  width: 35%;
+  height: 35%;
+  padding: 10px;
+  border: none;
+  border-radius: 40px;
+  background-color: #3A559F; 
+  text-align: center;
+  color: white;
+  cursor: pointer;
+  margin-top:0;
+  margin-bottom:0;
+
+}
+
+.liste{
+  background: rgba(255, 255, 255, 0.25);
+  border-radius: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  width: 700px;
+  height: 600px;
+  padding: 10px;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: thin;
+  scrollbar-color: white transparent;
+  -ms-overflow-style: -ms-autohiding-scrollbar; /* Hide the scrollbar in IE and Edge */
+}
+
+
+.liste table  {
+  border-collapse: separate; 
+  border-spacing: 0; 
+  border-radius: 20px;
+  withd:100%;
+}
+
+
+.liste th, td {
+  padding: 10px;
+}
+
+.liste td {
+  border-bottom: 2px solid white; 
+}
+
+.table thead {
+  width:100;
+  background: rgba(255, 255, 255, 0.25);
+  border-radius: 20px 20px 0 0; /* Apply border radius to the top corners only */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.liste th {
+  border-radius: 20px 20px 0 0; /* Apply border radius to the top corners only */
+  background-color: #3A559F;
+  color:white;
+  top:0px;
+  position: sticky; 
+  z-index: 1000; 
+  vertical-align: top; 
+}
+
+.comment-content{
+  border-radius: 20px 20px 0 0; /* Apply border radius to the top corners only */
+
+}
+
+a {
+  display: block;
+  width: 100%;
+  text-align: right;
+  text-decoration: none;
+  color: #3A559F;
+}
+
+@media (max-width: 1200px) {
+  div {
+    width: 450px;
+  }
+}
+
+@media (max-width: 900px) {
+  div {
+    width: 100%;
+  }
+}
+</style>
 <body>
     {% if user.role == 'intervenant' %}
      <h1>Liste des interventions</h1>

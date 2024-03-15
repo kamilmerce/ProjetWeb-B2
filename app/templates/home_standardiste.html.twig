@@ -9,50 +9,32 @@ body {
   background-repeat: no-repeat; 
   background-attachment: fixed; 
   background-position: center center; 
-  color: white; 
   display: flex;
-  justify-content: center;
+  justify-content:center;
   align-items: center;
+  color: white; 
   height: 100vh;
-  margin: 0;
 }
 
 .liste-container {
   display: flex;
   flex-direction: column;
-  align-items: center;
+  margin-bottom:100px;
 }
 
-.liste{
-  background: rgba(255, 255, 255, 0.25);
-  border-radius: 20px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  width: 700px;
-  height: 600px;
-  align-items: center;
-  margin-right:30px;
-  margin-top:20px;
+.en-tete {
+  margin-top:150px;
+  text-align:center;
+  
 }
 
-.liste table {
-    width: 100%;
-    border-collapse: separate; 
-    border-spacing: 0; 
-}
-
-h1 {
+.en-tete h1 {
   font-weight: bold;
-  margin-top: 20px;
-  margin-bottom:0px;
   color:white;
-  top:0;
-  position: sticky; 
-  z-index: 1000;
-  background-color: #3A559F; /* Ajout de cette ligne */
-  padding: 10px; /* Ajout de cette ligne */
+  font-size:70px;
 }
 
-select, input[type=text], button {
+.en-tete select, input[type=text], button {
   width: 35%;
   height: 35%;
   padding: 10px;
@@ -62,24 +44,60 @@ select, input[type=text], button {
   text-align: center;
   color: white;
   cursor: pointer;
-  margin-top: 20px;
+  margin-top:0;
+  margin-bottom:0;
+
 }
 
-th, td {
+.liste{
+  background: rgba(255, 255, 255, 0.25);
+  border-radius: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  width: 700px;
+  height: 600px;
+  padding: 10px;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: thin;
+  scrollbar-color: white transparent;
+  -ms-overflow-style: -ms-autohiding-scrollbar; /* Hide the scrollbar in IE and Edge */
+}
+
+
+.liste table  {
+  border-collapse: separate; 
+  border-spacing: 0; 
+  border-radius: 20px;
+  withd:100%;
+}
+
+
+.liste th, td {
   padding: 10px;
 }
 
 .liste td {
-    border-bottom: 2px solid white; 
+  border-bottom: 2px solid white; 
+}
+
+.table thead {
+  width:100;
+  background: rgba(255, 255, 255, 0.25);
+  border-radius: 20px 20px 0 0; /* Apply border radius to the top corners only */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .liste th {
-    border-bottom: 2px solid white; 
-    background-color: #3A559F;
-    color:white;
-    top:57px;
-    position: sticky; 
-    z-index: 1000; 
+  border-radius: 20px 20px 0 0; /* Apply border radius to the top corners only */
+  background-color: #3A559F;
+  color:white;
+  top:0px;
+  position: sticky; 
+  z-index: 1000; 
+  vertical-align: top; 
+}
+
+.comment-content{
+  border-radius: 20px 20px 0 0; /* Apply border radius to the top corners only */
 
 }
 
@@ -104,60 +122,73 @@ a {
 }
 </style>
 <body>
-    {% if user.role == 'standardiste' %}
-    <div class="liste-container">
-        <div class = "liste" style="width: 1300px; height: 570px; overflow-y: scroll; border: 1px solid #ccc; padding: 10px; margin-bottom: 20px;">
-            <table>
-                <thead>
-                    <h1>Liste des interventions</h1>
-                    <tr>
-                        <th>ID</th>
-                        <th>Date de début</th>
-                        <th>Client</th>
-                        <th>Standardiste</th>
-                        <th>Infos</th>
-                        <th>Commentaires</th>
-                        <th>Status</th>
-                        <th>Degré d'urgence</th>
-                        <th></th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {% for intervention in interventions %}
-                    <tr>
-                        <td>{{ intervention.id }}</td>
-                        <td>{{ intervention.start_date }}</td>
-                        <td>{{ intervention.client_id }}</td>
-                        <td>{{ intervention.standardiste_id }}</td>
-                        <td>{{ intervention.infos }}</td>
-                        <td>
-                            <div style="width: 300px; height: 100px; overflow-y: scroll; border: 1px solid #ccc; padding: 10px; margin-bottom: 20px;">
-                                {% for commentaire in commentaires %}
-                                    {% if commentaire.intervention_id == intervention.id %}
-                                        <div class="comment">
-                                            <span class="comment-author">{{ commentaire.user_name }} {{ commentaire.user_surname }}</span>
-                                            <span class="comment-date">{{ commentaire.date_commentaire}}</span>
-                                            <p class="comment-content">{{ commentaire.commentaire}}</p>
-                                        </div>
-                                    {% endif %}
-                                {% endfor %}
-                            </div>
-                        </td>
-                        <td>{{ intervention.status_suivi }}</td>
-                        <td>{{ intervention.degre_urgence }}</td>
-                        <td>
-                            {% if intervention.standardiste_id == user.user_id %}
-                                <a href="edit_intervention.php?id={{ intervention.id }}">Edit</a>
-                            {% else %}
-                            <a href="viewmore.php?type=intervention&id={{ intervention.id }}">View more</a>
-                            {% endif %}
-                        </td>
-                    </tr>
-                    {% endfor %}
-                </tbody>
-            </table>
-        </div>
-    </div>
-    {% endif %}
+{% if user.role == 'standardiste' %}
+<div class="liste-container">
+  <div class="en-tete">
+    <h1>Liste des interventions</h1>
+    <form  classe ='form' action="search.php" method="GET">
+      <select name="tri">
+        <option value="id_intervention_asc">ID croissant</option>
+        <option value="id_intervention_desc">ID décroissant</option>
+        <option value="intervention_cloturee">Clôturée</option>
+        <option value="intervention_annulee">Annulée</option>
+        <option value="intervention_encours">En cours</option>
+        <option value="intervention_enattente">En attente</option>
+      </select>
+      <button type="submit">Trier</button>
+    </form>
+  </div>
+  <div class = "liste" style="width: 1300px; height: 570px; overflow-y: scroll; border: 1px solid #ccc; padding: 10px;">
+    <table>
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Date de début</th>
+          <th>Client</th>
+          <th>Standardiste</th>
+          <th>Infos</th>
+          <th>Commentaires</th>
+          <th>Status</th>
+          <th>Degré d'urgence</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for intervention in interventions %}
+          <tr>
+            <td>{{ intervention.id }}</td>
+            <td>{{ intervention.start_date }}</td>
+            <td>{{ intervention.client_id }}</td>
+            <td>{{ intervention.standardiste_id }}</td>
+            <td>{{ intervention.infos }}</td>
+            <td>
+              <div class="comment-content" style="width: 300px; height: 100px; overflow-y: scroll; border: 2px solid white; padding: 10px;">
+                {% for commentaire in commentaires %}
+                  {% if commentaire.intervention_id == intervention.id %}
+                    <div class="comment">
+                      <span class="comment-author">{{ commentaire.user_name }} {{ commentaire.user_surname }}</span>
+                      <span class="comment-date">{{ commentaire.date_commentaire}}</span>
+                      <p class="comment-content">{{ commentaire.commentaire}}</p>
+                    </div>
+                  {% endif %}
+                {% endfor %}
+              </div>
+            </td>
+            <td>{{ intervention.status_suivi }}</td>
+            <td>{{ intervention.degre_urgence }}</td>
+            <td>
+                {% if intervention.standardiste_id == user.user_id %}
+                  <a href="edit_intervention.php?id={{ intervention.id }}">Edit</a>
+                {% else %}
+                  <a href="viewmore.php?type=intervention&id={{ intervention.id }}">View more</a>
+                {% endif %}
+            </td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+{% endif %}
 </body>
 {% endblock %}

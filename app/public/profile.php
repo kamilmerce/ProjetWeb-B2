@@ -14,7 +14,10 @@
             case 'client':
                 $interventions_in_progress = $page->getInterventionInProgressByClient($user['user_id']);
                 $allcommentaires = $page->getALLComment();
-                echo $page->render('home_client.html.twig',['commentaires'=>$allcommentaires,'user'=>$user,'interventions_in_progress'=>$interventions_in_progress]);
+                echo $page->render('home_client.html.twig',[
+                    'commentaires'=>$allcommentaires,
+                    'user'=>$user,
+                    'interventions_in_progress'=>$interventions_in_progress]);
             case 'intervenant':
                 $allcommentaires = $page->getALLComment();
                 $interventions= $page->getInterventionsByIntervenantId($user['user_id']);
