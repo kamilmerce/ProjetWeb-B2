@@ -1,59 +1,201 @@
 {% extends "base_auth.html.twig" %}
 
 {% block body %}
+<style>
+body {
+  font-family: 'Arial', sans-serif;
+  background-image: url('/img/login.png'); 
+  background-size: cover;
+  background-repeat: no-repeat; 
+  background-attachment: fixed; 
+  background-position: center center; 
+  display: flex;
+  justify-content:center;
+  align-items: center;
+  color: white; 
+  height: 100vh;
+}
+
+.liste-container {
+  display: flex;
+  flex-direction: column;
+  margin-bottom:100px;
+  height: 110vh;
+}
+
+.en-tete {
+  margin-top:150px;
+  text-align:center;
+}
+
+.en-tete h1 {
+  font-weight: bold;
+  color:white;
+  font-size:70px;
+}
+
+
+
+button {
+  padding: 10px;
+  border: none;
+  border-radius: 40px;
+  background-color: #3A559F; 
+  text-align: center;
+  color: white;
+  cursor: pointer;
+  margin-top:0;
+  margin-bottom:0;
+  width:100px;
+  height:60px;
+
+}
+
+.liste{
+  background: rgba(255, 255, 255, 0.25);
+  border-radius: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  width: 700px;
+  height: 600px;
+  padding: 10px;
+  margin-left:10px;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: thin;
+  scrollbar-color: white transparent;
+  -ms-overflow-style: -ms-autohiding-scrollbar; /* Hide the scrollbar in IE and Edge */
+}
+
+.comment-container{
+  background: rgba(255, 255, 255, 0.25);
+  border-radius: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  width: 650px;
+  height: 100px;
+  padding: 10px;
+  margin-left:10px;
+  overflow-y: scroll;  
+  scroll-snap-type: x mandatory;
+  scrollbar-width: thin;
+  scrollbar-color: white transparent;
+  -ms-overflow-style: -ms-autohiding-scrollbar; /* Hide the scrollbar in IE and Edge */
+}
+.intervenant{
+  background: rgba(255, 255, 255, 0.25);
+  border-radius: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  width: 650px;
+  height: 100px;
+  padding: 10px;
+  margin-left:10px;
+
+}
+
+.ajout_com{
+    background: rgba(255, 255, 255, 0.25);
+  border-radius: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  width: 650px;
+  height: 300px;
+  padding: 10px;
+  margin-left:10px;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: thin;
+  scrollbar-color: white transparent;
+  -ms-overflow-style: -ms-autohiding-scrollbar; /* Hide the scrollbar in IE and Edge */}
+
+
+
+
+.comment-content{
+  border-radius: 20px 20px 0 0; /* Apply border radius to the top corners only */
+
+}
+
+a {
+  display: block;
+  width: 100%;
+  text-align: right;
+  text-decoration: none;
+  color: #3A559F;
+}
+
+.input_edit{
+
+}
+
+
+@media (max-width: 1200px) {
+  div {
+    width: 450px;
+  }
+}
+
+@media (max-width: 900px) {
+  div {
+    width: 100%;
+  }
+}
+</style>
 <body>
-    <h1>Édition de l'intervention</h1>
-
-    <h2>Informations de l'intervention</h2>
-    <ul>
-        <li>ID: {{ intervention.id }}</li>
-        <li>Date de début: {{ intervention.start_date }}</li>
-        <li>Status: {{ intervention.status_suivi }}</li>
-        <li>Degré d'urgence: {{ intervention.degre_urgence }}</li>
-    </ul>
-
-
-
-    <h2>Intervenants de l'intervention</h2>
-    <ul>
-        {% for intervenant in intervenants %}
-        <li>{{ intervenant.name }} {{ intervenant.surname }}</li>
-        {% endfor %}
-    </ul>
-
-    <div class="comment-section">
-        <h2>Commentaires</h2>
-        <div class="comment-container" style="width: 600px; height: 300px; overflow-y: scroll; border: 1px solid #ccc; padding: 10px; margin-bottom: 20px;">
-            {% for commentaire in commentaires %}
-            <div class="comment">
-                <span class="comment-author">{{ commentaire.user_name }} {{ commentaire.user_surname }}</span>
-                <span class="comment-date">{{ commentaire.date_commentaire}}</span>
-                <p class="comment-content">{{ commentaire.commentaire}}</p>
-            </div>
-            {% endfor %}
+    <div class='liste-container'>
+        <div class='en-tete'>
+            <h1>Intervention #{{intervention.id}}</h1>
         </div>
-    </div>
+    
+        <div class='liste'>
+            <ul>
+                <li>Date de début: {{ intervention.start_date }}</li>
+                <li>Status: {{ intervention.status_suivi }}</li>
+                <li>Degré d'urgence: {{ intervention.degre_urgence }}</li>
+            </ul>
+        </div>
+    
 
-    <form action="edit_intervention.php?id={{ intervention.id }}" method="post">
-        <h2>Ajouter un commentaire :</h2>
-        <textarea id="commentaire" name="commentaire" cols="70" rows="5"></textarea><br><br>
 
-        {% if user.role == 'standardiste' or user.role == 'intervenant' %}
-        <h3>Statut :</h3>
-            <input type="radio" name="status" value="En attente" {% if intervention.status_suivi == 'En attente' %}checked{% endif %}> En attente<br>
-            <input type="radio" name="status" value="En cours" {% if intervention.status_suivi == 'En cours' %}checked{% endif %}> En cours<br>
-            {% if user.role =='standardiste' %}
-                <input type="radio" name="status" value="Clôturée" {% if intervention.status_suivi == 'Clôturée' %}checked{% endif %}> Clôturée<br>
-                <input type="radio" name="status" value="Annulée" {% if intervention.status_suivi == 'Annulée' %}checked{% endif %}> Annulée<br><br>
+        <h2>Intervenants</h2>
+        <div class ='intervenants'>
+            <ul>
+                {% for intervenant in intervenants %}
+                <li>{{ intervenant.name }} {{ intervenant.surname }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+
+        <div class="comment-section">
+            <h2>Commentaires</h2>
+            <div class="comment-container">
+                {% for commentaire in commentaires %}
+                <div class="comment" >
+                    <span class="comment-author">{{ commentaire.user_name }} {{ commentaire.user_surname }}</span>
+                    <span class="comment-date">{{ commentaire.date_commentaire}}</span>
+                    <p class="comment-content">{{ commentaire.commentaire}}</p>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+
+        <form action="edit_intervention.php?id={{ intervention.id }}" method="post">
+            <h2>Ajouter un commentaire :</h2>
+
+            <textarea class="ajout_com" id="commentaire" name="commentaire" ></textarea><br><br>
+
+            {% if user.role == 'standardiste' or user.role == 'intervenant' %}
+            <h3>Statut :</h3>
+                <input class='input_edit' type="radio" name="status" value="En attente" {% if intervention.status_suivi == 'En attente' %}checked{% endif %}> En attente<br>
+                <input class='input_edit' type="radio" name="status" value="En cours" {% if intervention.status_suivi == 'En cours' %}checked{% endif %}> En cours<br>
+                {% if user.role =='standardiste' %}
+                    <input class='input_edit' type="radio" name="status" value="Clôturée" {% if intervention.status_suivi == 'Clôturée' %}checked{% endif %}> Clôturée<br>
+                    <input class='input_edit' type="radio" name="status" value="Annulée" {% if intervention.status_suivi == 'Annulée' %}checked{% endif %}> Annulée<br><br>
+                {% endif %}
             {% endif %}
-        {% endif %}
-        {% if user.role == 'standardiste' %}
-            <h3>Degré d'urgence :</h3>
-            <input type="radio" name="urgence" value="Faible" {% if intervention.degre_urgence == 'Faible' %}checked{% endif %}> Faible<br>
-            <input type="radio" name="urgence" value="Moyen" {% if intervention.degre_urgence == 'Moyen' %}checked{% endif %}> Moyen<br>
-            <input type="radio" name="urgence" value="Élevé" {% if intervention.degre_urgence == 'Élevé' %}checked{% endif %}> Élevé<br><br>
-        {% endif %}
-        <button type="submit">Enregistrer</button>
-    </form>
+            {% if user.role == 'standardiste' %}
+                <h3>Degré d'urgence :</h3>
+                <input class='input_edit' type="radio" name="urgence" value="Faible" {% if intervention.degre_urgence == 'Faible' %}checked{% endif %}> Faible<br>
+                <input  class='input_edit'type="radio" name="urgence" value="Moyen" {% if intervention.degre_urgence == 'Moyen' %}checked{% endif %}> Moyen<br>
+                <input  class='input_edit'type="radio" name="urgence" value="Élevé" {% if intervention.degre_urgence == 'Élevé' %}checked{% endif %}> Élevé<br><br>
+            {% endif %}
+            <button type="submit">Enregistrer</button>
+        </form>
+    </div>
 </body>
 {% endblock %}

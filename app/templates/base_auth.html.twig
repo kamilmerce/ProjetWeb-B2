@@ -57,6 +57,47 @@
         padding:10px;
         width: 100px;
     }
+    .bouton_search{
+        padding: 10px;
+        border: none;
+        border-radius: 40px;
+        background-color: #3A559F; 
+        text-align: center;
+        color: white;
+        cursor: pointer;
+        margin-top:0;
+        margin-bottom:0;
+        width:100px;
+        height:50px;
+    }
+    .bar_select{
+        padding: 10px;
+        border: none;
+        border-radius: 40px;
+        background-color: #3A559F; 
+        text-align: center;
+        color: white;
+        cursor: pointer;
+        margin-top:0;
+        margin-bottom:0;
+        width:60px;
+        height:30px;
+    }
+
+    input{
+        padding: 10px;
+        border: none;
+        border-radius: 40px;
+        background-color: #3A559F; 
+        text-align: center;
+        color: white;
+        cursor: pointer;
+        margin-top:0;
+        margin-bottom:0;
+        width:60px;
+        height:30px;
+    }
+
 
     .nav-item a:hover {
         background: rgba(255, 255, 255, 0.25);
@@ -94,13 +135,13 @@
         <li class="nav-item">
             <form class="search-form" action="search.php" method="GET">
                 <input type="text" name="query" placeholder="Recherche...">
-                <select name="type">
+                <select class='bar_select' name="type">
                     <option value="intervention">Intervention</option>
                     <option value="client">Client</option>
                     <option value="intervenant">Intervenant</option>
                     <option value="standardiste">Standardiste</option>
                 </select>
-                <button type="submit">Rechercher</button>
+                <button class='bouton_search' type="submit">Rechercher</button>
             </form>
         </li>
         {% endif %}
@@ -111,7 +152,7 @@
                 <select  hidden name="type">
                     <option value="intervention">Intervention</option>
                 </select>
-                <button type="submit">Rechercher</button>
+                <button class='bouton_search' type="submit">Rechercher</button>
             </form>
         </li>
         <li class="nav-item"><a href="messagerie.php"><i class='bx bxs-message'></i>Notification</a></li>
@@ -124,18 +165,18 @@
                 <select  hidden name="type">
                     <option value="intervention">Intervention</option>
                 </select>
-                <button type="submit">Rechercher</button>
+                <button class='bouton_search' type="submit">Rechercher</button>
             </form>
         </li>
         {% endif %}
         {% if user.role=='client' %}
         <li class="nav-item">
             <form class="search-form" action="search.php" method="GET">
-                <input type="text" name="query" placeholder="Recherche...">
-                <select  hidden name="type">
+                <input class='bar_search' type="text" name="query" placeholder="Recherche...">
+                <select hidden name="type">
                     <option value="intervention">Intervention</option>
                 </select>
-                <button type="submit">Rechercher</button>
+                <button class='bouton_search' type="submit">Rechercher</button>
             </form>
         </li>
         <li class="nav-item"><a href="demande_creation_intervention.php"><i class='bx bxs-create'></i>Ask for a intervention</a></li>
