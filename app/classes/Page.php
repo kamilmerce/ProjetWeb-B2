@@ -152,6 +152,7 @@ class Page
 
     }
 
+
     public function getALLComment(){
         $sql ="SELECT c.*, u.name AS user_name, u.surname AS user_surname FROM commentaires c INNER JOIN users u ON c.user_id = u.user_id";
         $sth = $this->link->prepare($sql);
@@ -198,7 +199,7 @@ class Page
         $sql = "SELECT interventions.*
                 FROM interventions
                 INNER JOIN intervenant_intervention ON interventions.id = intervenant_intervention.intervention_id
-                WHERE intervenant_intervention.intervenant_id = :intervenantId ORDER BY user_id ASC";
+                WHERE intervenant_intervention.intervenant_id = :intervenantId ORDER BY id ASC";
         
         $stmt = $this->link->prepare($sql);
         $stmt->bindParam(':intervenantId', $intervenantId, \PDO::PARAM_INT);
@@ -211,7 +212,20 @@ class Page
         $sql = "SELECT interventions.*
                 FROM interventions
                 INNER JOIN intervenant_intervention ON interventions.id = intervenant_intervention.intervention_id
-                WHERE intervenant_intervention.intervenant_id = :intervenantId ORDER BY user_id DESC";
+                WHERE intervenant_intervention.intervenant_id = :intervenantId ORDER BY id DESC";
+        
+        $stmt = $this->link->prepare($sql);
+        $stmt->bindParam(':intervenantId', $intervenantId, \PDO::PARAM_INT);
+        $stmt->execute();
+    
+        return $stmt->fetchAll(\PDO::FETCH_ASSOC);
+    }
+
+    public function getInterventionCompletedByintervenant($intervenantId){
+        $sql = "SELECT interventions.*
+                FROM interventions
+                INNER JOIN intervenant_intervention ON interventions.id = intervenant_intervention.intervention_id
+                WHERE intervenant_intervention.intervenant_id = :intervenantId and interventions.status_suivi='Clôturée' ";
         
         $stmt = $this->link->prepare($sql);
         $stmt->bindParam(':intervenantId', $intervenantId, \PDO::PARAM_INT);
@@ -382,10 +396,37 @@ class Page
         return $sth->fetchALL(\PDO::FETCH_ASSOC);
     }
 
+    public function getInterventionInProgressEnCoursByclient($user_id){
+        $sql ="SELECT * FROM interventions WHERE client_id=$user_id and status_suivi='En cours'";
+        $sth = $this->link->prepare($sql);
+        $sth->execute();
+        return $sth->fetchALL(\PDO::FETCH_ASSOC);
+    }
 
-// Dans la classe Page
+    public function getInterventionInProgressEnattenteByclient($user_id){
+        $sql ="SELECT * FROM interventions WHERE client_id=$user_id and status_suivi='En attente'";
+        $sth = $this->link->prepare($sql);
+        $sth->execute();
+        return $sth->fetchALL(\PDO::FETCH_ASSOC);
+    }
 
-    // Tri des clients
+    public function getInterventionInProgressAscByclient($user_id){
+        $sql ="SELECT * FROM interventions WHERE client_id=$user_id ORDER BY id ASC";
+        $sth = $this->link->prepare($sql);
+        $sth->execute();
+        return $sth->fetchALL(\PDO::FETCH_ASSOC);
+    }
+
+    public function getInterventionInProgressDESCByclient($user_id){
+        $sql ="SELECT * FROM interventions WHERE client_id=$user_id ORDER BY id DESC";
+        $sth = $this->link->prepare($sql);
+        $sth->execute();
+        return $sth->fetchALL(\PDO::FETCH_ASSOC);
+    }
+
+
+
+
     public function getClientsAsc()
     {
         $query = "SELECT * FROM users WHERE role='client' and verified=TRUE ORDER BY user_id ASC";
@@ -517,18 +558,7 @@ class Page
         return $sth->fetchALL(\PDO::FETCH_ASSOC);
     }
 
-    public function getInterventionCompletedByintervenant($id){
-        $sql = "SELECT interventions.*
-        FROM interventions
-        INNER JOIN intervenant_intervention ON interventions.id = intervenant_intervention.intervention_id
-        WHERE intervenant_intervention.intervenant_id = :intervenantId and interventions.status_suivi='Clôturée'";
-
-        $stmt = $this->link->prepare($sql);
-        $stmt->bindParam(':intervenantId', $intervenantId, \PDO::PARAM_INT);
-        $stmt->execute();
-
-        return $stmt->fetchAll(\PDO::FETCH_ASSOC);
-    }
+    
 
     public function getInterventionCompleted(){
         $query = "SELECT * FROM interventions WHERE status_suivi='Clôturée'";

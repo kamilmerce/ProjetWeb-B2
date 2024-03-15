@@ -42,6 +42,7 @@
                         'interventions'=>$interventions
                     ]); 
                 }
+                    
                 break;
             case "intervention_encours":
                 if ($user['role']=='admin'){
@@ -73,9 +74,16 @@
                         'user'=>$user,
                         'interventions'=>$interventions
                     ]); 
+                }elseif($user['role']=='client'){
+                    $interventions_in_progress = $page->getInterventionInProgressEnCoursByclient($user['user_id']);
+                    $allcommentaires = $page->getALLComment();
+                    echo $page->render('home_client.html.twig',[
+                        'commentaires'=>$allcommentaires,
+                        'user'=>$user,
+                        'interventions_in_progress'=>$interventions_in_progress
+                    ]);
                 }
                 break;
-
             case "intervention_enattente":
                 if ($user['role']=='admin'){
                     $interventions = $page->getInterventionAttente();
@@ -106,6 +114,14 @@
                         'user'=>$user,
                         'interventions'=>$interventions
                     ]); 
+                }elseif($user['role']=='client'){
+                    $interventions_in_progress = $page->getInterventionInProgressEnattenteByclient($user['user_id']);
+                    $allcommentaires = $page->getALLComment();
+                    echo $page->render('home_client.html.twig',[
+                        'commentaires'=>$allcommentaires,
+                        'user'=>$user,
+                        'interventions_in_progress'=>$interventions_in_progress
+                    ]);
                 }
                 break;
             case "intervention_cloturee":
@@ -134,7 +150,8 @@
                 }elseif($user['role']=='intervenant'){
                     $allcommentaires = $page->getALLComment();
                     $interventions= $page->getInterventionCompletedByintervenant($user['user_id']);
-                    echo $page->render('home_intervenant.html.twig',['commentaires'=>$allcommentaires,
+                    echo $page->render('home_intervenant.html.twig',[
+                        'commentaires'=>$allcommentaires,
                         'user'=>$user,
                         'interventions'=>$interventions
                     ]); 
@@ -171,6 +188,14 @@
                         'user'=>$user,
                         'interventions'=>$interventions
                     ]); 
+                }elseif($user['role']=='client'){
+                    $interventions_in_progress = $page->getInterventionInProgressAscByclient($user['user_id']);
+                    $allcommentaires = $page->getALLComment();
+                    echo $page->render('home_client.html.twig',[
+                        'commentaires'=>$allcommentaires,
+                        'user'=>$user,
+                        'interventions_in_progress'=>$interventions_in_progress
+                    ]);
                 }
                 break;
 
@@ -204,6 +229,15 @@
                         'user'=>$user,
                         'interventions'=>$interventions
                     ]); 
+                }elseif($user['role']=='client'){
+                    $interventions_in_progress = $page->getInterventionInProgressDESCByclient($user['user_id']);
+                    $allcommentaires = $page->getALLComment();
+                    
+                    echo $page->render('home_client.html.twig',[
+                        'commentaires'=>$allcommentaires,
+                        'user'=>$user,
+                        'interventions_in_progress'=>$interventions_in_progress
+                    ]);
                 }
                 break;
                 
@@ -605,24 +639,36 @@
         // Effectuer la recherche en fonction du type sélectionné
         switch ($type) {
             case 'intervention':
-                // Effectuer la recherche dans la table des interventions
+                if ($user['role']=='admin'){
+                    $results = $page->searchInterventions($query);
+                    $interventions=array();
+                }elseif($user['role']=="standardiste"){
+                    $results = $page->searchInterventions($query);
+                    $interventions=array();
+
+                }elseif($user['role']=='intervenant'){
+                    $results = $page->searchInterventions($query);
+                    $interventions=$page->getInterventionsByIntervenantId($user['user_id']);
+
+                }elseif($user['role']=='client'){
+                    $results = $page->searchInterventions($query);
+                    $interventions=$page->getInterventionsByClient($user['user_id']);
+                }
+
                 $results = $page->searchInterventions($query);
                 break;
             case 'client':
-                // Effectuer la recherche dans la table des clients
                 $results = $page->searchClients($query);
                 break;
             case 'intervenant':
-                // Effectuer la recherche dans la table des intervenants
                 $results = $page->searchIntervenants($query);
                 break;
             case 'standardiste':
-                // Effectuer la recherche dans la table des standardistes
                 $results = $page->searchStandardistes($query);
                 break;
             default:
                 break;
         }
-        echo $page->render('resultsearch.html.twig',['user'=>$user,'results'=>$results, 'query' => $query, 'type' => $type]);
+        echo $page->render('resultsearch.html.twig',['user'=>$user,'results'=>$results, 'query' => $query, 'type' => $type, 'interventions'=>$interventions]);
 
     }

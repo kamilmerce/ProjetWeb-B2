@@ -114,7 +114,32 @@
                 <button type="submit">Rechercher</button>
             </form>
         </li>
+        <li class="nav-item"><a href="messagerie.php"><i class='bx bxs-message'></i>Notification</a></li>
         <li class="nav-item"><a href="create_intervention.php"><i class='bx bxs-create'></i>Create new</a></li>
+        {% endif %}
+        {% if user.role == 'intervenant' %}
+        <li class="nav-item">
+            <form class="search-form" action="search.php" method="GET">
+                <input type="text" name="query" placeholder="Recherche...">
+                <select  hidden name="type">
+                    <option value="intervention">Intervention</option>
+                </select>
+                <button type="submit">Rechercher</button>
+            </form>
+        </li>
+        {% endif %}
+        {% if user.role=='client' %}
+        <li class="nav-item">
+            <form class="search-form" action="search.php" method="GET">
+                <input type="text" name="query" placeholder="Recherche...">
+                <select  hidden name="type">
+                    <option value="intervention">Intervention</option>
+                </select>
+                <button type="submit">Rechercher</button>
+            </form>
+        </li>
+        <li class="nav-item"><a href="demande_creation_intervention.php"><i class='bx bxs-create'></i>Ask for a intervention</a></li>
+        <li class="nav-item"><a href="intervention_completed.php"><i class='bx bxs-create'></i>Intervention completed</a></li>
         {% endif %}
         <li class="nav-item"><a href="#"><i class='bx bxs-profile'></i> My account</a></li>
         <li class="nav-item"><a href="profile.php"><i class="bx bxs-home"></i> Home</a></li>

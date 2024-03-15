@@ -53,9 +53,12 @@ body {
   background: rgba(255, 255, 255, 0.25);
   border-radius: 20px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  width: 700px;
-  height: 600px;
-  padding: 10px;
+  width: 300px; 
+  height: 100px; 
+  overflow-y: scroll; 
+  border: 1px solid #ccc; 
+  padding: 10px; 
+  margin-bottom: 20px;
   scroll-snap-type: x mandatory;
   scrollbar-width: thin;
   scrollbar-color: white transparent;
@@ -68,6 +71,8 @@ body {
   border-spacing: 0; 
   border-radius: 20px;
   withd:100%;
+  
+
 }
 
 
@@ -122,9 +127,23 @@ a {
 }
 </style>
 <body>
-    {% if user.role == 'intervenant' %}
-     <h1>Liste des interventions</h1>
-    <div style="width: 1300px; height: 500px; overflow-y: scroll; border: 1px solid #ccc; padding: 10px; margin-bottom: 20px;">
+  {% if user.role == 'intervenant' %}
+    <div class="liste-container">
+      <div class="en-tete">
+        <h1>Liste des interventions</h1>
+        <form  classe ='form' action="search.php" method="GET">
+          <select name="tri">
+            <option value="id_intervention_asc">ID croissant</option>
+            <option value="id_intervention_desc">ID décroissant</option>
+            <option value="intervention_cloturee">Clôturée</option>
+            <option value="intervention_annulee">Annulée</option>
+            <option value="intervention_encours">En cours</option>
+            <option value="intervention_enattente">En attente</option>
+          </select>
+          <button type="submit">Trier</button>
+        </form>
+      </div>
+      <div class="liste" style="width: 1300px; height: 500px; overflow-y: scroll; border: 1px solid #ccc; padding: 10px; margin-bottom: 20px;">
         <table>
             <thead>
                 <tr>
@@ -140,34 +159,35 @@ a {
                 </tr>
             </thead>
             <tbody>
-                {% for intervention in interventions %}
+              {% for intervention in interventions %}
                 <tr>
-                    <td>{{ intervention.id }}</td>
-                    <td>{{ intervention.start_date }}</td>
-                    <td>{{ intervention.client_id }}</td>
-                    <td>{{ intervention.standardiste_id }}</td>
-                    <td>{{ intervention.infos }}</td>
-                    <td>
-                        <div style="width: 300px; height: 100px; overflow-y: scroll; border: 1px solid #ccc; padding: 10px; margin-bottom: 20px;">
-                            {% for commentaire in commentaires %}
-                                {% if commentaire.intervention_id == intervention.id %}
-                                    <div class="comment">
-                                        <span class="comment-author">{{ commentaire.user_name }} {{ commentaire.user_surname }}</span>
-                                        <span class="comment-date">{{ commentaire.date_commentaire}}</span>
-                                        <p class="comment-content">{{ commentaire.commentaire}}</p>
-                                    </div>
-                                {% endif %}
-                            {% endfor %}
-                        </div>
-                    </td>
-                    <td>{{ intervention.status_suivi }}</td>
-                    <td>{{ intervention.degre_urgence }}</td>
-                    <td><a href="edit_intervention.php?id={{ intervention.id }}">View more</a></td>
+                  <td>{{ intervention.id }}</td>
+                  <td>{{ intervention.start_date }}</td>
+                  <td>{{ intervention.client_id }}</td>
+                  <td>{{ intervention.standardiste_id }}</td>
+                  <td>{{ intervention.infos }}</td>
+                  <td>
+                    <div class='comment-content' style="width: 300px; height: 100px; overflow-y: scroll; border: 1px solid #ccc; padding: 10px; margin-bottom: 20px;">
+                      {% for commentaire in commentaires %}
+                        {% if commentaire.intervention_id == intervention.id %}
+                          <div class="comment">
+                            <span class="comment-author">{{ commentaire.user_name }} {{ commentaire.user_surname }}</span>
+                            <span class="comment-date">{{ commentaire.date_commentaire}}</span>
+                            <p class="comment-content">{{ commentaire.commentaire}}</p>
+                          </div>
+                        {% endif %}
+                      {% endfor %}
+                    </div>
+                  </td>
+                  <td>{{ intervention.status_suivi }}</td>
+                  <td>{{ intervention.degre_urgence }}</td>
+                  <td><a href="edit_intervention.php?id={{ intervention.id }}">View more</a></td>
                 </tr>
-                {% endfor %}
+              {% endfor %}
             </tbody>
         </table>
+      </div>
     </div>
-    {% endif %}
+  {% endif %}
 </body>
 {% endblock %}
