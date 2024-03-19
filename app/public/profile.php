@@ -28,9 +28,11 @@
             case 'standardiste':
                 $interventions=$page->getAllInterventions();
                 $allcommentaires = $page->getALLComment();
+                $demandes=$page->getNbDemande($user['user_id']);
                 echo $page->render('home_standardiste.html.twig',['commentaires'=>$allcommentaires,
                     'user'=>$user,
-                    'interventions'=>$interventions
+                    'interventions'=>$interventions,
+                    'demandes'=>$demandes
                 ]);
             case 'admin':
                 $standardistes=$page->getAllStandardiste();

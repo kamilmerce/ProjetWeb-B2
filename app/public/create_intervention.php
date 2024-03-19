@@ -43,10 +43,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             }
         }
 
+        if (isset($_POST['demande_id'])) {
+            $demande_id = $_POST['demande_id']
+            $page->updateDemandeVerified($demande_id, false);
+        }
+
         // Rediriger vers la page d'accueil ou une autre page après la création de l'intervention
         header('Location: profile.php');
         exit();
-    } 
+    }
+
+    
 
 
 }

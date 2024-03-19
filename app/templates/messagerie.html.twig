@@ -1,0 +1,115 @@
+{% extends "base_auth.html.twig" %}
+
+{% block body %}
+<style>
+body {
+  font-family: 'Arial', sans-serif;
+  background-image: url('/img/login.png'); 
+  background-size: cover;
+  background-repeat: no-repeat; 
+  background-attachment: fixed; 
+  background-position: center center; 
+  color: white; 
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+}
+
+h1{
+    margin-top:100px;
+    margin-left:50px;
+    font-size:50px;
+    height: 5vh;
+
+}
+
+
+.liste{
+  background: rgba(255, 255, 255, 0.25);
+  border-radius: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  width: 1200px;
+  height: 500px;
+  align-items: center;
+  margin-right:30px;
+  margin-top:100px;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: thin;
+  scrollbar-color: white transparent;
+  -ms-overflow-style: -ms-autohiding-scrollbar; 
+  overflow-y: scroll; 
+  border: 1px solid #ccc; 
+  padding: 10px;
+}
+
+
+.liste table {
+    width: 100%;
+    border-collapse: separate; 
+    border-spacing: 0; 
+}
+
+th, td {
+  padding: 10px;
+}
+
+
+.liste td {
+    border-bottom: 2px solid white; 
+}
+
+
+th {
+    border-bottom: 2px solid white; 
+    color:#3A559F;
+}
+
+a {
+  display: block;
+  width: 100%;
+  text-align: right;
+  text-decoration: none;
+  color: #3A559F;
+}
+
+</style>
+<body>
+{% if user.role == 'standardiste' %}
+<div class='liste-container'>
+    <h1>Demande à traiter</h1>
+    <div class = "liste">
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Client</th>
+                    <th>Infos</th>
+                    <th>Date</th>
+                    <th></th> 
+
+                </tr>
+            </thead>
+            <tbody>
+                {% for demande in demandes %}
+                    <tr>
+                        <td>{{ demande.id }}</td>
+                        <td>{{ demande.client_id }}</td>
+                        <td>{{ demande.infos }}</td>
+                        <td>{{ demande.start_date }}</td>
+                        <td>
+                            <form action="createByDemande.php" method="post">
+                                <input type="hidden" name="demande_id" value="{{ demande.id }}">
+                                <button type="submit">Create</button>
+                            </form>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endif %}
+</body>
+{% endblock %}

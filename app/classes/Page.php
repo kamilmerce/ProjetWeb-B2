@@ -66,10 +66,63 @@ class Page
         $sth->execute();
     }
 
+
+    public function getDemandeById($id){
+        $sql = "SELECT * FROM demande WHERE id=$id ";
+        $sth = $this->link->prepare($sql);
+        $sth->execute();
+        return $sth->fetch(\PDO::FETCH_ASSOC);
+
+    }
+
+    public function updateDemandeVerified($demandeId) {
+        // Requête SQL pour mettre à jour la colonne verified de la demande
+        $query = "UPDATE demandes SET verified = FALSE WHERE id = :demande_id";
+    
+        // Préparation de la requête
+        $statement = $this->pdo->prepare($query);
+    
+        // Liaison des valeurs
+        $statement->bindParam(':demande_id', $demandeId, PDO::PARAM_INT);
+    
+        // Exécution de la requête
+        $statement->execute();
+    }
+
+    public function getNbDemande($id){
+        $sql="SELECT COUNT(*) AS nb_demandes FROM demande WHERE standardiste_id = :standardiste_id";
+        $sth=$this->link->prepare($sql);
+        $sth->bindParam(":standardiste_id",$id,\PDO::PARAM_INT);
+        $sth->execute();
+        return $sth->fetch(PDO::FETCH_ASSOC);
+        
+    }
+
+    public function getDemandeByStandardiste($id){
+        $sql = "SELECT * FROM demande WHERE standardiste_id=$id ";
+        $sth = $this->link->prepare($sql);
+        $sth->execute();
+        return $sth->fetchAll(\PDO::FETCH_ASSOC);
+    }
+
     public function insertNewDemande(array $data){
-        $sql = 'INSERT INTO demande (client_id, standardiste_id,stard_date,infos,degre_urgence) VALUES (:client_id, :standardiste_id,:stard_date,:infos,:degre_urgence)' ;
-        $sth = $this->link->prepare($sql, [\PDO::ATTR_CURSOR => \PDO::CURSOR_FWDONLY]);
-        $sth->execute($data);
+        $sql = 'INSERT INTO demande (client_id, standardiste_id, start_date, infos, degre_urgence) VALUES (:client_id, :standardiste_id, :start_date, :infos, :degre_urgence)';
+        $sth = $this->link->prepare($sql);
+        $sth->execute([
+            ':client_id' => $data['client_id'],
+            ':standardiste_id' => $data['standardiste_id'],
+            ':start_date' => $data['start_date'],
+            ':infos' => $data['infos'],
+            ':degre_urgence' => $data['degre_urgence']
+        ]);
+    }
+    
+
+    public function getRandomStandardiste(){
+        $sql = "SELECT user_id FROM users WHERE role='standardiste' ORDER BY RAND() LIMIT 1";
+        $sth = $this->link->prepare($sql);
+        $sth->execute();
+        return $sth->fetch(\PDO::FETCH_ASSOC);
     }
 
     public function updateUserProfilePhoto($user_id, $new_photo_path) {
@@ -77,7 +130,7 @@ class Page
         $sql = "UPDATE users SET photo = :photo_path WHERE user_id = :user_id";
         
         // Exécutez la requête avec les valeurs fournies
-        $stmt = $this->db->prepare($sql);
+        $stmt = $this->link->prepare($sql);
         $stmt->bindParam(':photo_path', $new_photo_path);
         $stmt->bindParam(':user_id', $user_id);
         
