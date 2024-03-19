@@ -92,7 +92,6 @@ body {
 }
 
 .liste th {
-  border-radius: 20px 20px 0 0; /* Apply border radius to the top corners only */
   background-color: #3A559F;
   color:white;
   top:0px;
@@ -102,8 +101,8 @@ body {
 }
 
 .comment-content{
-  border-radius: 20px 20px 0 0; /* Apply border radius to the top corners only */
-
+  border:none;
+  
 }
 
 a {
@@ -160,29 +159,31 @@ a {
             </thead>
             <tbody>
               {% for intervention in interventions %}
-                <tr>
-                  <td>{{ intervention.id }}</td>
-                  <td>{{ intervention.start_date }}</td>
-                  <td>{{ intervention.client_id }}</td>
-                  <td>{{ intervention.standardiste_id }}</td>
-                  <td>{{ intervention.infos }}</td>
-                  <td>
-                    <div class='comment-content' style="width: 300px; height: 100px; overflow-y: scroll; border: 1px solid #ccc; padding: 10px; margin-bottom: 20px;">
-                      {% for commentaire in commentaires %}
-                        {% if commentaire.intervention_id == intervention.id %}
-                          <div class="comment">
-                            <span class="comment-author">{{ commentaire.user_name }} {{ commentaire.user_surname }}</span>
-                            <span class="comment-date">{{ commentaire.date_commentaire}}</span>
-                            <p class="comment-content">{{ commentaire.commentaire}}</p>
-                          </div>
-                        {% endif %}
-                      {% endfor %}
-                    </div>
-                  </td>
-                  <td>{{ intervention.status_suivi }}</td>
-                  <td>{{ intervention.degre_urgence }}</td>
-                  <td><a href="edit_intervention.php?id={{ intervention.id }}">View more</a></td>
-                </tr>
+                {% if intervention.status_suivi != 'Clôturée' %}
+                  <tr>
+                    <td>{{ intervention.id }}</td>
+                    <td>{{ intervention.start_date }}</td>
+                    <td>{{ intervention.client_id }}</td>
+                    <td>{{ intervention.standardiste_id }}</td>
+                    <td>{{ intervention.infos }}</td>
+                    <td>
+                      <div class='comment-content' style="width: 300px; height: 100px; overflow-y: scroll; padding: 10px; margin-bottom: 20px;">
+                        {% for commentaire in commentaires %}
+                          {% if commentaire.intervention_id == intervention.id %}
+                            <div class="comment">
+                              <span class="comment-author">{{ commentaire.user_name }} {{ commentaire.user_surname }}</span>
+                              <span class="comment-date">{{ commentaire.date_commentaire}}</span>
+                              <p class="comment-content">{{ commentaire.commentaire}}</p>
+                            </div>
+                          {% endif %}
+                        {% endfor %}
+                      </div>
+                    </td>
+                    <td>{{ intervention.status_suivi }}</td>
+                    <td>{{ intervention.degre_urgence }}</td>
+                    <td><a href="edit_intervention.php?id={{ intervention.id }}">View more</a></td>
+                  </tr>
+                {% endif %}
               {% endfor %}
             </tbody>
         </table>

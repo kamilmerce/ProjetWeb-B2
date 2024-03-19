@@ -180,29 +180,6 @@ a {
        
         <h2>Informations</h2>
         <textarea class="info-content" id="infos" name="infos" cols="70" rows="5" ></textarea><br><br>
-        
-        
-        <fieldset class="info-content">
-            <legend>Intervenants :</legend>
-            {% for intervenant in intervenants %}
-                <input type="checkbox" id="intervenant_{{ intervenant.user_id }}" name="intervenants[]" value="{{ intervenant.user_id }}">
-                <label for="intervenant_{{ intervenant.user_id }}">{{ intervenant.name }} {{ intervenant.surname }}</label><br>
-            {% endfor %}
-        </fieldset><br>
-
-        <label for="standardiste">Standardiste :</label>
-        <select name="standardiste" id="standardiste" required>
-            {% for standardiste in standardistes %}
-                <option value="{{ standardiste.user_id }}">{{ standardiste.name }} {{ standardiste.surname }}</option>
-            {% endfor %}
-        </select><br><br>
-
-        <label for="client">Client :</label>
-        <select name="client_id" id="client_id" required>
-            {% for client in clients %}
-                <option value="{{ client.user_id }}">{{ client.name }} {{ client.surname }}</option>
-            {% endfor %}
-        </select><br><br>
 
         <label>Date de début :</label>
         <input type="date" id="start_date" name="start_date" required><br><br>
@@ -219,7 +196,7 @@ a {
             <label for="eleve">Élevé</label><br>
         </fieldset><br>
 
-        <button type="submit">Enregistrer</button>
+        <button type="submit">Demander</button>
     </form>
 </div>
 </body>

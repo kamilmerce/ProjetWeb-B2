@@ -37,6 +37,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 }
 // Rendre la page verify.html.twig avec les détails du nouveau client
-echo $page->render('verify.html.twig', [
+echo $page->render('verify.html.twig', ['user'=>$user,
     'newCustomer' => $newCustomer[0]
 ]);

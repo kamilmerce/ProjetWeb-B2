@@ -1,126 +1,222 @@
 {% extends "base_auth.html.twig" %}
 
 {% block body %}
+<style>
+body{
+font-family: 'Arial', sans-serif;
+  background-image: url('/img/login.png'); 
+  background-size: cover;
+  background-repeat: no-repeat; 
+  background-attachment: fixed; 
+  background-position: center center; 
+  display: flex;
+  justify-content:left;
+  margin-left:100px;
+  align-items: center;
+  color: white; 
+  height: 100vh;
+}
+
+.liste-container{
+  height: 70vh;
+  margin-bottom:100px;
+}
+
+.info-content{
+  background: rgba(255, 255, 255, 0.25);
+  border-radius: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  width: 700px;
+  height: 210px;
+  padding: 10px;
+  margin-left:10px;
+}
+
+.comment, .liste{
+  background: rgba(255, 255, 255, 0.25);
+  border-radius: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  width: 700px;
+  height: 300px;
+  padding: 10px;
+  margin-bottom:100px;
+  border:none;
+  overflow-y: scroll;  
+  scroll-snap-type: x mandatory;
+  scrollbar-width: thin;
+  scrollbar-color: white transparent;
+  -ms-overflow-style: -ms-autohiding-scrollbar; /* Hide the scrollbar in IE and Edge */  
+}
+
+.liste th {
+  background-color: #3A559F;
+  color:white;
+  top:0px;
+  position: sticky; 
+  z-index: 1000; 
+  vertical-align: top; 
+}
+
+.liste table  {
+  border-collapse: separate; 
+  border-spacing: 0; 
+  border-radius: 20px;
+  withd:100%;
+}
+
+.liste td{
+    text-align:center;
+}
+
+
+.liste th, td {
+  padding: 10px;
+}
+
+.liste td {
+  border-bottom: 2px solid white; 
+}
+
+
+
+
+</style>
 <body>
     {% if type == 'client' %}
-        <h1>Informations sur le client</h1>
-        <p>ID: {{ userInfo.user_id }} </p>
-        <p>Nom: {{ userInfo.name }}</p>
-        <p>Prénom: {{ userInfo.surname }}</p>
-        <p>Email: {{ userInfo.email }}</p>
-        <h2>Interventions</h2>
-        <div style="width: 600px; height: 300px; overflow-y: scroll; border: 1px solid #ccc; padding: 10px; margin-bottom: 20px;">
-            <table>
-                <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>Date</th>
-                        <th>Standardiste</th> 
-                        <th>Infos</th>
-                        <th>Status</th>
-                        <th>Degree d'urgence</th>
-                    </tr>
-                </thead>
-                <tbody>
-                {% for intervention in interventionclient %}
-                    <tr>
-                        <td>{{ intervention.id }}</td>
-                        <td>{{ intervention.start_date}}
-                        <td>{{ intervention.standardiste_id }}</td>
-                        <td>{{ intervention.infos }}</td>
-                        <td>{{ intervention.status_suivi }}</td>
-                        <td>{{ intervention.degre_urgence }}</td>
-                    </tr>
-                {% endfor %}
-                </tbody>
-            </table>
+        <div class="liste-container">
+            <h1>Informations sur le client</h1>
+            <div class='info-content'>
+                <p>ID: {{ userInfo.user_id }} </p>
+                <p>Nom: {{ userInfo.name }}</p>
+                <p>Prénom: {{ userInfo.surname }}</p>
+                <p>Email: {{ userInfo.email }}</p>
+            </div>
+            <h2>Interventions</h2>
+            <div class='liste' >
+                <table>
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Date</th>
+                            <th>Standardiste</th> 
+                            <th>Infos</th>
+                            <th>Status</th>
+                            <th>Degree d'urgence</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    {% for intervention in interventionclient %}
+                        <tr>
+                            <td>{{ intervention.id }}</td>
+                            <td>{{ intervention.start_date}}
+                            <td>{{ intervention.standardiste_id }}</td>
+                            <td>{{ intervention.infos }}</td>
+                            <td>{{ intervention.status_suivi }}</td>
+                            <td>{{ intervention.degre_urgence }}</td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
         </div>
     {% elseif type == 'standardiste' %}
-        <h1>Informations sur le standardiste</h1>
-        <p>ID: {{ userInfo.user_id }} </p
-        <p>Nom: {{ userInfo.name }}</p>
-        <p>Prénom: {{ userInfo.surname }}</p>
-        <p>Email: {{ userInfo.email }}</p>
-        <h2>Interventions</h2>
-        <div style="width: 600px; height: 300px; overflow-y: scroll; border: 1px solid #ccc; padding: 10px; margin-bottom: 20px;">
-            <table>
-                <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>Date</th>
-                        <th>Client</th> 
-                        <th>Infos</th>
-                        <th>Status</th>
-                        <th>Degree d'urgence</th>
-                    </tr>
-                </thead>
-                <tbody>
-                {% for intervention in interventionbystandardiste %}
-                    <tr>
-                        <td>{{ intervention.id }}</td>
-                        <td>{{ intervention.start_date}}
-                        <td>{{ intervention.client_id }}</td>
-                        <td>{{ intervention.infos }}</td>
-                        <td>{{ intervention.status_suivi }}</td>
-                        <td>{{ intervention.degre_urgence }}</td>
-                    </tr>
-                {% endfor %}
-                </tbody>
-            </table>
+        <div class='liste-container'>
+            <h1>Informations sur le standardiste</h1>
+            <div class='info-content'>
+                <p>ID: {{ userInfo.user_id }} </p
+                <p>Nom: {{ userInfo.name }}</p>
+                <p>Prénom: {{ userInfo.surname }}</p>
+                <p>Email: {{ userInfo.email }}</p>
+            </div>
+            <h2>Interventions</h2>
+            <div class="liste" style="width: 600px; height: 300px; overflow-y: scroll; border: 1px solid #ccc; padding: 10px; margin-bottom: 20px;">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Date</th>
+                            <th>Client</th> 
+                            <th>Infos</th>
+                            <th>Status</th>
+                            <th>Degree d'urgence</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    {% for intervention in interventionbystandardiste %}
+                        <tr>
+                            <td>{{ intervention.id }}</td>
+                            <td>{{ intervention.start_date}}
+                            <td>{{ intervention.client_id }}</td>
+                            <td>{{ intervention.infos }}</td>
+                            <td>{{ intervention.status_suivi }}</td>
+                            <td>{{ intervention.degre_urgence }}</td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
         </div>
     {% elseif type == 'intervenant' %}
-        <h1>Informations sur l'intervenant</h1>
-        <p>ID: {{ userInfo.user_id }} </p
-        <p>Nom: {{ userInfo.name }}</p>
-        <p>Prénom: {{ userInfo.surname }}</p>
-        <p>Email: {{ userInfo.email }}</p>
-        <h2>Interventions</h2>
-        <div style="width: 600px; height: 300px; overflow-y: scroll; border: 1px solid #ccc; padding: 10px; margin-bottom: 20px;">
-            <table>
-                <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>Date</th>
-                        <th>Standardiste</th> 
-                        <th>Infos</th>
-                        <th>Status</th>
-                        <th>Degree d'urgence</th>
-                    </tr>
-                </thead>
-                <tbody>
-                {% for intervention in interventionbyintervenant %}
-                    <tr>
-                        <td>{{ intervention.id }}</td>
-                        <td>{{ intervention.start_date}}
-                        <td>{{ intervention.standardiste_id }}</td>
-                        <td>{{ intervention.infos }}</td>
-                        <td>{{ intervention.status_suivi }}</td>
-                        <td>{{ intervention.degre_urgence }}</td>
-                    </tr>
-                {% endfor %}
-                </tbody>
-            </table>
+        <div class="liste-container">
+            <h1>Informations sur l'intervenant</h1>
+            <div class='info-content'>
+                <p>ID: {{ userInfo.user_id }} </p
+                <p>Nom: {{ userInfo.name }}</p>
+                <p>Prénom: {{ userInfo.surname }}</p>
+                <p>Email: {{ userInfo.email }}</p>
+            </div>
+            <h2>Interventions</h2>
+            <div class='liste' style="width: 600px; height: 300px; overflow-y: scroll; border: 1px solid #ccc; padding: 10px; margin-bottom: 20px;">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Date</th>
+                            <th>Standardiste</th> 
+                            <th>Infos</th>
+                            <th>Status</th>
+                            <th>Degree d'urgence</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    {% for intervention in interventionbyintervenant %}
+                        <tr>
+                            <td>{{ intervention.id }}</td>
+                            <td>{{ intervention.start_date}}
+                            <td>{{ intervention.standardiste_id }}</td>
+                            <td>{{ intervention.infos }}</td>
+                            <td>{{ intervention.status_suivi }}</td>
+                            <td>{{ intervention.degre_urgence }}</td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
         </div>
     {% elseif type == 'intervention' %}
-        <h1>Informations sur l'intervention</h1>
-        <p>ID: {{ interventionInfo.id }} </p>
-        <p>Client: {{interventionInfo.client_id}}<p/>
-        <p>Standardiste: {{interventionInfo.standardiste_id}}</p>
-        <p>Date de debut:  {{ interventionInfo.start_date}}</p>
-        <p>Status: {{ interventionInfo.status_suivi }}</p>
-        <p>Degré d'urgence: {{ interventionInfo.degre_urgence }}</p>
-        <div class="comment-section">
-        <h2>Commentaires</h2>
-        <div class="comment-container" >
-            <div class="comment" style="width: 600px; height: 300px; overflow-y: scroll; border: 1px solid #ccc; padding: 10px; margin-bottom: 20px;">
+        <div class="liste-container">
+            <h1>Informations sur l'intervention</h1>
+            <div class='info-content'>
+                <p>ID: {{ interventionInfo.id }} </p>
+                <p>Client: {{interventionInfo.client_id}}<p/>
+                <p>Standardiste: {{interventionInfo.standardiste_id}}</p>
+                <p>Date de debut:  {{ interventionInfo.start_date}}</p>
+                <p>Status: {{ interventionInfo.status_suivi }}</p>
+                <p>Degré d'urgence: {{ interventionInfo.degre_urgence }}</p>
+                <div class="comment-section">
+            </div>
+            <h1>Commentaires</h1>
+            <div class="comment-container" >
+                <div class="comment" >
                     {% for commentaire in commentaires %}
                         <span class="comment-author">{{ commentaire.user_name }} {{ commentaire.user_surname }}</span>
                         <span class="comment-date">{{ commentaire.date_commentaire}}</span>
                         <p class="comment-content">{{ commentaire.commentaire}}</p>
                     {% endfor %}
+                </div>
             </div>
+            
         </div>
-    </div>
     {% else %}
         <p>Type non reconnu.</p>
     {% endif %}

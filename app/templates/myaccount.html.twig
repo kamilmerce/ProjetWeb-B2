@@ -1,0 +1,143 @@
+{% extends "base_auth.html.twig" %}
+
+
+{% block body %}
+<style>
+body {
+  font-family: 'Arial', sans-serif;
+  background-image: url('/img/login.png'); 
+  background-size: cover;
+  background-repeat: no-repeat; 
+  background-attachment: fixed; 
+  background-position: center center; 
+  justify-content:center;
+  align-items: center;
+  color: white; 
+  height: 100vh;
+}
+
+h1{
+    margin-top:70px;
+    margin-left:50px;
+    font-size:50px;
+}
+
+.liste-container {
+  margin-bottom:100px;
+  height:50vh;
+}
+
+.contain{
+    background: rgba(255, 255, 255, 0.25);
+  border-radius: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  width: 1300px;
+  height: 600px;
+  padding: 10px;
+  margin:20px;
+}
+
+form{
+  margin-bottom: 10px; 
+  align-items: center;
+  text-align: left;
+}
+
+input{
+  background: rgba(255, 255, 255, 0.25);
+  padding: 10px;
+  margin-bottom: 15px; 
+  border: 2px solid white;
+  border-radius: 25px;
+  text-align:left;
+  width:200px;
+}
+
+button{
+    width: 150px;
+  padding: 10px;
+  border: none;
+  border-radius: 40px;
+  background-color: #3A559F; 
+  text-align: center;
+  color: white;
+  cursor: pointer;
+  margin-top: 20px;
+}
+
+.contain {
+    display: flex; /* Utilisation de flexbox */
+    justify-content: space-between; /* Espacement automatique entre les éléments */
+}
+
+.infos{
+    border-radius: 20px;
+    border:2px solid white;
+
+}
+
+.photo-container,
+.infos {
+    flex: 1; /* Partage de l'espace disponible */
+}
+
+.photo-container {
+    margin-left: 70px; /* Marge entre les divs */
+
+}
+
+label, p{
+    margin-left:20px;
+    margin-top:20px;
+}
+
+
+</style>
+<body>
+<h1>Parametre du compte</h1>
+<div class='liste-container'>
+    <div class='contain'>
+        <div class='photo-container'>
+            <img src="{{ user.photo }}" alt="Photo de profil">
+            <form method="post" action="update_photo.php" onsubmit="return confirm('Veuillez vous reconnecter pour confirmer les modifications.');" enctype="multipart/form-data">
+                <input type="file" id="profile_photo" name="profile_photo" accept="image/*">
+                <button type="submit">Changer</button>
+            </form>
+        </div>
+        <div class='infos'>
+            <p>ID: <span>{{user.user_id}}</span></p>
+
+            <form method="post" action="update.php" onsubmit="return confirm('Veuillez vous reconnecter pour confirmer les modifications.');">
+                <label for="user_firstname">Prénom:</label>
+                <input type="text" id="user_firstname" name="user_firstname" value={{user.name}}>
+                <button type="submit">Changer le prénom</button>
+            </form>
+            <form method="post" action="update.php" onsubmit="return confirm('Veuillez vous reconnecter pour confirmer les modifications.');">
+                <label for="user_lastname">Nom:</label>
+                <input type="text" id="user_lastname" name="user_lastname" value={{user.surname}}>
+                <button type="submit">Changer le nom</button>
+            </form>
+            <form method="post" action="update.php" onsubmit="return confirm('Veuillez vous reconnecter pour confirmer les modifications.');">
+                <label for="user_email">Email:</label>
+                <input type="email" id="user_email" name="user_email" value={{user.email}}>
+                <button type="submit">Changer l'email</button>
+            </form>
+            <form id="changePassword" method="post" action="update.php" onsubmit="return confirm('Veuillez vous reconnecter pour confirmer les modifications.');" >
+                <label for="old_password">Ancien mot de passe:</label>
+                <input type="password" id="old_password" name="old_password" value='************' required>
+            </form>
+            <form id="changePassword" method="post" action="update.php" onsubmit="return confirm('Veuillez vous reconnecter pour confirmer les modifications.');">
+                <label for="new_password">Nouveau mot de passe:</label>
+                <input type="password" id="new_password" name="new_password" required>
+                <button type="submit">Changer le mot de passe</button>
+            </form>
+        </div>
+    </div>
+</div>
+{% if error_message %}
+    <script>
+        alert("{{ error_message }}");
+    </script>
+{% endif %}
+</body>
+{% endblock %}

@@ -25,6 +25,8 @@ body {
 .en-tete {
   margin-top:150px;
   text-align:center;
+  margin-top:300px;
+  height: 20vh;
   
 }
 
@@ -33,10 +35,7 @@ body {
   color:white;
   font-size:70px;
 }
-
-.en-tete select, input[type=text], button {
-  width: 35%;
-  height: 35%;
+.selection{
   padding: 10px;
   border: none;
   border-radius: 40px;
@@ -44,10 +43,21 @@ body {
   text-align: center;
   color: white;
   cursor: pointer;
-  margin-top:0;
-  margin-bottom:0;
 
 }
+
+.chercher{
+  padding: 10px;
+  border: none;
+  border-radius: 40px;
+  background-color: #3A559F; 
+  text-align: center;
+  color: white;
+  cursor: pointer;
+}
+
+
+
 
 .liste{
   background: rgba(255, 255, 255, 0.25);
@@ -71,7 +81,7 @@ body {
 }
 
 
-.liste th, td {
+.liste td {
   padding: 10px;
 }
 
@@ -79,15 +89,8 @@ body {
   border-bottom: 2px solid white; 
 }
 
-.table thead {
-  width:100;
-  background: rgba(255, 255, 255, 0.25);
-  border-radius: 20px 20px 0 0; /* Apply border radius to the top corners only */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
 
 .liste th {
-  border-radius: 20px 20px 0 0; /* Apply border radius to the top corners only */
   background-color: #3A559F;
   color:white;
   top:0px;
@@ -98,7 +101,6 @@ body {
 
 .comment-content{
   border-radius: 20px 20px 0 0; /* Apply border radius to the top corners only */
-
 }
 
 a {
@@ -127,7 +129,7 @@ a {
   <div class="en-tete">
     <h1>Liste des interventions</h1>
     <form  classe ='form' action="search.php" method="GET">
-      <select name="tri">
+      <select class='selection' name="tri">
         <option value="id_intervention_asc">ID croissant</option>
         <option value="id_intervention_desc">ID décroissant</option>
         <option value="intervention_cloturee">Clôturée</option>
@@ -135,7 +137,7 @@ a {
         <option value="intervention_encours">En cours</option>
         <option value="intervention_enattente">En attente</option>
       </select>
-      <button type="submit">Trier</button>
+      <button class='chercher' type="submit">Trier</button>
     </form>
   </div>
   <div class = "liste" style="width: 1300px; height: 570px; overflow-y: scroll; border: 1px solid #ccc; padding: 10px;">

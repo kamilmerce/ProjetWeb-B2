@@ -16,6 +16,7 @@ if (isset($_GET['type']) && isset($_GET['id'])) {
         $interventionbyclient = $page->getInterventionsByClient($id);
         $interventionbyintervenant = $page->getInterventionsByIntervenantId($id);
         echo $page->render('viewmore.html.twig', [
+            'user'=>$user,
             'interventionbyintervenant'=>$interventionbyintervenant,
             'interventionclient' => $interventionbyclient,
             'type' => $type,
@@ -25,6 +26,7 @@ if (isset($_GET['type']) && isset($_GET['id'])) {
         $interventionInfo = ($type=='intervention')?$page->getInterventionsByID($id)  : false ;
         $commentaires = $page->getCommentByIntervention($id);
         echo $page->render('viewmore.html.twig', [
+            'user'=>$user,
             'type'=>$type,
             'id'=>$id,
             'interventionInfo'=>$interventionInfo,
@@ -35,6 +37,7 @@ if (isset($_GET['type']) && isset($_GET['id'])) {
         $interventionbystandardiste = $page->getInterventionByStandardiste($id);
 
         echo $page->render('viewmore.html.twig', [
+            'user'=>$user,
             'interventionbystandardiste'=>$interventionbystandardiste,
             'type'=>$type,
             'userInfo'=>$userInfo[0]

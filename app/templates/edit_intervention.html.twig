@@ -79,6 +79,7 @@ button {
   scrollbar-color: white transparent;
   -ms-overflow-style: -ms-autohiding-scrollbar; /* Hide the scrollbar in IE and Edge */
 }
+
 .intervenant{
   background: rgba(255, 255, 255, 0.25);
   border-radius: 20px;
@@ -147,6 +148,7 @@ a {
                 <li>Date de début: {{ intervention.start_date }}</li>
                 <li>Status: {{ intervention.status_suivi }}</li>
                 <li>Degré d'urgence: {{ intervention.degre_urgence }}</li>
+                <li>Infos: {{ intervention.infos }}</li>
             </ul>
         </div>
     
@@ -179,7 +181,7 @@ a {
 
             <textarea class="ajout_com" id="commentaire" name="commentaire" ></textarea><br><br>
 
-            {% if user.role == 'standardiste' or user.role == 'intervenant' %}
+            {% if (user.role == 'standardiste' or user.role == 'intervenant') and (intervention.status_suivi != 'Clôturée' and intervention.status_suivi != 'Annulée' )%}
             <h3>Statut :</h3>
                 <input class='input_edit' type="radio" name="status" value="En attente" {% if intervention.status_suivi == 'En attente' %}checked{% endif %}> En attente<br>
                 <input class='input_edit' type="radio" name="status" value="En cours" {% if intervention.status_suivi == 'En cours' %}checked{% endif %}> En cours<br>
@@ -188,13 +190,13 @@ a {
                     <input class='input_edit' type="radio" name="status" value="Annulée" {% if intervention.status_suivi == 'Annulée' %}checked{% endif %}> Annulée<br><br>
                 {% endif %}
             {% endif %}
-            {% if user.role == 'standardiste' %}
+            {% if user.role == 'standardiste' and (intervention.status_suivi != 'Clôturée' and intervention.status_suivi != 'Annulée' ) %}
                 <h3>Degré d'urgence :</h3>
                 <input class='input_edit' type="radio" name="urgence" value="Faible" {% if intervention.degre_urgence == 'Faible' %}checked{% endif %}> Faible<br>
                 <input  class='input_edit'type="radio" name="urgence" value="Moyen" {% if intervention.degre_urgence == 'Moyen' %}checked{% endif %}> Moyen<br>
                 <input  class='input_edit'type="radio" name="urgence" value="Élevé" {% if intervention.degre_urgence == 'Élevé' %}checked{% endif %}> Élevé<br><br>
             {% endif %}
-            <button type="submit">Enregistrer</button>
+            <button class='submit-button' type="submit">Enregistrer</button>
         </form>
     </div>
 </body>

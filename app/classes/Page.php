@@ -58,6 +58,68 @@ class Page
         return $randomPassword;
     }
 
+    public function updatePassword($id,$password){
+        $sql ="UPDATE users SET password = :password WHERE user_id=:id";
+        $sth = $this->link->prepare($sql);
+        $sth->bindParam(':password', $password, PDO::PARAM_STR);
+        $sth->bindParam(':id', $id, PDO::PARAM_INT);
+        $sth->execute();
+    }
+
+    public function insertNewDemande(array $data){
+        $sql = 'INSERT INTO demande (client_id, standardiste_id,stard_date,infos,degre_urgence) VALUES (:client_id, :standardiste_id,:stard_date,:infos,:degre_urgence)' ;
+        $sth = $this->link->prepare($sql, [\PDO::ATTR_CURSOR => \PDO::CURSOR_FWDONLY]);
+        $sth->execute($data);
+    }
+
+    public function updateUserProfilePhoto($user_id, $new_photo_path) {
+        // Préparez votre requête SQL pour mettre à jour le chemin d'accès de la photo dans la base de données
+        $sql = "UPDATE users SET photo = :photo_path WHERE user_id = :user_id";
+        
+        // Exécutez la requête avec les valeurs fournies
+        $stmt = $this->db->prepare($sql);
+        $stmt->bindParam(':photo_path', $new_photo_path);
+        $stmt->bindParam(':user_id', $user_id);
+        
+        // Exécutez la requête préparée
+        $stmt->execute();
+        
+        // Vérifiez si la mise à jour a réussi
+        if ($stmt->rowCount() > 0) {
+            // La mise à jour a réussi
+            return true;
+        } else {
+            // La mise à jour a échoué
+            return false;
+        }
+    }
+
+    public function updateUserSurname($id,$surname){
+        $sql ="UPDATE users SET surname= :surname WHERE user_id= :id";
+        $sth = $this->link->prepare($sql);
+        $sth->bindParam(':surname', $surname, PDO::PARAM_STR);
+        $sth->bindParam(':id', $id, PDO::PARAM_INT);
+        $sth->execute();
+    }
+
+    public function updateUserName($id, $name) {
+        $sql = "UPDATE users SET name = :name WHERE user_id = :id";
+        $sth = $this->link->prepare($sql);
+        $sth->bindParam(':name', $name, PDO::PARAM_STR);
+        $sth->bindParam(':id', $id, PDO::PARAM_INT);
+        $sth->execute();
+    }
+
+    public function updateUserEmail($id,$email){
+        $sql ="UPDATE users SET email = :email WHERE user_id=:id";
+        $sth = $this->link->prepare($sql);
+        $sth->bindParam(':email', $email, PDO::PARAM_STR);
+        $sth->bindParam(':id', $id, PDO::PARAM_INT);
+        $sth->execute();
+    }
+
+
+
     public function updateUserPassword(string $email, string $newPassword){
         $sql ="UPDATE users SET password = :newPassword WHERE email=:email";
         $sth = $this->link->prepare($sql);
@@ -301,6 +363,19 @@ class Page
         $sth->execute();
         return true;
     }
+
+    public function updatePhoto($userId, $photoPath) {
+        try {
+            $sql = "UPDATE users SET photo = :photoPath WHERE user_id = :userId";
+            $stmt = $this->link->prepare($sql);
+            $stmt->bindParam(':photoPath', $photoPath, PDO::PARAM_STR);
+            $stmt->bindParam(':userId', $userId, PDO::PARAM_INT);
+            $stmt->execute();
+        } catch (PDOException $e) {
+            echo "Erreur lors de la mise à jour de la photo de profil : " . $e->getMessage();
+        }
+    }
+
     public function getInterventionsByClient($id){
         $sql ="SELECT * FROM interventions WHERE client_id=$id";
         $sth = $this->link->prepare($sql);
