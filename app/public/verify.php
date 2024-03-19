@@ -6,6 +6,8 @@ use App\Page;
 $page = new Page();
 $user = $page->session->get('user'); 
 $page->session->add('user', $user);
+$error_message = '';
+
 
 if (!isset($_GET['id'])) {
     echo "Erreur: ID de client manquant.";
@@ -28,7 +30,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         // Mettez à jour la colonne vérifiée dans la base de données
         if ($success) {
             $page->setUserVerified($id);
-            header('Location: profile.php');
+            $error_message = "Client validé avec succès !";
+            echo '<script>alert("Client validé avec succès !"); window.location.href = "profile.php";</script>';
             exit;
         } else {
             // Affichez un message d'erreur si la mise à jour a échoué
@@ -38,5 +41,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 }
 // Rendre la page verify.html.twig avec les détails du nouveau client
 echo $page->render('verify.html.twig', ['user'=>$user,
-    'newCustomer' => $newCustomer[0]
+    'newCustomer' => $newCustomer[0],
+    'error_message'=>$error_message
 ]);

@@ -6,6 +6,8 @@ use App\Page;
 $page = new Page();
 $user = $page->session->get('user'); 
 $page->session->add('user', $user);
+$error_message = '';
+
 
 // Récupérer la liste des standardistes et des intervenants
 $standardistes = $page->getAllStandardiste();
@@ -18,13 +20,17 @@ $demande_id = $_POST['demande_id'] ?? null;
 if ($demande_id) {
     // Récupérer les informations de la demande
     $demande = $page->getDemandeById($demande_id);
+    $error_message = "Intervention crée !";
+    
     // Afficher le formulaire de création d'intervention avec les informations de la demande
     echo $page->render('createByDemande.html.twig', [
         'user' => $user,
         'standardistes' => $standardistes,
         'intervenants' => $intervenants,
         'clients' => $clients,
-        'demande' => $demande
+        'demande' => $demande,
+        'error_message'=>$error_message
+
     ]);
 } 
 

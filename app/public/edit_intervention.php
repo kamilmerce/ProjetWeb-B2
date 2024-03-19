@@ -6,6 +6,8 @@ use App\Page;
 $page = new Page();
 $user = $page->session->get('user'); 
 $page->session->add('user', $user);
+$error_message = '';
+
 
 $interventionId = $_GET['id'];
 
@@ -42,7 +44,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         ]; 
     }
     $page->addCommentaire($data);
-    header('Location: profile.php');
+    $error_message = "Demande envoyée !";
+    echo '<script>alert("Intervention modifiée avec succés !"); window.location.href = "profile.php";</script>';
     exit();
 }
 
@@ -51,5 +54,6 @@ echo $page->render('edit_intervention.html.twig', [
     'user' => $user,
     'intervention' => $intervention,
     'intervenants' => $intervenants,
-    'commentaires'=>$commentaires
+    'commentaires'=>$commentaires,
+    'error_message'=>$error_message
 ]);

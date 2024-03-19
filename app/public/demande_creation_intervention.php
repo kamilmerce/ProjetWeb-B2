@@ -6,6 +6,8 @@ use App\Page;
 $page = new Page();
 $user = $page->session->get('user');
 $page->session->add('user', $user);
+$error_message = '';
+
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Vérifier si les champs du formulaire sont définis
@@ -26,13 +28,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         ];
         $page->insertNewDemande($data);
 
-
-        // Rediriger vers la page d'accueil ou une autre page après la création de l'intervention
-        header('Location: profile.php');
+        $error_message = "Demande envoyée !";
+        echo '<script>alert("Demande envoyée !"); window.location.href = "profile.php";</script>';
         exit();
     } 
 
 
 }
 
-echo $page->render('demande_intervention.html.twig', ['user' => $user]);
+echo $page->render('demande_intervention.html.twig', ['user' => $user, 'error_message'=>$error_message
+]);

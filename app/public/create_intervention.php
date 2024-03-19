@@ -6,6 +6,8 @@ use App\Page;
 $page = new Page();
 $user = $page->session->get('user'); 
 $page->session->add('user', $user);
+$error_message = '';
+
 
 // Récupérer la liste des standardistes et des intervenants
 $standardistes = $page->getAllStandardiste();
@@ -44,13 +46,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
 
         if (isset($_POST['demande_id'])) {
-            $demande_id = $_POST['demande_id']
+            $demande_id = $_POST['demande_id'];
             $page->updateDemandeVerified($demande_id, false);
         }
 
-        // Rediriger vers la page d'accueil ou une autre page après la création de l'intervention
-        header('Location: profile.php');
+       
+        $error_message = "Intervention crée !";
+    
+        echo '<script>alert("Intervention crée !"); window.location.href = "profile.php";</script>';
         exit();
+        
     }
 
     
@@ -63,6 +68,8 @@ echo $page->render('create_intervention.html.twig', [
     'user' => $user,
     'standardistes' => $standardistes,
     'intervenants' => $intervenants,
-    'clients' => $clients
+    'clients' => $clients,
+    'error_message'=>$error_message
+
 ]);
 ?>

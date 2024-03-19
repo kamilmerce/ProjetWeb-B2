@@ -173,6 +173,7 @@ a {
 }
 </style>
 <body>
+{% if user.role == 'client' and user.verified == TRUE %}
 <div class='liste-container'>
     <h1>Demande d'intervention</h1>
 
@@ -199,5 +200,13 @@ a {
         <button type="submit">Demander</button>
     </form>
 </div>
+{% else %}
+<h1>En attente de verification ...</h1>
+{% endif %}
 </body>
+{% if error_message %}
+    <script>
+        alert("{{ error_message }}");
+    </script>
+{% endif %}
 {% endblock %}

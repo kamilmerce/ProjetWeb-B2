@@ -124,7 +124,7 @@ a {
 }
 </style>
 <body>
-    {% if user.role == 'client' %}
+    {% if user.role == 'client' and user.verified == TRUE %}
         <div class='liste-container'>
         <div class='en-tete'>
             <h1>Liste des interventions clôturée</h1>
@@ -159,6 +159,9 @@ a {
             </div>
         </div>
         <a href="profile.php">Voir toutes les intervention en cours</a>
+    {% else %}
+      <h1>En attente de verification ...</h1>
     {% endif %}
+
 </body>
 {% endblock %}

@@ -143,5 +143,10 @@ form h3 {
 
   </form>
 </body>
+{% if error_message %}
+    <script>
+        alert("{{ error_message }}");
+    </script>
+{% endif %}
 
 {% endblock %}

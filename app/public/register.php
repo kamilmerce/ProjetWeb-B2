@@ -5,6 +5,8 @@
     use App\Page;
     
     $page = new Page();
+    $error_message = '';
+
 
     if (isset($_POST['send'])) {
         if (isset($_POST['surname']) && isset($_POST['name']) && isset($_POST['email']) && isset($_POST['password'])) {
@@ -14,12 +16,15 @@
                 'email' => $_POST['email'],
                 'password' => password_hash($_POST['password'], PASSWORD_DEFAULT)
             ]);
-            header('Location: index.php');
-            exit(); 
+
+
+            $error_message = "Inscription réussie !";
+
+            echo '<script>alert("Inscription réussie !"); window.location.href = "index.php";</script>';
+            exit();
         }
 
 
     }
     
-    echo $page->render('register.html.twig', []);
-    ?>
+    echo $page->render('register.html.twig', ['error_message'=>$error_message ]);
