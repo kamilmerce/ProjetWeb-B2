@@ -4,6 +4,25 @@
   height: 100vh;
 }
 
+.liste{
+  background: rgba(255, 255, 255, 0.25);
+  margin-top: 100px;
+  border-radius: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  width: 1200px;
+  height: 500px;
+  text-align: center;
+  align-items: center;
+  margin-right:30px;
+  margin-top:70px;
+  overflow-y:scroll;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: thin;
+  scrollbar-color: white transparent;
+  -ms-overflow-style: -ms-autohiding-scrollbar; /* Hide the scrollbar in IE and Edge */
+  height: 80vh;
+}
+
 .en-tete {
   text-align:center;
 }
@@ -13,6 +32,7 @@
   color:white;
   font-size:70px;
 }
+
 .selection{
   padding: 10px;
   border: none;
@@ -39,7 +59,7 @@
   border-collapse: separate; 
   border-spacing: 0; 
   border-radius: 20px;
-  width:100%;
+  width:1200px;
 }
 
 
@@ -54,12 +74,10 @@
 .table thead {
   width:100;
   background: rgba(255, 255, 255, 0.25);
-  border-radius: 20px 20px 0 0; /* Apply border radius to the top corners only */
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .liste th {
-  border-radius: 20px 20px 0 0;
   background-color: #3A559F;
   color:white;
   top:0px;

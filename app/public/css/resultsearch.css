@@ -1,7 +1,13 @@
 h1{
-    margin-top:50px;
+    margin-top:100px;
     margin-left:50px;
     font-size:50px;
+}
+
+.liste-container {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
 }
 
 .liste{
@@ -11,11 +17,14 @@ h1{
   width: 1300px;
   height: 600px;
   padding: 10px;
+  
   scroll-snap-type: x mandatory;
   scrollbar-width: thin;
   scrollbar-color: white transparent;
   -ms-overflow-style: -ms-autohiding-scrollbar; 
 }
+
+
 
 p{
     font-size:20px;

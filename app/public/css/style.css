@@ -51,7 +51,15 @@ nav {
         justify-content: center;
         display: flex;
         text-decoration: none;
-        color: white;
+        color: #303030;
+        font-size:20px;
+    }
+
+    .tabone{
+        padding: 10px 20px;
+        border-radius: 40px;
+        background-color:#3A559F 
+    
     }
 
     ul li{
@@ -61,11 +69,13 @@ nav {
      .bar-search, .bouton_search{
         padding: 10px 20px;
         border-radius: 40px;
+        background-color:#3A559F ;
+        border:none;
     }
 
     ul li a{
         text-decoration: none;
-        color: white;
+        color: #303030;
     }
 
     .search-form{

@@ -12,7 +12,7 @@
     <div class = "liste">
         <h1>Liste des interventions</h1>
         <form action="search.php" method="GET">
-            <select class"select-form" name="tri">
+            <select class"select-form" style="width: 35%; height: 35%; padding: 10px; border: none; border-radius: 40px; background-color: #3A559F; text-align: center; color: white; cursor: pointer; margin-top: 20px;" name="tri">
                 <option value="id_intervention_asc">ID croissant</option>
                 <option value="id_intervention_desc">ID décroissant</option>
                 <option value="intervention_cloturee">Clôturée</option>
@@ -36,7 +36,7 @@
                     <tr>
                         <td>{{ intervention.id }}</td>
                         <td>{{ intervention.client_id}}
-                        <td><a href="viewmore.php?type=intervention&id={{ intervention.id }}">View more</a></td>
+                        <td><a href="viewmore.php?type=intervention&id={{ intervention.id }}">Voir plus</a></td>
                     </tr>
                     {% endfor %}
                 </tbody>
@@ -45,7 +45,7 @@
     <div class = "liste">
         <h2>Liste des clients</h2>
         <form action="search.php" method="GET">
-            <select class"select-form" name="tri">
+            <select class"select-form" style="width: 35%; height: 35%; padding: 10px; border: none; border-radius: 40px; background-color: #3A559F; text-align: center; color: white; cursor: pointer; margin-top: 20px;" name="tri">
                 <option value="id_client_asc">ID croissant</option>
                 <option value="id_client_desc">ID décroissant</option>
                 <option value="name_client_asc">Nom croissant</option>
@@ -68,7 +68,7 @@
                         <td>{{ client.name }}</td>
                         <td>{{ client.surname }}</td>
                         <td>{{ client.user_id }}</td>
-                        <td><a href="viewmore.php?type=client&id={{ client.user_id }}">View more</a></td> 
+                        <td><a href="viewmore.php?type=client&id={{ client.user_id }}">Voir plus</a></td> 
                     </tr>
                     {% endfor %}
                 </tbody>
@@ -77,7 +77,7 @@
         <div class = "liste_newCustomers">
             <h2>Nouveaux clients</h2>  
             <form action="search.php" method="GET">
-                <select class"select-form" name="tri">
+            <select class"select-form" style="width: 35%; height: 35%; padding: 10px; border: none; border-radius: 40px; background-color: #3A559F; text-align: center; color: white; cursor: pointer; margin-top: 20px;" name="tri">
                     <option value="id_newclient_asc">ID croissant</option>
                     <option value="id_newclient_desc">ID décroissant</option>
                     <option value="name_newclient_asc">Nom croissant</option>
@@ -100,7 +100,7 @@
                         <td>{{ customer.name }}</td>
                         <td>{{ customer.surname }}</td>
                         <td>{{ customer.user_id }}</td>
-                        <td><a href="verify.php?type=newCustomers&id={{ customer.user_id }}">Verify</a></td>
+                        <td><a href="verify.php?type=newCustomers&id={{ customer.user_id }}">Verifier</a></td>
                     </tr>
                     {% endfor %}
                 </tbody>
@@ -112,7 +112,7 @@
     <div class = "liste">
         <h2>Liste des intervenants</h2>  
         <form action="search.php" method="GET">
-            <select class"select-form" name="tri">
+            <select class"select-form" style="width: 35%; height: 35%; padding: 10px; border: none; border-radius: 40px; background-color: #3A559F; text-align: center; color: white; cursor: pointer; margin-top: 20px;" name="tri">
                 <option value="id_intervenant_asc">ID croissant</option>
                 <option value="id_intervenant_desc">ID décroissant</option>
                 <option value="name_intervenant_asc">Nom croissant</option>
@@ -135,7 +135,7 @@
                         <td>{{ intervenant.name }}</td>
                         <td>{{ intervenant.surname }}</td>
                         <td>{{ intervenant.user_id }}</td>
-                        <td><a href="viewmore.php?type=intervenant&id={{ intervenant.user_id }}">View more</a></td>
+                        <td><a href="viewmore.php?type=intervenant&id={{ intervenant.user_id }}">Verifier</a></td>
 
                     </tr>
                     {% endfor %}
@@ -145,7 +145,7 @@
     <div class = "liste">
         <h2>Liste des standardiste</h2>
         <form action="search.php" method="GET">
-            <select class"select-form" name="tri">
+            <select class"select-form" style="width: 35%; height: 35%; padding: 10px; border: none; border-radius: 40px; background-color: #3A559F; text-align: center; color: white; cursor: pointer; margin-top: 20px;" name="tri">
                 <option value="id_standardiste_asc">ID croissant</option>
                 <option value="id_standardiste_desc">ID décroissant</option>
                 <option value="name_standardiste_asc">Nom croissant</option>
@@ -168,7 +168,7 @@
                         <td>{{ standardiste.name }}</td>
                         <td>{{ standardiste.surname }}</td>
                         <td>{{ standardiste.user_id }}</td>
-                        <td><a href="viewmore.php?type=standardiste&id={{ standardiste.user_id }}">View more</a></td>
+                        <td><a href="viewmore.php?type=standardiste&id={{ standardiste.user_id }}">Verifier</a></td>
 
                     </tr>
                     {% endfor %}

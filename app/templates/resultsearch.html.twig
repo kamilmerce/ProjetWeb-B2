@@ -5,6 +5,7 @@
  {% endblock %}
 
 {% block body %}
+<div class = 'liste-container'>
     <h1>Résultats de la recherche</h1>
     <div class='liste'>
         {% if user.role =='intervenant' %}
@@ -48,4 +49,5 @@
             {% endif %}
         {% endif %}
     </div>
+</div>
 {% endblock %}

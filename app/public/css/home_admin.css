@@ -17,13 +17,19 @@
   height: 80vh;
 }
 
+.select-form{
+  padding: 10px 20px;
+  border-radius: 40px;
+  background-color:#3A559F
+}
+
 .liste table {
     width: 100%;
     border-collapse: separate; 
     border-spacing: 0;
 }
 
-.button-form {
+.button-form, .select-form {
   width: 35%;
   height: 35%;
   padding: 10px;

@@ -43,7 +43,7 @@
             </form>
         </li>
         <li class="nav-item"><a href="messagerie.php"><i class='bx bxs-message'></i>Notification</a></li>
-        <li class="nav-item"><a href="create_intervention.php"><i class='bx bxs-create'></i>Create new</a></li>
+        <li class="nav-item"><a href="create_intervention.php"><i class='bx bxs-edit'></i>Nouvelle intervention</a></li>
         {% endif %}
         {% if user.role == 'intervenant' %}
         <li class="nav-item-bar">
@@ -66,12 +66,12 @@
                 <button class='bouton_search' type="submit">Rechercher</button>
             </form>
         </li>
-        <li class="nav-item"><a href="demande_creation_intervention.php"><i class='bx bxs-create'></i>Ask for a intervention</a></li>
-        <li class="nav-item"><a href="intervention_completed.php"><i class='bx bxs-create'></i>Intervention completed</a></li>
+        <li class="nav-item"><a href="demande_creation_intervention.php"><i class='bx bxs-plus-circle'></i> Nouvelle demande</a></li>
+        <li class="nav-item"><a href="intervention_completed.php"><i class='bx bxs-calendar-x'></i> Intervention clôturée</a></li>
         {% endif %}
-        <li class="nav-item"><a href="myaccount.php"><i class='bx bxs-profile'></i> My account</a></li>
-        <li class="nav-item"><a href="profile.php"><i class="bx bxs-home"></i> Home</a></li>
-        <li class="nav-item"><a href="log_out.php" class="keluar"><i class='bx bx-log-in'></i> Log Out</a></li>
+        <li class="nav-item"><a href="myaccount.php"><i class='bx bxs-user-circle'></i> Profile</a></li>
+        <li class="nav-item"><a href="profile.php"><i class="bx bxs-home"></i> Accueil</a></li>
+        <li class="nav-item"><a href="log_out.php" class="keluar"><i class='bx bx-log-out'></i> LOG OUT</a></li>
     </ul>
     </div>
 </nav>

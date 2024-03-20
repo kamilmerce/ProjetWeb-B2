@@ -25,6 +25,20 @@ h1{
   padding: 10px;
 }
 
+.cree-button{
+  padding: 10px;
+  border: none;
+  border-radius: 40px;
+  background-color: #3A559F; 
+  text-align: center;
+  color: white;
+  cursor: pointer;
+  margin-top:0;
+  margin-bottom:0;
+  width:100px;
+  height:35px;
+}
+
 
 .liste table {
     width: 100%;

@@ -21,7 +21,7 @@
         <option value="intervention_enattente">En attente</option>
       </select>
       <button class='chercher' type="submit">Trier</button>
-    </form> <br> <br>
+    </form> 
   </div>
   <div class = "liste">
     <table>
@@ -35,7 +35,7 @@
           <th>Commentaires</th>
           <th>Status</th>
           <th>Degré d'urgence</th>
-          <th>Voir Plus</th>
+          <th></th>
         </tr>
       </thead>
       <tbody>
@@ -63,9 +63,9 @@
             <td>{{ intervention.degre_urgence }}</td>
             <td>
                 {% if intervention.standardiste_id == user.user_id %}
-                  <a href="edit_intervention.php?id={{ intervention.id }}">Edit</a>
+                  <a href="edit_intervention.php?id={{ intervention.id }}">Modifier</a>
                 {% else %}
-                  <a href="viewmore.php?type=intervention&id={{ intervention.id }}">View more</a>
+                  <a href="viewmore.php?type=intervention&id={{ intervention.id }}">Voir plus</a>
                 {% endif %}
             </td>
           </tr>

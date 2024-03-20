@@ -36,13 +36,14 @@
   position: sticky; 
   z-index: 1000; 
   vertical-align: top; 
+  width:100%;
 }
 
 .liste table  {
   border-collapse: separate; 
   border-spacing: 0; 
   border-radius: 20px;
-  withd:100%;
+  width:100%;
 }
 
 .liste td{
