@@ -659,12 +659,18 @@
                 break;
             case 'client':
                 $results = $page->searchClients($query);
+                $interventions=array();
+
                 break;
             case 'intervenant':
                 $results = $page->searchIntervenants($query);
+                $interventions=array();
+
                 break;
             case 'standardiste':
                 $results = $page->searchStandardistes($query);
+                $interventions=array();
+
                 break;
             default:
                 break;
