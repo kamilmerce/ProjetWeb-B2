@@ -1,0 +1,120 @@
+.liste-container {
+  display: flex;
+  flex-direction: column;
+  margin-bottom:100px;
+  height: 110vh;
+}
+
+.en-tete {
+  margin-top:150px;
+  text-align:center;
+}
+
+.en-tete h1 {
+  font-weight: bold;
+  color:white;
+  font-size:70px;
+}
+
+
+
+button {
+  padding: 10px;
+  border: none;
+  border-radius: 40px;
+  background-color: #3A559F; 
+  text-align: center;
+  color: white;
+  cursor: pointer;
+  margin-top:0;
+  margin-bottom:0;
+  width:100px;
+  height:60px;
+
+}
+
+.liste{
+  background: rgba(255, 255, 255, 0.25);
+  border-radius: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  width: 700px;
+  height: 600px;
+  padding: 10px;
+  margin-left:10px;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: thin;
+  scrollbar-color: white transparent;
+  -ms-overflow-style: -ms-autohiding-scrollbar; /* Hide the scrollbar in IE and Edge */
+}
+
+.comment-container{
+  background: rgba(255, 255, 255, 0.25);
+  border-radius: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  width: 650px;
+  height: 100px;
+  padding: 10px;
+  margin-left:10px;
+  overflow-y: scroll;  
+  scroll-snap-type: x mandatory;
+  scrollbar-width: thin;
+  scrollbar-color: white transparent;
+  -ms-overflow-style: -ms-autohiding-scrollbar; /* Hide the scrollbar in IE and Edge */
+}
+
+.intervenant{
+  background: rgba(255, 255, 255, 0.25);
+  border-radius: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  width: 650px;
+  height: 100px;
+  padding: 10px;
+  margin-left:10px;
+
+}
+
+.ajout_com{
+    background: rgba(255, 255, 255, 0.25);
+  border-radius: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  width: 650px;
+  height: 300px;
+  padding: 10px;
+  margin-left:10px;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: thin;
+  scrollbar-color: white transparent;
+  -ms-overflow-style: -ms-autohiding-scrollbar; /* Hide the scrollbar in IE and Edge */}
+
+
+
+
+.comment-content{
+  border-radius: 20px 20px 0 0; /* Apply border radius to the top corners only */
+
+}
+
+a {
+  display: block;
+  width: 100%;
+  text-align: right;
+  text-decoration: none;
+  color: #3A559F;
+}
+
+.input_edit{
+
+}
+
+
+@media (max-width: 1200px) {
+  div {
+    width: 450px;
+  }
+}
+
+@media (max-width: 900px) {
+  div {
+    width: 100%;
+  }
+}

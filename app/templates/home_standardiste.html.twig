@@ -1,134 +1,17 @@
 {% extends "base_auth.html.twig" %}
 
+{% block stylesheet %}
+<link rel="stylesheet" type="text/css" href="/css/home_standardiste.css"/>
+ {% endblock %}
+
 {% block body %}
-<style>
-body {
-  font-family: 'Arial', sans-serif;
-  background-image: url('/img/login.png'); 
-  background-size: cover;
-  background-repeat: no-repeat; 
-  background-attachment: fixed; 
-  background-position: center center; 
-  display: flex;
-  justify-content:center;
-  align-items: center;
-  color: white; 
-  height: 100vh;
-}
-
-.liste-container {
-  display: flex;
-  flex-direction: column;
-  margin-bottom:100px;
-}
-
-.en-tete {
-  margin-top:150px;
-  text-align:center;
-  margin-top:300px;
-  height: 20vh;
-  
-}
-
-.en-tete h1 {
-  font-weight: bold;
-  color:white;
-  font-size:70px;
-}
-.selection{
-  padding: 10px;
-  border: none;
-  border-radius: 40px;
-  background-color: #3A559F; 
-  text-align: center;
-  color: white;
-  cursor: pointer;
-
-}
-
-.chercher{
-  padding: 10px;
-  border: none;
-  border-radius: 40px;
-  background-color: #3A559F; 
-  text-align: center;
-  color: white;
-  cursor: pointer;
-}
-
-
-
-
-.liste{
-  background: rgba(255, 255, 255, 0.25);
-  border-radius: 20px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  width: 700px;
-  height: 600px;
-  padding: 10px;
-  scroll-snap-type: x mandatory;
-  scrollbar-width: thin;
-  scrollbar-color: white transparent;
-  -ms-overflow-style: -ms-autohiding-scrollbar; /* Hide the scrollbar in IE and Edge */
-}
-
-
-.liste table  {
-  border-collapse: separate; 
-  border-spacing: 0; 
-  border-radius: 20px;
-  withd:100%;
-}
-
-
-.liste td {
-  padding: 10px;
-}
-
-.liste td {
-  border-bottom: 2px solid white; 
-}
-
-
-.liste th {
-  background-color: #3A559F;
-  color:white;
-  top:0px;
-  position: sticky; 
-  z-index: 1000; 
-  vertical-align: top; 
-}
-
-.comment-content{
-  border-radius: 20px 20px 0 0; /* Apply border radius to the top corners only */
-}
-
-a {
-  display: block;
-  width: 100%;
-  text-align: right;
-  text-decoration: none;
-  color: #3A559F;
-}
-
-@media (max-width: 1200px) {
-  div {
-    width: 450px;
-  }
-}
-
-@media (max-width: 900px) {
-  div {
-    width: 100%;
-  }
-}
-</style>
 <body>
 {% if user.role == 'standardiste' %}
 <div class="liste-container">
-  <div class="en-tete">
+  <div class='en-tete'>
     <h1>Liste des interventions</h1>
-    <form  classe ='form' action="search.php" method="GET">
+ 
+    <form class="form" action="search.php" method="GET">
       <select class='selection' name="tri">
         <option value="id_intervention_asc">ID croissant</option>
         <option value="id_intervention_desc">ID décroissant</option>
@@ -138,9 +21,9 @@ a {
         <option value="intervention_enattente">En attente</option>
       </select>
       <button class='chercher' type="submit">Trier</button>
-    </form>
+    </form> <br> <br>
   </div>
-  <div class = "liste" style="width: 1300px; height: 570px; overflow-y: scroll; border: 1px solid #ccc; padding: 10px;">
+  <div class = "liste">
     <table>
       <thead>
         <tr>
@@ -152,7 +35,7 @@ a {
           <th>Commentaires</th>
           <th>Status</th>
           <th>Degré d'urgence</th>
-          <th></th>
+          <th>Voir Plus</th>
         </tr>
       </thead>
       <tbody>
@@ -164,7 +47,7 @@ a {
             <td>{{ intervention.standardiste_id }}</td>
             <td>{{ intervention.infos }}</td>
             <td>
-              <div class="comment-content" style="width: 300px; height: 100px; overflow-y: scroll; border: 2px solid white; padding: 10px;">
+              <div class="comment-content">
                 {% for commentaire in commentaires %}
                   {% if commentaire.intervention_id == intervention.id %}
                     <div class="comment">
@@ -189,6 +72,7 @@ a {
         {% endfor %}
       </tbody>
     </table>
+     </div>
   </div>
 </div>
 {% endif %}

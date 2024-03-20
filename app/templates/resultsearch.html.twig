@@ -1,47 +1,12 @@
 {% extends "base_auth.html.twig" %}
 
+{% block stylesheet %}
+<link rel="stylesheet" type="text/css" href="/css/resultsearch.css"/>
+ {% endblock %}
+
 {% block body %}
-<style>
-body {
-  font-family: 'Arial', sans-serif;
-  background-image: url('/img/login.png'); 
-  background-size: cover;
-  background-repeat: no-repeat; 
-  background-attachment: fixed; 
-  background-position: center center; 
-  justify-content:center;
-  align-items: center;
-  color: white; 
-  height: 100vh;
-}
-
-h1{
-    margin-top:50px;
-    margin-left:50px;
-    font-size:50px;
-}
-
-.liste{
-  background: rgba(255, 255, 255, 0.25);
-  border-radius: 20px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  width: 1300px;
-  height: 600px;
-  padding: 10px;
-  scroll-snap-type: x mandatory;
-  scrollbar-width: thin;
-  scrollbar-color: white transparent;
-  -ms-overflow-style: -ms-autohiding-scrollbar; 
-}
-
-p{
-    font-size:20px;
-}
-
-
-</style>
     <h1>Résultats de la recherche</h1>
-    <div class='liste' style="width: 1200px; height: 500px; overflow-y: scroll; border: 1px solid #ccc; padding: 10px; margin-bottom: 20px;">
+    <div class='liste'>
         {% if user.role =='intervenant' %}
             {% if type == 'intervention' %}
                 {% for result in results %}

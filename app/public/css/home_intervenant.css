@@ -1,0 +1,76 @@
+.liste-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.en-tete {
+  text-align:center;
+}
+
+.en-tete h1 {
+  font-weight: bold;
+  color:white;
+  font-size:70px;
+}
+
+.en-tete select, .button-form {
+  width: 35%;
+  height: 35%;
+  padding: 10px;
+  border: none;
+  border-radius: 40px;
+  background-color: #3A559F; 
+  text-align: center;
+  color: white;
+  cursor: pointer;
+  margin-top:0;
+  margin-bottom:0;
+
+}
+
+.liste table  {
+  border-collapse: separate; 
+  border-spacing: 0; 
+  border-radius: 20px;
+  width:100%;
+  
+
+}
+
+.liste th, td {
+  padding: 10px;
+}
+
+.liste td {
+  border-bottom: 2px solid white; 
+}
+
+.table thead {
+  width:100;
+  background: rgba(255, 255, 255, 0.25);
+  border-radius: 20px 20px 0 0; /* Apply border radius to the top corners only */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.liste th {
+  border-radius: 20px 20px 0 0;
+  background-color: #3A559F;
+  color:white;
+  top:0px;
+  position: sticky; 
+  z-index: 1000; 
+  vertical-align: top; 
+}
+
+.comment-content{
+  border:none;
+  
+}
+
+a {
+  display: block;
+  width: 100%;
+  text-align: right;
+  text-decoration: none;
+  color: #3A559F;
+}

@@ -1,0 +1,59 @@
+.liste-container{
+  height: 70vh;
+  margin-bottom:100px;
+}
+
+.info-content{
+  background: rgba(255, 255, 255, 0.25);
+  border-radius: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  width: 700px;
+  height: 210px;
+  padding: 10px;
+  margin-left:10px;
+}
+
+.comment, .liste{
+  background: rgba(255, 255, 255, 0.25);
+  border-radius: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  width: 700px;
+  height: 300px;
+  padding: 10px;
+  margin-bottom:100px;
+  border:none;
+  overflow-y: scroll;  
+  scroll-snap-type: x mandatory;
+  scrollbar-width: thin;
+  scrollbar-color: white transparent;
+  -ms-overflow-style: -ms-autohiding-scrollbar; /* Hide the scrollbar in IE and Edge */  
+}
+
+.liste th {
+  background-color: #3A559F;
+  color:white;
+  top:0px;
+  position: sticky; 
+  z-index: 1000; 
+  vertical-align: top; 
+}
+
+.liste table  {
+  border-collapse: separate; 
+  border-spacing: 0; 
+  border-radius: 20px;
+  withd:100%;
+}
+
+.liste td{
+    text-align:center;
+}
+
+
+.liste th, td {
+  padding: 10px;
+}
+
+.liste td {
+  border-bottom: 2px solid white; 
+}

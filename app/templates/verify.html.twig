@@ -1,70 +1,11 @@
 {% extends "base_auth.html.twig" %}
 
+{% block stylesheet %}
+<link rel="stylesheet" type="text/css" href="/css/verify.css"/>
+ {% endblock %}
+
 {% block body %}
-<style>
-body {
-  font-family: 'Arial', sans-serif;
-  background-image: url('/img/login.png'); 
-  background-size: cover;
-  background-repeat: no-repeat; 
-  background-attachment: fixed; 
-  background-position: center center; 
-  display: flex;
-  justify-content:center;
-  align-items: center;
-  color: white; 
-  height: 70vh;
-}
 
-.liste-container {
-  display: flex;
-  flex-direction: column;
-  margin-bottom:100px;
-  height: 40vh;
-}
-.info-content{
-    border:none;
-    background: rgba(255, 255, 255, 0.25);
-  border-radius: 20px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  width: 650px;
-  height: 200px;
-  padding: 10px;
-  margin-left:10px;
-  
-}
-
-
-.enregistrer{
-  padding: 10px;
-  border: none;
-  border-radius: 40px;
-  background-color: #3A559F; 
-  text-align: center;
-  color: white;
-  cursor: pointer;
-  margin-top:0;
-  margin-bottom:0;
-  width:170px;
-  height:40px;
-
-}
-
-select{
-    padding: 10px;
-  border: none;
-  border-radius: 40px;
-  background-color: #3A559F; 
-  text-align: center;
-  color: white;
-  cursor: pointer;
-  margin-top:0;
-  margin-bottom:0;
-  width:150px;
-  height:40px;
-}
-
-</style>
 <body>
     <div class='liste-container'>
         <h1>Informations sur le nouveau client</h1>
@@ -86,9 +27,4 @@ select{
         </form>
     </div>
 </body>
-{% if error_message %}
-    <script>
-        alert("{{ error_message }}");
-    </script>
-{% endif %}
 {% endblock %}

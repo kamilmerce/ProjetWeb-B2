@@ -1,0 +1,72 @@
+.en-tete {
+  text-align:center;
+}
+
+.en-tete h1 {
+  font-weight: bold;
+  color:white;
+  font-size:70px;
+}
+  
+  .contain{
+    background: rgba(255, 255, 255, 0.25);
+    border-radius: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 1300px;
+    height: 600px;
+    padding: 10px;
+    margin:20px;
+  }
+  
+  .form-account{
+    margin-bottom: 10px; 
+    align-items: center;
+    text-align: left;
+  }
+  
+  .inputclass{
+    background: rgba(255, 255, 255, 0.25);
+    padding: 10px;
+    border: 2px solid white;
+    border-radius: 25px;
+    text-align:left;
+    width:200px;
+  }
+  
+  .button-form{
+    width: 150px;
+    padding: 10px;
+    border: none;
+    border-radius: 40px;
+    background-color: #3A559F; 
+    text-align: center;
+    color: white;
+    cursor: pointer;
+    margin-top: 20px;
+  }
+  
+  .contain {
+      display: flex; /* Utilisation de flexbox */
+      justify-content: space-between; /* Espacement automatique entre les éléments */
+  }
+  
+  .infos{
+      border-radius: 20px;
+      border:2px solid white;
+  
+  }
+  
+  .photo-container,
+  .infos {
+      flex: 1; /* Partage de l'espace disponible */
+  }
+  
+  .photo-container {
+      margin-left: 70px; /* Marge entre les divs */
+  
+  }
+  
+  label, p{
+      margin-left:20px;
+      margin-top:20px;
+  }

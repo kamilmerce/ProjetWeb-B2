@@ -1,116 +1,18 @@
 {% extends "base_auth.html.twig" %}
 
+{% block stylesheet %}
+<link rel="stylesheet" type="text/css" href="/css/home_admin.css"/>
+ {% endblock %}
+
 {% block body %}
-<style>
-body {
-  font-family: 'Arial', sans-serif;
-  background-image: url('/img/login.png'); 
-  background-size: cover;
-  background-repeat: no-repeat; 
-  background-attachment: fixed; 
-  background-position: center center; 
-  color: white; 
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-  margin: 0;
-}
 
-
-.liste{
-  background: rgba(255, 255, 255, 0.25);
-  border-radius: 20px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  width: 500px;
-  height: 300px;
-  align-items: center;
-  margin-right:30px;
-  margin-top:100px;
-  scroll-snap-type: x mandatory;
-  scrollbar-width: thin;
-  scrollbar-color: white transparent;
-  -ms-overflow-style: -ms-autohiding-scrollbar; /* Hide the scrollbar in IE and Edge */
-}
-
-.liste table {
-    width: 100%;
-    border-collapse: separate; 
-    border-spacing: 0; 
-}
-
-
-select, input[type=text], button {
-  width: 35%;
-  height: 35%;
-  padding: 10px;
-  border: none;
-  border-radius: 40px;
-  background-color: #3A559F; 
-  text-align: center;
-  color: white;
-  cursor: pointer;
-  margin-top: 20px;
-}
-
-.liste h2
-{
-  text-align: center; 
-}
-
-
-th, td {
-  padding: 10px;
-}
-
-
-.liste td {
-    border-bottom: 2px solid white; 
-}
-
-
-th {
-    border-bottom: 2px solid white; 
-    color:#3A559F;
-}
-
-a {
-  display: block;
-  width: 100%;
-  text-align: right;
-  text-decoration: none;
-  color: #3A559F;
-}
-.liste_newCustomers{
-    margin-top:0px;
-    background-color:none;
-    border:none;
-    scroll-snap-type: x mandatory;
-    scrollbar-width: thin;
-    scrollbar-color: white transparent;
-    -ms-overflow-style: -ms-autohiding-scrollbar; /* Hide the scrollbar in IE and Edge */
-
-}
-
-@media (max-width: 1200px) {
-  div {
-    width: 450px;
-  }
-}
-
-@media (max-width: 900px) {
-  div {
-    width: 100%;
-  }
-}
-
-</style>
 <body>
 {% if user.role == 'admin' %}
-    <div class = "liste" style="width: 300px; height: 600px; overflow-y: scroll; border: 1px solid #ccc; padding: 10px; margin-bottom: 20px;">
-        <h2>Liste des interventions</h2>
+
+    <div class = "liste">
+        <h1>Liste des interventions</h1>
         <form action="search.php" method="GET">
-            <select name="tri">
+            <select class"select-form" name="tri">
                 <option value="id_intervention_asc">ID croissant</option>
                 <option value="id_intervention_desc">ID décroissant</option>
                 <option value="intervention_cloturee">Clôturée</option>
@@ -118,7 +20,7 @@ a {
                 <option value="intervention_encours">En cours</option>
                 <option value="intervention_enattente">En attente</option>
             </select>
-            <button type="submit">Trier</button>
+            <button class="button-form" type="submit">Trier</button>
         </form>
             <table>
                 <thead>
@@ -140,16 +42,16 @@ a {
                 </tbody>
             </table>
     </div>
-    <div class = "liste" style="width: 300px; height: 600px; overflow-y: scroll; border: 1px solid #ccc; padding: 10px; margin-bottom: 20px;">
+    <div class = "liste">
         <h2>Liste des clients</h2>
         <form action="search.php" method="GET">
-            <select name="tri">
+            <select class"select-form" name="tri">
                 <option value="id_client_asc">ID croissant</option>
                 <option value="id_client_desc">ID décroissant</option>
                 <option value="name_client_asc">Nom croissant</option>
                 <option value="name_client_desc">Nom décroissant</option>
             </select>
-            <button type="submit">Trier</button>
+            <button class="button-form" type="submit">Trier</button>
         </form>
             <table>
                 <thead>
@@ -172,16 +74,16 @@ a {
                 </tbody>
             </table>
         {% if newCustomers != empty %}
-        <div class = "liste_newCustomers" style="width: 270px; height: 300px; overflow-y: scroll; padding: 10px; margin-bottom: 20px;">
+        <div class = "liste_newCustomers">
             <h2>Nouveaux clients</h2>  
             <form action="search.php" method="GET">
-                <select name="tri">
+                <select class"select-form" name="tri">
                     <option value="id_newclient_asc">ID croissant</option>
                     <option value="id_newclient_desc">ID décroissant</option>
                     <option value="name_newclient_asc">Nom croissant</option>
                     <option value="name_newclient_desc">Nom décroissant</option>
                 </select>
-                <button type="submit">Trier</button>
+                <button class="button-form" type="submit">Trier</button>
             </form>
             <table>
                 <thead>
@@ -206,18 +108,17 @@ a {
         </div>
         {% endif %}
 
-
-   </div>
-    <div class = "liste" style="width: 300px; height: 600px; overflow-y: scroll; border: 1px solid #ccc; padding: 10px; margin-bottom: 20px;">
+    </div>
+    <div class = "liste">
         <h2>Liste des intervenants</h2>  
         <form action="search.php" method="GET">
-            <select name="tri">
+            <select class"select-form" name="tri">
                 <option value="id_intervenant_asc">ID croissant</option>
                 <option value="id_intervenant_desc">ID décroissant</option>
                 <option value="name_intervenant_asc">Nom croissant</option>
                 <option value="name_intervenant_desc">Nom décroissant</option>
             </select>
-            <button type="submit">Trier</button>
+            <button class="button-form" type="submit">Trier</button>
         </form>
             <table>
                 <thead>
@@ -240,17 +141,17 @@ a {
                     {% endfor %}
                 </tbody>
             </table>
-    </div>
-    <div class = "liste" style="width: 300px; height: 600px; overflow-y: scroll; border: 1px solid #ccc; padding: 10px; margin-bottom: 20px;">
+    </div>  
+    <div class = "liste">
         <h2>Liste des standardiste</h2>
         <form action="search.php" method="GET">
-            <select name="tri">
+            <select class"select-form" name="tri">
                 <option value="id_standardiste_asc">ID croissant</option>
                 <option value="id_standardiste_desc">ID décroissant</option>
                 <option value="name_standardiste_asc">Nom croissant</option>
                 <option value="name_standardiste_desc">Nom décroissant</option>
             </select>
-            <button type="submit">Trier</button>
+            <button class="button-form" type="submit">Trier</button>
         </form>
             <table>
                 <thead>
@@ -274,6 +175,7 @@ a {
                 </tbody>
             </table>
     </div>
+
 {% endif %}
 </body>
 {% endblock %}

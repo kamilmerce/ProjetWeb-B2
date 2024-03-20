@@ -1,0 +1,87 @@
+h1
+{
+  padding-right: 250px;
+  padding-bottom: 500px;
+  font-size: 75px;
+  margin-left: 100px;
+  margin-top: 60px;
+  color: white;
+}
+
+form {
+  background: rgba(255, 255, 255, 0.25);
+  border-radius: 20px;
+  padding: 40px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  width: 400px;
+  align-items: center;
+  margin-right:100px
+}
+
+form div {
+  margin-bottom: 10px; 
+  align-items: center;
+  text-align: center;
+}
+
+label {
+  display: block;
+  margin-bottom: 5px; 
+  text-align: left;
+}
+
+input[type="email"], input[type="password"] {
+  width: 100%;
+  background: rgba(255, 255, 255, 0.25);
+  padding: 10px;
+  margin-bottom: 15px; 
+  border: 2px solid white;
+  border-radius: 25px;
+  text-align:left;
+}
+
+input[type="submit"] {
+  width: 35%;
+  height: 35%;
+  padding: 10px;
+  border: none;
+  border-radius: 40px;
+  background-color: #3A559F; 
+  text-align: center;
+  color: white;
+  cursor: pointer;
+  margin-top: 20px;
+}
+
+p
+{
+  text-align: center;
+}
+
+input[type="submit"]:hover {
+  background-color: #2A3F7F; 
+}
+
+.link {
+  text-align: center;
+  display: block;
+  margin-top: 20px;
+  color: white;
+  text-decoration: none;
+}
+
+form h2, form h3
+{
+  text-align: center; 
+}
+
+form h3 {
+  text-align: center;
+  font-weight: normal; /* Ajout de cette ligne pour enlever le gras */
+}
+
+.title-f
+{
+  text-align: center;
+  font-weight: bold;
+}
