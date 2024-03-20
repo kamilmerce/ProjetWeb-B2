@@ -6,7 +6,7 @@
 
 {% block body %}
 <body>
-    {% if type == 'client' and user.verified == TRUE %}
+    {% if type == 'client' %}
         <div class="liste-container">
             <h1>Informations sur le client</h1>
             <div class='info-content'>
@@ -141,8 +141,6 @@
             </div>
             
         </div>
-    {% else %}
-        <p>En Attente...</p>
     {% endif %}
 </body>
 {% endblock %}
