@@ -7,6 +7,7 @@
 {% block body %}
 
 <body>
+{% if user.verified == TRUE %}
 <div class="liste-container">
         <div class="en-tete">
         <h1>Liste des interventions en cours</h1>
@@ -68,6 +69,10 @@
     </div>
     </div>
 </div>
+{% else %}
+<div class='liste-container'>
+<p>En Attente ...</p>
+{% endif %}
 
 </body>
 {% endblock %}

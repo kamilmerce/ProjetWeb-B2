@@ -61,6 +61,12 @@
   width:100%;
 }
 
+p{
+  font-weight: bold;
+  color:white;
+  font-size:70px;
+  height: 80vh;
+}
 
 .liste th, td {
   padding: 10px;

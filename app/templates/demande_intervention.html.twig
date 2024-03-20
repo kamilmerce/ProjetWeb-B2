@@ -5,6 +5,7 @@
  {% endblock %}
 
 {% block body %}
+{% if user.verified == TRUE %}
 <div class='liste-container'>
     <div class="en-tete">
     <h1>Demande d'intervention</h1>
@@ -30,4 +31,7 @@
         <button class="button-submit" type="submit">Demander</button>
     </form>
 </div>
+{% else %}
+<p>En attente ...</p>
+{% endif %}
 {% endblock %}
