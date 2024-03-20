@@ -5,7 +5,7 @@
  {% endblock %}
 
 {% block body %}
-{% if user.verified == TRUE %}
+{% if user.role == 'admin' or user.verified == TRUE %}
 
 <div class = 'liste-container'>
     <h1>Résultats de la recherche</h1>
